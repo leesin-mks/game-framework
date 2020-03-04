@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="common-util" />
+        <module name="test-client" />
+        <module name="game-server" />
+        <module name="frame-work" />
+        <module name="login-server" />
+        <module name="protobuf-protocol" />
+        <module name="common-lib" />
+        <module name="game-data" />
+        <module name="center-server" />
+        <module name="gateway-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="center-server" target="1.5" />
+      <module name="common-lib" target="1.5" />
+      <module name="common-util" target="1.5" />
+      <module name="frame-work" target="1.5" />
+      <module name="game-data" target="1.5" />
+      <module name="game-server" target="1.5" />
+      <module name="gateway-server" target="1.5" />
+      <module name="login-server" target="1.5" />
+      <module name="protobuf-protocol" target="1.5" />
+      <module name="test-client" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
