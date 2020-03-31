@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE game>
+<config>
+	<server>
+		<id>4</id>
+		<type>4</type> <!-- 服务器类型 -->
+		<!--<areaID>2</areaID>  区服ID -->
+		<!--<areaName>205</areaName>  区服名称 -->
+		<!--<address>192.168.1.20</address>-->
+		<port>5000</port><!-- 对外端口 --> 
+		<innerPort>5000</innerPort><!-- 对内端口 --> 
+		<privateModulus>AMKdkIslPzpQjfpg1Tb7QHDjq1EuSqcHx1lOCUCDXWcz1V6zd6IJQjKSB149Lxl/ZeAGh2TWrGNIcE3tGrPsmn4e3NjrRoNLSbhqNPKRgury1L87o6vbqoT9dP9ot9eyop2DGPgpx3ey5nRxNcffAaNXMvOSBQt2D1CkXVtGco6d
+		</privateModulus>
+		<privateExponent>T58AHnV4J0cCtz97q9liVW1Hz1hFkY2UqPxMu7ii85CYyHxbQw9PpnnpCsy0YtWk2+E/7mkHsTzXOYJ6bMctsxh5EcA8MT8DvXerUs6v9ZyQv3yMZtwQl+jw5mvSvc2y3AzMcMx3GIGRR/IEpmr5v0Xs5vk+pQY3Bk3Xk3QhuW8=
+		</privateExponent>
+		<rechargeSalt>a869ccbcbd9568808b8497e28275c7c8</rechargeSalt>
+		<languagePath>../CommonLib/language/Language-zh_cn.txt
+		</languagePath>
+		<dirtyChar>../CommonLib/language/dirtyChar.txt
+		</dirtyChar>
+		<certificate>../CommonLib/push.p12
+		</certificate>
+		<GMStatus>true</GMStatus> <!-- GM指令是否开启 -->
+		<editionPath>../CommonLib/config/edition.xml
+		</editionPath>
+		<redis>
+			<ip>192.168.1.21</ip>
+			<port>6379</port>
+			<password>Bdsk@123</password>
+		</redis>
+	</server>
+	<database>
+		<pool> 
+		    <db name="MasterDB"> 
+        		<url>jdbc:mysql://192.168.1.21:3306/niuniu?characterEncoding=UTF-8&amp;user=root&amp;password=Bdsk@123&amp;allowMultiQueries=true&amp;rewriteBatchedStatements=true&amp;autoReconnect=true&amp;useSSL=false</url>
+      		</db> 
+       		<db name="SlaveDB"> 
+        		<url>jdbc:mysql://192.168.1.21:3306/niuniu?characterEncoding=UTF-8&amp;user=root&amp;password=Bdsk@123&amp;allowMultiQueries=true&amp;rewriteBatchedStatements=true&amp;autoReconnect=true&amp;useSSL=false</url> 
+      		</db>
+    	</pool> 
+	</database>
+	<web port='8088' resourcePath = "./webResource/">
+	</web>
+	<sites chargeIp="127.0.0.1">
+		<site site="7road" name="1">
+			<chargeKey key="QY7RODDD-16SDEDE-WAN-0668-2525555-7ROAD-SERVER-lovDDe777" />
+			<loginKey key="QY7RODDDshen-16SDEDE-WAN-0668-2525-7ROAD-SHENQU-lovDDe777" />
+		</site>
+	</sites>
+	<request>
+		<logInterval>5</logInterval>
+		<adminIP>127.0.0.1|10.10.9.251|172.27.35.1|172.16.*.*|192.168.*.*</adminIP>
+	</request>
+</config>

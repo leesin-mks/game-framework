@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/center-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/center-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-util/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/frame-work/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/frame-work/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/game-data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/game-data/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/game-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/game-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/login-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/login-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/protobuf-protocol/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/protobuf-protocol/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test-client/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

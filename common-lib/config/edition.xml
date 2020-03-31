@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE edition>
+<config>
+	<platforms>
+		<platform name = "IOS" id = "1">
+			<edition>
+				<force>100</force>
+				<newest>100</newest>
+				<description>v1.0版本，测试更新
+				</description>
+				<size>15</size>
+			</edition>
+			<channel name = "AppStore" id = "1">
+				<url>http://download.apple.com
+				</url>
+			</channel>
+		</platform>
+		<platform name = "Android" id = "2">
+			<edition>
+				<force>100</force>
+				<newest>100</newest>
+				<description>v1.0版本，测试更新
+				</description>
+				<size>15</size>
+			</edition>
+			<channel name = "官网" id = "0">
+				<url>https://www.bendipai.net/app/9198niuniu.apk
+				</url>
+			</channel>
+			<channel name = "应用宝" id = "1">
+				<url>http://download.yingyongbao.com
+				</url>
+			</channel>
+			<channel name = "小米" id = "2">
+				<url>http://download.xiaomi.com
+				</url>
+			</channel>
+		</platform>
+	</platforms>
+</config>

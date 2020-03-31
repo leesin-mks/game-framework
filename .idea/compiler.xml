@@ -7,28 +7,42 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common-util" />
-        <module name="test-client" />
+        <module name="game-data" />
         <module name="game-server" />
         <module name="frame-work" />
         <module name="login-server" />
         <module name="protobuf-protocol" />
         <module name="common-lib" />
-        <module name="game-data" />
         <module name="center-server" />
         <module name="gateway-server" />
+        <module name="test-client" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="center-server" target="1.5" />
-      <module name="common-lib" target="1.5" />
-      <module name="common-util" target="1.5" />
-      <module name="frame-work" target="1.5" />
-      <module name="game-data" target="1.5" />
-      <module name="game-server" target="1.5" />
-      <module name="gateway-server" target="1.5" />
-      <module name="login-server" target="1.5" />
-      <module name="protobuf-protocol" target="1.5" />
-      <module name="test-client" target="1.5" />
+    <bytecodeTargetLevel target="8">
+      <module name="center-server" target="1.8" />
+      <module name="common-lib" target="8" />
+      <module name="common-util" target="1.8" />
+      <module name="frame-work" target="1.8" />
+      <module name="game-data" target="1.8" />
+      <module name="game-server" target="1.8" />
+      <module name="gateway-server" target="1.8" />
+      <module name="login-server" target="1.8" />
+      <module name="protobuf-protocol" target="1.8" />
+      <module name="test-client" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding UTF8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="center-server" options="" />
+      <module name="common-util" options="" />
+      <module name="frame-work" options="" />
+      <module name="game-data" options="" />
+      <module name="game-server" options="" />
+      <module name="gateway-server" options="" />
+      <module name="login-server" options="" />
+      <module name="protobuf-protocol" options="" />
+      <module name="test-client" options="" />
+    </option>
   </component>
 </project>

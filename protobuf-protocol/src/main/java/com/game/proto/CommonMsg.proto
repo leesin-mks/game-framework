@@ -1,0 +1,13 @@
+package com.game.proto;
+
+option java_package = "com.game.pb";
+option java_outer_classname = "CommonMsgProto";
+
+message PingMessage {
+    required int64 time = 1;    //  服务器时间
+}
+
+message CommonMsgPB {
+    required int32 code = 1;    // 协议号
+    optional bytes body = 2;    // 包体
+}
