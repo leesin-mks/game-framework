@@ -44,22 +44,26 @@ public class RegisterCmd extends AbstractServerCmd
     @Override
     public void executeConnect(IClientConnection conn, byte[] packet)
     {
+        RegisterMsg msg = null;
         try
         {
-            RegisterMsg msg = RegisterMsg.parseFrom(packet);
-            ServerClient server = new ServerClient();
-            server.setServerID(msg.getServerID());
-            server.setClientConnection(conn);
-            conn.setHolder(server);
-            LOGGER.info("服务器登录成功, id: {}", msg.getServerID());
-            IServerComponent sc = (IServerComponent) ComponentManager.getInstance().getComponent(
-                    IServerComponent.NAME);
-            sc.addServerClient(server);
+            msg = RegisterMsg.parseFrom(packet);
         }
         catch (InvalidProtocolBufferException e)
         {
             LOGGER.error("Parse packet error: ", e);
+            return;
         }
+
+        ServerClient server = new ServerClient();
+        server.setServerID(msg.getServerID());
+        server.setClientConnection(conn);
+        conn.setHolder(server);
+        IServerComponent sc = (IServerComponent) ComponentManager.getInstance().getComponent(
+                IServerComponent.NAME);
+        sc.addServerClient(server);
+        server.sendRegisterSuccess();
+        LOGGER.info("服务器注册成功, id: {}", msg.getServerID());
     }
 
 }

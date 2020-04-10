@@ -14,6 +14,7 @@ import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.command.AbstractCommandComponent;
 import com.game.command.ICommand;
 import com.game.component.ComponentManager;
+import com.game.pb.command.ProtocolInProto.ProtocolIn;
 
 /**
  * @author jacken
@@ -38,11 +39,15 @@ public class CommonWSMessageHandler implements IMessageHandler
                 AbstractCommandComponent.NAME);
         if (cm == null)
         {
-            LOGGER.error("CommandModule not found");
+            LOGGER.warn("Command module not found");
             return;
         }
 
         ICommand cmd = cm.getCommand(code);
+        if (cmd == null)
+        {
+            cmd = cm.getCommand((short) ProtocolIn.FORWARD_MESSAGE_VALUE);
+        }
 
         try
         {

@@ -13,10 +13,10 @@ package com.game.type;
  */
 public enum ServerStateType
 {
-    STOP(0),          // 停止
-    RUNNING(1),       // 运行中
-    PREPARE_STOP(2),  // 准备停服
-    SHUTTING_DOWN(3);  // 停服中
+    STOP(0),             // 停止
+    RUNNING(1),          // 运行中
+    PREPARE_STOP(2),     // 准备停服
+    SHUTTING_DOWN(3);    // 停服
    
 
     private final int type;

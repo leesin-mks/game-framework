@@ -18,9 +18,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.bll.ServerBussiness;
+import com.game.component.CSCommandComponent;
+import com.game.component.CSComponent;
+import com.game.component.CommandComponent;
 import com.game.component.ComponentManager;
 import com.game.component.LanguageComponent;
 import com.game.component.RedisComponent;
+import com.game.component.ServerListComponent;
 import com.game.config.GlobalConfigManager;
 import com.game.database.DBComponent;
 import com.game.entity.bean.ServerListBean;
@@ -77,14 +81,14 @@ public class GateWayServer extends com.bdsk.event.EventSource
         // 初始化配置管理器。
         if (!GlobalConfigManager.getInstance().init(args[0]))
         {
-            LOGGER.error("GameServer has started failed because of initing config.");
+            LOGGER.info("GameServer has started failed because of init config.");
             System.exit(1);
         }
         Runtime.getRuntime().addShutdownHook(new BaseShutdownHooker(GateWayServer.getInstance()));
 
         if (!GateWayServer.getInstance().LoadComponents())
         {
-            LOGGER.error("GameServer has started failed");
+            LOGGER.info("GameServer has started failed");
             System.out.print("GameServer has started failed");
             System.exit(1);
         }
@@ -92,9 +96,9 @@ public class GateWayServer extends com.bdsk.event.EventSource
         printServerPID();
         System.out.print(String.format("GameServer has started successfully, taken %d millis.\n",
                 System.currentTimeMillis() - time));
-        LOGGER.error(String.format("GameServer has started successfully, taken %d millis.",
+        LOGGER.info(String.format("GameServer has started successfully, taken %d millis.",
                 System.currentTimeMillis() - time));
-        GateWayServer.getInstance().setStatus(1);
+        GateWayServer.getInstance().setStatus(ServerStateType.RUNNING.getValue());
     }
 
     /**
@@ -104,39 +108,40 @@ public class GateWayServer extends com.bdsk.event.EventSource
     {
         try
         {
+            ComponentManager componentManager = ComponentManager.getInstance();
             // 初始化组件处理器
-            if (!ComponentManager.getInstance().init())
+            if (!componentManager.init())
             {
                 return false;
             }
 
-            if (!ComponentManager.getInstance().addComponent(
-                    DBComponent.class.getName()))
+            if (!componentManager.addComponent(DBComponent.class.getName()))
                 return false;
-            if (!ComponentManager.getInstance().addComponent(
-                    RedisComponent.class.getName()))
+            if (!componentManager.addComponent(RedisComponent.class.getName()))
                 return false;
-            if (!ComponentManager.getInstance().addComponent(
-                    LanguageComponent.class.getName()))
+            if (!componentManager.addComponent(LanguageComponent.class.getName()))
                 return false;
-            if (!ComponentManager.getInstance().addComponent(
-                    NettyWSComponent.class.getName()))
+            if (!componentManager.addComponent(WebComponent.class.getName()))
                 return false;
-            if (!ComponentManager.getInstance().addComponent(
-                    WebComponent.class.getName()))
+            if (!componentManager.addComponent(TimerComponent.class.getName()))
                 return false;
-            if (!ComponentManager.getInstance().addComponent(
-                    TimerComponent.class.getName()))
+            if (!componentManager.addComponent(LogCache.class.getName()))
                 return false;
-            if (!ComponentManager.getInstance().addComponent(
-                    LogCache.class.getName()))
+            if (!componentManager.addComponent(ServerListComponent.class.getName()))
+                return false;
+            if (!componentManager.addComponent(CSCommandComponent.class.getName()))
+                return false;
+            if (!componentManager.addComponent(CSComponent.class.getName()))
+                return false;
+            if (!componentManager.addComponent(CommandComponent.class.getName()))
+                return false;
+            if (!componentManager.addComponent(NettyWSComponent.class.getName()))
                 return false;
             // 启动
-            if (!ComponentManager.getInstance().start())
+            if (!componentManager.start())
             {
                 return false;
             }
-
         }
         catch (Throwable e)
         {
@@ -152,7 +157,7 @@ public class GateWayServer extends com.bdsk.event.EventSource
      */
     public void callBackStop()
     {
-        status = ServerStateType.SHUTTING_DOWN.getValue();
+        setStatus(ServerStateType.SHUTTING_DOWN.getValue());
         ComponentManager.getInstance().stop();
     }
 
@@ -174,7 +179,7 @@ public class GateWayServer extends com.bdsk.event.EventSource
         if (this.status == ServerStateType.SHUTTING_DOWN.getValue())
         {
             CommonMsgPB.Builder message = CommonMsgPB.newBuilder();
-            message.setCode(ProtocolOut.SHUT_DOWN_CMD_VALUE);
+            message.setCode(ProtocolOut.SHUT_DOWN_VALUE);
         }
         if (this.status == ServerStateType.STOP.getValue())
         {
@@ -186,8 +191,8 @@ public class GateWayServer extends com.bdsk.event.EventSource
             {
                 LOGGER.info("Thread interrupted: ", e);
             }
-            LOGGER.error("-------------GameServer shutdown！！！-------------");
-            saveServerState(0);
+            LOGGER.error("-------------Gate way server shutdown！！！-------------");
+            saveServerState(ServerStateType.SHUTTING_DOWN.getValue());
             System.exit(1);
         }
         saveServerState(status);

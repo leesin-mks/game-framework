@@ -22,13 +22,29 @@ public final class ProtocolOutProto {
      */
     PING(0, 20480),
     /**
-     * <code>SHUT_DOWN_CMD = 20481;</code>
+     * <code>USER_LOGIN = 20481;</code>
+     *
+     * <pre>
+     * 登录
+     * </pre>
+     */
+    USER_LOGIN(1, 20481),
+    /**
+     * <code>USER_LOGIN_OUT = 20482;</code>
+     *
+     * <pre>
+     * 登出
+     * </pre>
+     */
+    USER_LOGIN_OUT(2, 20482),
+    /**
+     * <code>SHUT_DOWN = 20483;</code>
      *
      * <pre>
      * 停服
      * </pre>
      */
-    SHUT_DOWN_CMD(1, 20481),
+    SHUT_DOWN(3, 20483),
     ;
 
     /**
@@ -40,13 +56,29 @@ public final class ProtocolOutProto {
      */
     public static final int PING_VALUE = 20480;
     /**
-     * <code>SHUT_DOWN_CMD = 20481;</code>
+     * <code>USER_LOGIN = 20481;</code>
+     *
+     * <pre>
+     * 登录
+     * </pre>
+     */
+    public static final int USER_LOGIN_VALUE = 20481;
+    /**
+     * <code>USER_LOGIN_OUT = 20482;</code>
+     *
+     * <pre>
+     * 登出
+     * </pre>
+     */
+    public static final int USER_LOGIN_OUT_VALUE = 20482;
+    /**
+     * <code>SHUT_DOWN = 20483;</code>
      *
      * <pre>
      * 停服
      * </pre>
      */
-    public static final int SHUT_DOWN_CMD_VALUE = 20481;
+    public static final int SHUT_DOWN_VALUE = 20483;
 
 
     public final int getNumber() { return value; }
@@ -54,7 +86,9 @@ public final class ProtocolOutProto {
     public static ProtocolOut valueOf(int value) {
       switch (value) {
         case 20480: return PING;
-        case 20481: return SHUT_DOWN_CMD;
+        case 20481: return USER_LOGIN;
+        case 20482: return USER_LOGIN_OUT;
+        case 20483: return SHUT_DOWN;
         default: return null;
       }
     }
@@ -116,9 +150,10 @@ public final class ProtocolOutProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\037proto/command/ProtocolOut.proto\022\016com.g" +
-      "ame.proto*.\n\013ProtocolOut\022\n\n\004PING\020\200\240\001\022\023\n\r" +
-      "SHUT_DOWN_CMD\020\201\240\001B\'\n\023com.game.pb.command" +
-      "B\020ProtocolOutProto"
+      "ame.proto*R\n\013ProtocolOut\022\n\n\004PING\020\200\240\001\022\020\n\n" +
+      "USER_LOGIN\020\201\240\001\022\024\n\016USER_LOGIN_OUT\020\202\240\001\022\017\n\t" +
+      "SHUT_DOWN\020\203\240\001B\'\n\023com.game.pb.commandB\020Pr" +
+      "otocolOutProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

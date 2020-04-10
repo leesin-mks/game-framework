@@ -13,7 +13,10 @@ import com.game.net.AbstractClientConnection;
 import com.game.net.IMessageHandler;
 import com.game.type.CommonConst;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
+import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 
 /**
  * @author jacken
@@ -52,6 +55,13 @@ public class NettyClientConnection extends AbstractClientConnection
         {
             channel.writeAndFlush(packet);
         }
+    }
+
+    @Override
+    public void send(byte[] packet)
+    {
+        ByteBuf buf = Unpooled.wrappedBuffer(packet);
+        send(new BinaryWebSocketFrame(buf));
     }
 
     @Override

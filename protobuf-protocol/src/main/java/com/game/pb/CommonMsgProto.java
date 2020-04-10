@@ -482,6 +482,51 @@ public final class CommonMsgProto {
      * </pre>
      */
     com.google.protobuf.ByteString getBody();
+
+    // optional int32 msgType = 3;
+    /**
+     * <code>optional int32 msgType = 3;</code>
+     *
+     * <pre>
+     * 错误消息类型
+     * </pre>
+     */
+    boolean hasMsgType();
+    /**
+     * <code>optional int32 msgType = 3;</code>
+     *
+     * <pre>
+     * 错误消息类型
+     * </pre>
+     */
+    int getMsgType();
+
+    // optional string errorMsg = 4;
+    /**
+     * <code>optional string errorMsg = 4;</code>
+     *
+     * <pre>
+     * 错误消息
+     * </pre>
+     */
+    boolean hasErrorMsg();
+    /**
+     * <code>optional string errorMsg = 4;</code>
+     *
+     * <pre>
+     * 错误消息
+     * </pre>
+     */
+    java.lang.String getErrorMsg();
+    /**
+     * <code>optional string errorMsg = 4;</code>
+     *
+     * <pre>
+     * 错误消息
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getErrorMsgBytes();
   }
   /**
    * Protobuf type {@code com.game.proto.CommonMsgPB}
@@ -542,6 +587,16 @@ public final class CommonMsgProto {
             case 18: {
               bitField0_ |= 0x00000002;
               body_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              msgType_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              errorMsg_ = input.readBytes();
               break;
             }
           }
@@ -632,9 +687,90 @@ public final class CommonMsgProto {
       return body_;
     }
 
+    // optional int32 msgType = 3;
+    public static final int MSGTYPE_FIELD_NUMBER = 3;
+    private int msgType_;
+    /**
+     * <code>optional int32 msgType = 3;</code>
+     *
+     * <pre>
+     * 错误消息类型
+     * </pre>
+     */
+    public boolean hasMsgType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 msgType = 3;</code>
+     *
+     * <pre>
+     * 错误消息类型
+     * </pre>
+     */
+    public int getMsgType() {
+      return msgType_;
+    }
+
+    // optional string errorMsg = 4;
+    public static final int ERRORMSG_FIELD_NUMBER = 4;
+    private java.lang.Object errorMsg_;
+    /**
+     * <code>optional string errorMsg = 4;</code>
+     *
+     * <pre>
+     * 错误消息
+     * </pre>
+     */
+    public boolean hasErrorMsg() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string errorMsg = 4;</code>
+     *
+     * <pre>
+     * 错误消息
+     * </pre>
+     */
+    public java.lang.String getErrorMsg() {
+      java.lang.Object ref = errorMsg_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          errorMsg_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string errorMsg = 4;</code>
+     *
+     * <pre>
+     * 错误消息
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getErrorMsgBytes() {
+      java.lang.Object ref = errorMsg_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        errorMsg_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       code_ = 0;
       body_ = com.google.protobuf.ByteString.EMPTY;
+      msgType_ = 0;
+      errorMsg_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -658,6 +794,12 @@ public final class CommonMsgProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, body_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, msgType_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getErrorMsgBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -674,6 +816,14 @@ public final class CommonMsgProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, body_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, msgType_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getErrorMsgBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -795,6 +945,10 @@ public final class CommonMsgProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         body_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
+        msgType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        errorMsg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -831,6 +985,14 @@ public final class CommonMsgProto {
           to_bitField0_ |= 0x00000002;
         }
         result.body_ = body_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.msgType_ = msgType_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.errorMsg_ = errorMsg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -852,6 +1014,14 @@ public final class CommonMsgProto {
         }
         if (other.hasBody()) {
           setBody(other.getBody());
+        }
+        if (other.hasMsgType()) {
+          setMsgType(other.getMsgType());
+        }
+        if (other.hasErrorMsg()) {
+          bitField0_ |= 0x00000008;
+          errorMsg_ = other.errorMsg_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -985,6 +1155,153 @@ public final class CommonMsgProto {
         return this;
       }
 
+      // optional int32 msgType = 3;
+      private int msgType_ ;
+      /**
+       * <code>optional int32 msgType = 3;</code>
+       *
+       * <pre>
+       * 错误消息类型
+       * </pre>
+       */
+      public boolean hasMsgType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 msgType = 3;</code>
+       *
+       * <pre>
+       * 错误消息类型
+       * </pre>
+       */
+      public int getMsgType() {
+        return msgType_;
+      }
+      /**
+       * <code>optional int32 msgType = 3;</code>
+       *
+       * <pre>
+       * 错误消息类型
+       * </pre>
+       */
+      public Builder setMsgType(int value) {
+        bitField0_ |= 0x00000004;
+        msgType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 msgType = 3;</code>
+       *
+       * <pre>
+       * 错误消息类型
+       * </pre>
+       */
+      public Builder clearMsgType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        msgType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string errorMsg = 4;
+      private java.lang.Object errorMsg_ = "";
+      /**
+       * <code>optional string errorMsg = 4;</code>
+       *
+       * <pre>
+       * 错误消息
+       * </pre>
+       */
+      public boolean hasErrorMsg() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string errorMsg = 4;</code>
+       *
+       * <pre>
+       * 错误消息
+       * </pre>
+       */
+      public java.lang.String getErrorMsg() {
+        java.lang.Object ref = errorMsg_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          errorMsg_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string errorMsg = 4;</code>
+       *
+       * <pre>
+       * 错误消息
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getErrorMsgBytes() {
+        java.lang.Object ref = errorMsg_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          errorMsg_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string errorMsg = 4;</code>
+       *
+       * <pre>
+       * 错误消息
+       * </pre>
+       */
+      public Builder setErrorMsg(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        errorMsg_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string errorMsg = 4;</code>
+       *
+       * <pre>
+       * 错误消息
+       * </pre>
+       */
+      public Builder clearErrorMsg() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        errorMsg_ = getDefaultInstance().getErrorMsg();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string errorMsg = 4;</code>
+       *
+       * <pre>
+       * 错误消息
+       * </pre>
+       */
+      public Builder setErrorMsgBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        errorMsg_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.game.proto.CommonMsgPB)
     }
 
@@ -1016,9 +1333,10 @@ public final class CommonMsgProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025proto/CommonMsg.proto\022\016com.game.proto\"" +
-      "\033\n\013PingMessage\022\014\n\004time\030\001 \002(\003\")\n\013CommonMs" +
-      "gPB\022\014\n\004code\030\001 \002(\005\022\014\n\004body\030\002 \001(\014B\035\n\013com.g" +
-      "ame.pbB\016CommonMsgProto"
+      "\033\n\013PingMessage\022\014\n\004time\030\001 \002(\003\"L\n\013CommonMs" +
+      "gPB\022\014\n\004code\030\001 \002(\005\022\014\n\004body\030\002 \001(\014\022\017\n\007msgTy" +
+      "pe\030\003 \001(\005\022\020\n\010errorMsg\030\004 \001(\tB\035\n\013com.game.p" +
+      "bB\016CommonMsgProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1036,7 +1354,7 @@ public final class CommonMsgProto {
           internal_static_com_game_proto_CommonMsgPB_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_game_proto_CommonMsgPB_descriptor,
-              new java.lang.String[] { "Code", "Body", });
+              new java.lang.String[] { "Code", "Body", "MsgType", "ErrorMsg", });
           return null;
         }
       };

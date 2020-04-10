@@ -1,0 +1,102 @@
+2020-04-01 07:00:25,923|ERROR|DefaultQuartzScheduler_Worker-2|Caller+0	 at com.jolbox.bonecp.ConnectionHandle.markPossiblyBroken(ConnectionHandle.java:388)
+Database access problem. Killing off this connection and all remaining connections in the connection pool. SQL State = 08S01
+2020-04-01 07:00:25,929|ERROR|DefaultQuartzScheduler_Worker-2|Caller+0	 at com.game.database.DBHelper.closeConn(DBHelper.java:550)
+关闭数据库连接出错
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 49,105 milliseconds ago.  The last packet sent successfully to the server was 19,134 milliseconds ago.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1116) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3090) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2979) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3520) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1990) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2151) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2619) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.ConnectionImpl.setAutoCommit(ConnectionImpl.java:4997) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.jolbox.bonecp.ConnectionHandle.setAutoCommit(ConnectionHandle.java:1292) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.game.database.DBHelper.closeConn(DBHelper.java:543) ~[classes/:na]
+	at com.game.log.cache.LogCache.writeLog(LogCache.java:151) [classes/:na]
+	at com.game.log.cache.LogSaveJob.execute(LogSaveJob.java:32) [classes/:na]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) [quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.3.2.jar:na]
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_241]
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_241]
+	at java.net.SocketInputStream.read(SocketInputStream.java:171) ~[na:1.8.0_241]
+	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_241]
+	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:114) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:161) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:189) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2537) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2990) ~[mysql-connector-java-5.1.17.jar:na]
+	... 12 common frames omitted
+2020-04-01 07:00:28,757|ERROR|DefaultQuartzScheduler_Worker-10|Caller+0	 at com.jolbox.bonecp.ConnectionHandle.markPossiblyBroken(ConnectionHandle.java:388)
+Database access problem. Killing off this connection and all remaining connections in the connection pool. SQL State = 08S01
+2020-04-01 07:00:28,766|ERROR|DefaultQuartzScheduler_Worker-10|Caller+0	 at com.game.database.DBHelper.closeConn(DBHelper.java:550)
+关闭数据库连接出错
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 59,102 milliseconds ago.  The last packet sent successfully to the server was 19,130 milliseconds ago.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_241]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_241]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_241]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_241]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1116) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3090) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2979) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3520) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1990) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2151) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2619) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.ConnectionImpl.setAutoCommit(ConnectionImpl.java:4997) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.jolbox.bonecp.ConnectionHandle.setAutoCommit(ConnectionHandle.java:1292) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.game.database.DBHelper.closeConn(DBHelper.java:543) ~[classes/:na]
+	at com.game.log.cache.LogCache.writeLog(LogCache.java:151) [classes/:na]
+	at com.game.log.cache.LogSaveJob.execute(LogSaveJob.java:32) [classes/:na]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:202) [quartz-2.3.2.jar:na]
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573) [quartz-2.3.2.jar:na]
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method) ~[na:1.8.0_241]
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116) ~[na:1.8.0_241]
+	at java.net.SocketInputStream.read(SocketInputStream.java:171) ~[na:1.8.0_241]
+	at java.net.SocketInputStream.read(SocketInputStream.java:141) ~[na:1.8.0_241]
+	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:114) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:161) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:189) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2537) ~[mysql-connector-java-5.1.17.jar:na]
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2990) ~[mysql-connector-java-5.1.17.jar:na]
+	... 12 common frames omitted
+2020-04-01 10:00:55,022|INFO |Thread-0|Caller+0	 at org.quartz.core.QuartzScheduler.shutdown(QuartzScheduler.java:666)
+Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+2020-04-01 10:00:55,022|INFO |Thread-0|Caller+0	 at org.quartz.core.QuartzScheduler.standby(QuartzScheduler.java:585)
+Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+2020-04-01 10:00:55,023|INFO |Thread-0|Caller+0	 at org.quartz.core.QuartzScheduler.shutdown(QuartzScheduler.java:740)
+Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+2020-04-01 10:00:55,030|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:159)
+Shutting down connection pool...
+2020-04-01 10:00:55,033|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:188)
+Connection pool has been shutdown.
+2020-04-01 10:00:55,033|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:159)
+Shutting down connection pool...
+2020-04-01 10:00:55,035|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:188)
+Connection pool has been shutdown.
+2020-04-01 10:00:55,525|INFO |Thread-0|Caller+0	 at org.quartz.core.QuartzScheduler.shutdown(QuartzScheduler.java:666)
+Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+2020-04-01 10:00:55,525|INFO |Thread-0|Caller+0	 at org.quartz.core.QuartzScheduler.standby(QuartzScheduler.java:585)
+Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+2020-04-01 10:00:55,525|INFO |Thread-0|Caller+0	 at org.quartz.core.QuartzScheduler.shutdown(QuartzScheduler.java:740)
+Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+2020-04-01 10:00:55,531|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:159)
+Shutting down connection pool...
+2020-04-01 10:00:55,533|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:188)
+Connection pool has been shutdown.
+2020-04-01 10:00:55,533|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:159)
+Shutting down connection pool...
+2020-04-01 10:00:55,535|INFO |Thread-0|Caller+0	 at com.jolbox.bonecp.BoneCP.shutdown(BoneCP.java:188)
+Connection pool has been shutdown.

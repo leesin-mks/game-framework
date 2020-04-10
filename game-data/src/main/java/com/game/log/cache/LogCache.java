@@ -151,8 +151,6 @@ public class LogCache implements ILogCache
             DaoManager.DB_MASTER_HELPER.closeConn(conn);
             lock.unlock();
         }
-        // System.out.println("写入日志时间，毫秒" + (System.currentTimeMillis() -
-        // time));
     }
 
     private void addLog(String key, List<Object> logs, Connection conn)
@@ -228,7 +226,6 @@ public class LogCache implements ILogCache
             catch (IOException e)
             {
                 LOGGER.error("writeLog error:", e);
-                ;
             }
         }
         return true;
@@ -259,12 +256,10 @@ public class LogCache implements ILogCache
                 catch (InstantiationException e)
                 {
                     LOGGER.error("writeLog error:", e);
-                    ;
                 }
                 catch (IllegalAccessException e)
                 {
                     LOGGER.error("writeLog error:", e);
-                    ;
                 }
             }
         }
@@ -298,7 +293,10 @@ public class LogCache implements ILogCache
     public void stop()
     {
         this.writeLog();
-        executorService.shutdown();
+        if (executorService != null)
+        {
+            executorService.shutdown();
+        }
     }
 
     /*

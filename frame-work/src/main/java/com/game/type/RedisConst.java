@@ -13,5 +13,7 @@ package com.game.type;
  */
 public final class RedisConst
 {
+    public static final String USER_SESSION_KEY = "USER_SESSION_KEY";
 
+    public static final String USER_SERVER_KEY = "USER_SERVER_KEY";
 }

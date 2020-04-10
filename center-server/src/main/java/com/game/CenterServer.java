@@ -22,11 +22,13 @@ import com.game.component.CommandComponent;
 import com.game.component.ComponentManager;
 import com.game.component.LanguageComponent;
 import com.game.component.RedisComponent;
+import com.game.component.ServerComponent;
 import com.game.component.ServerListComponent;
 import com.game.config.GlobalConfigManager;
 import com.game.database.DBComponent;
 import com.game.entity.bean.ServerListBean;
 import com.game.log.cache.LogCache;
+import com.game.net.netty.NettyComponent;
 import com.game.net.netty.web.NettyWSComponent;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
@@ -119,9 +121,9 @@ public class CenterServer extends com.bdsk.event.EventSource
                 return false;
             if (!componentManager.addComponent(LanguageComponent.class.getName()))
                 return false;
-            if (!componentManager.addComponent(NettyWSComponent.class.getName()))
-                return false;
             if (!componentManager.addComponent(CommandComponent.class.getName()))
+                return false;
+            if (!componentManager.addComponent(NettyComponent.class.getName()))
                 return false;
             if (!componentManager.addComponent(WebComponent.class.getName()))
                 return false;
@@ -130,6 +132,8 @@ public class CenterServer extends com.bdsk.event.EventSource
             if (!componentManager.addComponent(LogCache.class.getName()))
                 return false;
             if (!componentManager.addComponent(ServerListComponent.class.getName()))
+                return false;
+            if (!componentManager.addComponent(ServerComponent.class.getName()))
                 return false;
             // 启动
             if (!componentManager.start())
@@ -151,7 +155,7 @@ public class CenterServer extends com.bdsk.event.EventSource
      */
     public void callBackStop()
     {
-        status = ServerStateType.SHUTTING_DOWN.getValue();
+        setStatus(ServerStateType.SHUTTING_DOWN.getValue());
         ComponentManager.getInstance().stop();
     }
 
@@ -173,7 +177,7 @@ public class CenterServer extends com.bdsk.event.EventSource
         if (this.status == ServerStateType.SHUTTING_DOWN.getValue())
         {
             CommonMsgPB.Builder message = CommonMsgPB.newBuilder();
-            message.setCode(ProtocolOut.SHUT_DOWN_CMD_VALUE);
+            message.setCode(ProtocolOut.SHUT_DOWN_VALUE);
         }
         if (this.status == ServerStateType.STOP.getValue())
         {
@@ -185,7 +189,7 @@ public class CenterServer extends com.bdsk.event.EventSource
             {
                 LOGGER.info("Thread interrupted: ", e);
             }
-            LOGGER.error("-------------GameServer shutdown！！！-------------");
+            LOGGER.info("-------------Center Server shutdown！！！-------------");
             saveServerState(0);
             System.exit(1);
         }

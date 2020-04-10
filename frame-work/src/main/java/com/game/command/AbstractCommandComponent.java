@@ -77,7 +77,6 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
         try
         {
             List<Class<?>> allClasses = ClassUtil.getClasses(getCommandPacketName());
-
             for (Class<?> clazz : allClasses)
             {
                 try
@@ -98,19 +97,14 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
                         cmdCache.put(getNodeType(cmd), (ICommand) clazz.newInstance());
                         continue;
                     }
-
                 }
                 catch (Exception e)
                 {
-                    LOGGER.error(
-                            "load command fail, command name : "
-                                    + clazz.getName(),
-                            e);
+                    LOGGER.error("load command fail, command name : {}", clazz.getName(), e);
                     e.printStackTrace();
                 }
             }
-
-            LOGGER.info("cmdCache size : " + cmdCache.size());
+            LOGGER.info("cmdCache size : {}", cmdCache.size());
             return true;
         }
         catch (Exception e)

@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.command.AbstractServerCmd;
-import com.game.command.FSCmdTask;
-import com.game.component.CSCmdComponent;
+import com.game.command.CSCmdTask;
+import com.game.component.CSCommandComponent;
 import com.game.component.ComponentManager;
 import com.game.net.CommonMessage;
 import com.game.net.IServerConnector;
@@ -37,8 +37,8 @@ public class CSMessageHandler implements IServerPacketHandler
         CommonMessage message = ((CommonMessage) packet);
         short code = message.getCode();
         // 从组件管理器中间调用
-        CSCmdComponent cm = (CSCmdComponent) ComponentManager.getInstance().getComponent(
-                CSCmdComponent.NAME);
+        CSCommandComponent cm = (CSCommandComponent) ComponentManager.getInstance().getComponent(
+                CSCommandComponent.NAME);
         if (cm == null)
         {
             LOGGER.error("CommandModule not found");
@@ -54,7 +54,7 @@ public class CSMessageHandler implements IServerPacketHandler
 
         try
         {
-            ((CSServerConn) client).addCommandTask(new FSCmdTask(cmd, message.getBody(), client));
+            ((CSServerConn) client).addCommandTask(new CSCmdTask(cmd, message.getBody(), client));
             // cmd.execute(client, message.getBody());
         }
         catch (Exception e)

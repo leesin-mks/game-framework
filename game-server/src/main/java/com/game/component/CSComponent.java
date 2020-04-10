@@ -103,7 +103,7 @@ public class CSComponent implements ICSComponent
                 CSServerConn server = new CSServerConn(bean, new CSMessageHandler(), NettyCommonCodecFactory.class);
                 if (server.connect())
                 {
-                    server.sendLogin();
+                    server.sendRegister();
                 }
                 else
                 {

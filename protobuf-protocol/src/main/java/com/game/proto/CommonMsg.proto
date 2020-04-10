@@ -8,6 +8,8 @@ message PingMessage {
 }
 
 message CommonMsgPB {
-    required int32 code = 1;    // 协议号
-    optional bytes body = 2;    // 包体
+    required int32 code = 1;        // 协议号
+    optional bytes body = 2;        // 包体
+    optional int32 msgType = 3;     // 错误消息类型
+    optional string errorMsg = 4;   // 错误消息
 }

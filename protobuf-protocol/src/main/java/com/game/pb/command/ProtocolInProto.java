@@ -21,6 +21,22 @@ public final class ProtocolInProto {
      * </pre>
      */
     PING(0, 1),
+    /**
+     * <code>USER_LOGIN = 2;</code>
+     *
+     * <pre>
+     * 登录
+     * </pre>
+     */
+    USER_LOGIN(1, 2),
+    /**
+     * <code>FORWARD_MESSAGE = 3;</code>
+     *
+     * <pre>
+     * 转发消息
+     * </pre>
+     */
+    FORWARD_MESSAGE(2, 3),
     ;
 
     /**
@@ -31,6 +47,22 @@ public final class ProtocolInProto {
      * </pre>
      */
     public static final int PING_VALUE = 1;
+    /**
+     * <code>USER_LOGIN = 2;</code>
+     *
+     * <pre>
+     * 登录
+     * </pre>
+     */
+    public static final int USER_LOGIN_VALUE = 2;
+    /**
+     * <code>FORWARD_MESSAGE = 3;</code>
+     *
+     * <pre>
+     * 转发消息
+     * </pre>
+     */
+    public static final int FORWARD_MESSAGE_VALUE = 3;
 
 
     public final int getNumber() { return value; }
@@ -38,6 +70,8 @@ public final class ProtocolInProto {
     public static ProtocolIn valueOf(int value) {
       switch (value) {
         case 1: return PING;
+        case 2: return USER_LOGIN;
+        case 3: return FORWARD_MESSAGE;
         default: return null;
       }
     }
@@ -99,8 +133,9 @@ public final class ProtocolInProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\036proto/command/ProtocolIn.proto\022\016com.ga" +
-      "me.proto*\026\n\nProtocolIn\022\010\n\004PING\020\001B&\n\023com." +
-      "game.pb.commandB\017ProtocolInProto"
+      "me.proto*;\n\nProtocolIn\022\010\n\004PING\020\001\022\016\n\nUSER" +
+      "_LOGIN\020\002\022\023\n\017FORWARD_MESSAGE\020\003B&\n\023com.gam" +
+      "e.pb.commandB\017ProtocolInProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

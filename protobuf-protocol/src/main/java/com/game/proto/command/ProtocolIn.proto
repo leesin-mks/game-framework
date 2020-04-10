@@ -4,5 +4,7 @@ option java_outer_classname = "ProtocolInProto";
 
 enum ProtocolIn
 {
-    PING = 0x0001;          // ping
+    PING = 0x0001;                   // ping
+    USER_LOGIN = 0x0002;             // 登录
+    FORWARD_MESSAGE = 0x0003;        // 转发消息
 }

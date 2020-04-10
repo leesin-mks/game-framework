@@ -24,7 +24,7 @@ public class CommandComponent extends AbstractCommandComponent<ICode>
     @Override
     public String getCommandPacketName()
     {
-        return "com.game.command";
+        return "com.game.server.command";
     }
 
     /*

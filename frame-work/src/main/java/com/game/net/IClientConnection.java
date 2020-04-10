@@ -48,6 +48,8 @@ public interface IClientConnection
      */
     void send(Object packet);
 
+    void send(byte[] packet);
+
     /**
      * 连接关闭时的回调。
      */
@@ -93,28 +95,31 @@ public interface IClientConnection
      * @return 属性 value
      */
     Object getAttribute(Object key);
-    
+
     /**
      * 是否是服务器断开连接
+     * 
      * @return
      */
     boolean isServerClosed();
-    
+
     /**
      * 设置是否是服务器断开
+     * 
      * @param isServerClosed
      */
     void setIsServerClosed(boolean isServerClosed);
-    
-    
+
     /**
      * 是否连接
+     * 
      * @return
      */
     public boolean isConnected();
-    
+
     /**
      * 读取缓冲byte[]
+     * 
      * @return
      */
     public byte[] getReadBytes();

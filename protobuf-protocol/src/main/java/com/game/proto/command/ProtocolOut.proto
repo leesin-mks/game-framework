@@ -6,5 +6,7 @@ option java_outer_classname = "ProtocolOutProto";
 enum ProtocolOut
 {
     PING = 0x5000;                           // ping
-    SHUT_DOWN_CMD = 0X5001;                  // 停服
+    USER_LOGIN = 0x5001;                     // 登录
+    USER_LOGIN_OUT = 0X5002;                 // 登出
+    SHUT_DOWN = 0X5003;                      // 停服
 }

@@ -83,17 +83,16 @@ public class NettyServerConnector extends AbstractServerConnector
         {
             this.init();
 
-            bootstrap.handler(
-                    new ChannelInitializer<SocketChannel>()
-                    {
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception
-                        {
-                            ch.pipeline().addLast("codec", codec.newInstance());
-                            ch.pipeline().addLast(handler.newInstance());
+            bootstrap.handler(new ChannelInitializer<SocketChannel>()
+            {
+                @Override
+                protected void initChannel(SocketChannel ch) throws Exception
+                {
+                    ch.pipeline().addLast("codec", codec.newInstance());
+                    ch.pipeline().addLast(handler.newInstance());
 
-                        }
-                    });
+                }
+            });
             ChannelFuture cf = bootstrap.connect(getAddress(), getPort()).sync();
             // bootstrap.connect().
             // ChannelFuture cf = bootstrap.connect("127.0.0.1", 5501).sync();

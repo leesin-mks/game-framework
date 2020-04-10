@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.bll.ServerBussiness;
-import com.game.component.CSCmdComponent;
+import com.game.component.CSCommandComponent;
 import com.game.component.CSComponent;
 import com.game.component.ComponentManager;
 import com.game.component.LanguageComponent;
@@ -28,7 +28,6 @@ import com.game.config.GlobalConfigManager;
 import com.game.database.DBComponent;
 import com.game.entity.bean.ServerListBean;
 import com.game.log.cache.LogCache;
-import com.game.net.netty.web.NettyWSComponent;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.timer.TimerComponent;
@@ -120,8 +119,6 @@ public class GameServer extends com.bdsk.event.EventSource
                 return false;
             if (!componentManager.addComponent(LanguageComponent.class.getName()))
                 return false;
-            if (!componentManager.addComponent(NettyWSComponent.class.getName()))
-                return false;
             if (!componentManager.addComponent(WebComponent.class.getName()))
                 return false;
             if (!componentManager.addComponent(TimerComponent.class.getName()))
@@ -130,7 +127,7 @@ public class GameServer extends com.bdsk.event.EventSource
                 return false;
             if (!componentManager.addComponent(ServerListComponent.class.getName()))
                 return false;
-            if (!componentManager.addComponent(CSCmdComponent.class.getName()))
+            if (!componentManager.addComponent(CSCommandComponent.class.getName()))
                 return false;
             if (!componentManager.addComponent(CSComponent.class.getName()))
                 return false;
@@ -139,7 +136,6 @@ public class GameServer extends com.bdsk.event.EventSource
             {
                 return false;
             }
-
         }
         catch (Throwable e)
         {
@@ -155,7 +151,7 @@ public class GameServer extends com.bdsk.event.EventSource
      */
     public void callBackStop()
     {
-        status = ServerStateType.SHUTTING_DOWN.getValue();
+        setStatus(ServerStateType.SHUTTING_DOWN.getValue());
         ComponentManager.getInstance().stop();
     }
 
@@ -177,7 +173,7 @@ public class GameServer extends com.bdsk.event.EventSource
         if (this.status == ServerStateType.SHUTTING_DOWN.getValue())
         {
             CommonMsgPB.Builder message = CommonMsgPB.newBuilder();
-            message.setCode(ProtocolOut.SHUT_DOWN_CMD_VALUE);
+            message.setCode(ProtocolOut.SHUT_DOWN_VALUE);
         }
         if (this.status == ServerStateType.STOP.getValue())
         {
