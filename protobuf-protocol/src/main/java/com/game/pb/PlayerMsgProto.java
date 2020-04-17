@@ -1562,9 +1562,9 @@ public final class PlayerMsgProto {
      */
     int getUserID();
 
-    // required string nickName = 2;
+    // optional string nickName = 2;
     /**
-     * <code>required string nickName = 2;</code>
+     * <code>optional string nickName = 2;</code>
      *
      * <pre>
      * 昵称
@@ -1572,7 +1572,7 @@ public final class PlayerMsgProto {
      */
     boolean hasNickName();
     /**
-     * <code>required string nickName = 2;</code>
+     * <code>optional string nickName = 2;</code>
      *
      * <pre>
      * 昵称
@@ -1580,7 +1580,7 @@ public final class PlayerMsgProto {
      */
     java.lang.String getNickName();
     /**
-     * <code>required string nickName = 2;</code>
+     * <code>optional string nickName = 2;</code>
      *
      * <pre>
      * 昵称
@@ -1589,9 +1589,9 @@ public final class PlayerMsgProto {
     com.google.protobuf.ByteString
         getNickNameBytes();
 
-    // required string head = 3;
+    // optional string head = 3;
     /**
-     * <code>required string head = 3;</code>
+     * <code>optional string head = 3;</code>
      *
      * <pre>
      * 用户头像
@@ -1599,7 +1599,7 @@ public final class PlayerMsgProto {
      */
     boolean hasHead();
     /**
-     * <code>required string head = 3;</code>
+     * <code>optional string head = 3;</code>
      *
      * <pre>
      * 用户头像
@@ -1607,7 +1607,7 @@ public final class PlayerMsgProto {
      */
     java.lang.String getHead();
     /**
-     * <code>required string head = 3;</code>
+     * <code>optional string head = 3;</code>
      *
      * <pre>
      * 用户头像
@@ -1616,9 +1616,9 @@ public final class PlayerMsgProto {
     com.google.protobuf.ByteString
         getHeadBytes();
 
-    // required string weChat = 4;
+    // optional string weChat = 4;
     /**
-     * <code>required string weChat = 4;</code>
+     * <code>optional string weChat = 4;</code>
      *
      * <pre>
      * 微信
@@ -1626,7 +1626,7 @@ public final class PlayerMsgProto {
      */
     boolean hasWeChat();
     /**
-     * <code>required string weChat = 4;</code>
+     * <code>optional string weChat = 4;</code>
      *
      * <pre>
      * 微信
@@ -1634,7 +1634,7 @@ public final class PlayerMsgProto {
      */
     java.lang.String getWeChat();
     /**
-     * <code>required string weChat = 4;</code>
+     * <code>optional string weChat = 4;</code>
      *
      * <pre>
      * 微信
@@ -1643,9 +1643,9 @@ public final class PlayerMsgProto {
     com.google.protobuf.ByteString
         getWeChatBytes();
 
-    // required string phone = 5;
+    // optional string phone = 5;
     /**
-     * <code>required string phone = 5;</code>
+     * <code>optional string phone = 5;</code>
      *
      * <pre>
      * 手机号
@@ -1653,7 +1653,7 @@ public final class PlayerMsgProto {
      */
     boolean hasPhone();
     /**
-     * <code>required string phone = 5;</code>
+     * <code>optional string phone = 5;</code>
      *
      * <pre>
      * 手机号
@@ -1661,7 +1661,7 @@ public final class PlayerMsgProto {
      */
     java.lang.String getPhone();
     /**
-     * <code>required string phone = 5;</code>
+     * <code>optional string phone = 5;</code>
      *
      * <pre>
      * 手机号
@@ -1670,9 +1670,9 @@ public final class PlayerMsgProto {
     com.google.protobuf.ByteString
         getPhoneBytes();
 
-    // required int64 nickChangeDate = 6;
+    // optional int64 nickChangeDate = 6;
     /**
-     * <code>required int64 nickChangeDate = 6;</code>
+     * <code>optional int64 nickChangeDate = 6;</code>
      *
      * <pre>
      * 上次修改昵称时间
@@ -1680,7 +1680,7 @@ public final class PlayerMsgProto {
      */
     boolean hasNickChangeDate();
     /**
-     * <code>required int64 nickChangeDate = 6;</code>
+     * <code>optional int64 nickChangeDate = 6;</code>
      *
      * <pre>
      * 上次修改昵称时间
@@ -1688,9 +1688,9 @@ public final class PlayerMsgProto {
      */
     long getNickChangeDate();
 
-    // required string unionID = 7;
+    // optional string unionID = 7;
     /**
-     * <code>required string unionID = 7;</code>
+     * <code>optional string unionID = 7;</code>
      *
      * <pre>
      * unionID
@@ -1698,7 +1698,7 @@ public final class PlayerMsgProto {
      */
     boolean hasUnionID();
     /**
-     * <code>required string unionID = 7;</code>
+     * <code>optional string unionID = 7;</code>
      *
      * <pre>
      * unionID
@@ -1706,7 +1706,7 @@ public final class PlayerMsgProto {
      */
     java.lang.String getUnionID();
     /**
-     * <code>required string unionID = 7;</code>
+     * <code>optional string unionID = 7;</code>
      *
      * <pre>
      * unionID
@@ -1715,9 +1715,9 @@ public final class PlayerMsgProto {
     com.google.protobuf.ByteString
         getUnionIDBytes();
 
-    // required int64 registerDate = 8;
+    // optional int64 registerDate = 8;
     /**
-     * <code>required int64 registerDate = 8;</code>
+     * <code>optional int64 registerDate = 8;</code>
      *
      * <pre>
      * 注册时间
@@ -1725,7 +1725,7 @@ public final class PlayerMsgProto {
      */
     boolean hasRegisterDate();
     /**
-     * <code>required int64 registerDate = 8;</code>
+     * <code>optional int64 registerDate = 8;</code>
      *
      * <pre>
      * 注册时间
@@ -1888,11 +1888,11 @@ public final class PlayerMsgProto {
       return userID_;
     }
 
-    // required string nickName = 2;
+    // optional string nickName = 2;
     public static final int NICKNAME_FIELD_NUMBER = 2;
     private java.lang.Object nickName_;
     /**
-     * <code>required string nickName = 2;</code>
+     * <code>optional string nickName = 2;</code>
      *
      * <pre>
      * 昵称
@@ -1902,7 +1902,7 @@ public final class PlayerMsgProto {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required string nickName = 2;</code>
+     * <code>optional string nickName = 2;</code>
      *
      * <pre>
      * 昵称
@@ -1923,7 +1923,7 @@ public final class PlayerMsgProto {
       }
     }
     /**
-     * <code>required string nickName = 2;</code>
+     * <code>optional string nickName = 2;</code>
      *
      * <pre>
      * 昵称
@@ -1943,11 +1943,11 @@ public final class PlayerMsgProto {
       }
     }
 
-    // required string head = 3;
+    // optional string head = 3;
     public static final int HEAD_FIELD_NUMBER = 3;
     private java.lang.Object head_;
     /**
-     * <code>required string head = 3;</code>
+     * <code>optional string head = 3;</code>
      *
      * <pre>
      * 用户头像
@@ -1957,7 +1957,7 @@ public final class PlayerMsgProto {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required string head = 3;</code>
+     * <code>optional string head = 3;</code>
      *
      * <pre>
      * 用户头像
@@ -1978,7 +1978,7 @@ public final class PlayerMsgProto {
       }
     }
     /**
-     * <code>required string head = 3;</code>
+     * <code>optional string head = 3;</code>
      *
      * <pre>
      * 用户头像
@@ -1998,11 +1998,11 @@ public final class PlayerMsgProto {
       }
     }
 
-    // required string weChat = 4;
+    // optional string weChat = 4;
     public static final int WECHAT_FIELD_NUMBER = 4;
     private java.lang.Object weChat_;
     /**
-     * <code>required string weChat = 4;</code>
+     * <code>optional string weChat = 4;</code>
      *
      * <pre>
      * 微信
@@ -2012,7 +2012,7 @@ public final class PlayerMsgProto {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required string weChat = 4;</code>
+     * <code>optional string weChat = 4;</code>
      *
      * <pre>
      * 微信
@@ -2033,7 +2033,7 @@ public final class PlayerMsgProto {
       }
     }
     /**
-     * <code>required string weChat = 4;</code>
+     * <code>optional string weChat = 4;</code>
      *
      * <pre>
      * 微信
@@ -2053,11 +2053,11 @@ public final class PlayerMsgProto {
       }
     }
 
-    // required string phone = 5;
+    // optional string phone = 5;
     public static final int PHONE_FIELD_NUMBER = 5;
     private java.lang.Object phone_;
     /**
-     * <code>required string phone = 5;</code>
+     * <code>optional string phone = 5;</code>
      *
      * <pre>
      * 手机号
@@ -2067,7 +2067,7 @@ public final class PlayerMsgProto {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required string phone = 5;</code>
+     * <code>optional string phone = 5;</code>
      *
      * <pre>
      * 手机号
@@ -2088,7 +2088,7 @@ public final class PlayerMsgProto {
       }
     }
     /**
-     * <code>required string phone = 5;</code>
+     * <code>optional string phone = 5;</code>
      *
      * <pre>
      * 手机号
@@ -2108,11 +2108,11 @@ public final class PlayerMsgProto {
       }
     }
 
-    // required int64 nickChangeDate = 6;
+    // optional int64 nickChangeDate = 6;
     public static final int NICKCHANGEDATE_FIELD_NUMBER = 6;
     private long nickChangeDate_;
     /**
-     * <code>required int64 nickChangeDate = 6;</code>
+     * <code>optional int64 nickChangeDate = 6;</code>
      *
      * <pre>
      * 上次修改昵称时间
@@ -2122,7 +2122,7 @@ public final class PlayerMsgProto {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int64 nickChangeDate = 6;</code>
+     * <code>optional int64 nickChangeDate = 6;</code>
      *
      * <pre>
      * 上次修改昵称时间
@@ -2132,11 +2132,11 @@ public final class PlayerMsgProto {
       return nickChangeDate_;
     }
 
-    // required string unionID = 7;
+    // optional string unionID = 7;
     public static final int UNIONID_FIELD_NUMBER = 7;
     private java.lang.Object unionID_;
     /**
-     * <code>required string unionID = 7;</code>
+     * <code>optional string unionID = 7;</code>
      *
      * <pre>
      * unionID
@@ -2146,7 +2146,7 @@ public final class PlayerMsgProto {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>required string unionID = 7;</code>
+     * <code>optional string unionID = 7;</code>
      *
      * <pre>
      * unionID
@@ -2167,7 +2167,7 @@ public final class PlayerMsgProto {
       }
     }
     /**
-     * <code>required string unionID = 7;</code>
+     * <code>optional string unionID = 7;</code>
      *
      * <pre>
      * unionID
@@ -2187,11 +2187,11 @@ public final class PlayerMsgProto {
       }
     }
 
-    // required int64 registerDate = 8;
+    // optional int64 registerDate = 8;
     public static final int REGISTERDATE_FIELD_NUMBER = 8;
     private long registerDate_;
     /**
-     * <code>required int64 registerDate = 8;</code>
+     * <code>optional int64 registerDate = 8;</code>
      *
      * <pre>
      * 注册时间
@@ -2201,7 +2201,7 @@ public final class PlayerMsgProto {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>required int64 registerDate = 8;</code>
+     * <code>optional int64 registerDate = 8;</code>
      *
      * <pre>
      * 注册时间
@@ -2227,34 +2227,6 @@ public final class PlayerMsgProto {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasUserID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasNickName()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasHead()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasWeChat()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPhone()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasNickChangeDate()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasUnionID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasRegisterDate()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -2581,34 +2553,6 @@ public final class PlayerMsgProto {
           
           return false;
         }
-        if (!hasNickName()) {
-          
-          return false;
-        }
-        if (!hasHead()) {
-          
-          return false;
-        }
-        if (!hasWeChat()) {
-          
-          return false;
-        }
-        if (!hasPhone()) {
-          
-          return false;
-        }
-        if (!hasNickChangeDate()) {
-          
-          return false;
-        }
-        if (!hasUnionID()) {
-          
-          return false;
-        }
-        if (!hasRegisterDate()) {
-          
-          return false;
-        }
         return true;
       }
 
@@ -2680,10 +2624,10 @@ public final class PlayerMsgProto {
         return this;
       }
 
-      // required string nickName = 2;
+      // optional string nickName = 2;
       private java.lang.Object nickName_ = "";
       /**
-       * <code>required string nickName = 2;</code>
+       * <code>optional string nickName = 2;</code>
        *
        * <pre>
        * 昵称
@@ -2693,7 +2637,7 @@ public final class PlayerMsgProto {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required string nickName = 2;</code>
+       * <code>optional string nickName = 2;</code>
        *
        * <pre>
        * 昵称
@@ -2711,7 +2655,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string nickName = 2;</code>
+       * <code>optional string nickName = 2;</code>
        *
        * <pre>
        * 昵称
@@ -2731,7 +2675,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string nickName = 2;</code>
+       * <code>optional string nickName = 2;</code>
        *
        * <pre>
        * 昵称
@@ -2748,7 +2692,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string nickName = 2;</code>
+       * <code>optional string nickName = 2;</code>
        *
        * <pre>
        * 昵称
@@ -2761,7 +2705,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string nickName = 2;</code>
+       * <code>optional string nickName = 2;</code>
        *
        * <pre>
        * 昵称
@@ -2778,10 +2722,10 @@ public final class PlayerMsgProto {
         return this;
       }
 
-      // required string head = 3;
+      // optional string head = 3;
       private java.lang.Object head_ = "";
       /**
-       * <code>required string head = 3;</code>
+       * <code>optional string head = 3;</code>
        *
        * <pre>
        * 用户头像
@@ -2791,7 +2735,7 @@ public final class PlayerMsgProto {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required string head = 3;</code>
+       * <code>optional string head = 3;</code>
        *
        * <pre>
        * 用户头像
@@ -2809,7 +2753,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string head = 3;</code>
+       * <code>optional string head = 3;</code>
        *
        * <pre>
        * 用户头像
@@ -2829,7 +2773,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string head = 3;</code>
+       * <code>optional string head = 3;</code>
        *
        * <pre>
        * 用户头像
@@ -2846,7 +2790,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string head = 3;</code>
+       * <code>optional string head = 3;</code>
        *
        * <pre>
        * 用户头像
@@ -2859,7 +2803,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string head = 3;</code>
+       * <code>optional string head = 3;</code>
        *
        * <pre>
        * 用户头像
@@ -2876,10 +2820,10 @@ public final class PlayerMsgProto {
         return this;
       }
 
-      // required string weChat = 4;
+      // optional string weChat = 4;
       private java.lang.Object weChat_ = "";
       /**
-       * <code>required string weChat = 4;</code>
+       * <code>optional string weChat = 4;</code>
        *
        * <pre>
        * 微信
@@ -2889,7 +2833,7 @@ public final class PlayerMsgProto {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required string weChat = 4;</code>
+       * <code>optional string weChat = 4;</code>
        *
        * <pre>
        * 微信
@@ -2907,7 +2851,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string weChat = 4;</code>
+       * <code>optional string weChat = 4;</code>
        *
        * <pre>
        * 微信
@@ -2927,7 +2871,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string weChat = 4;</code>
+       * <code>optional string weChat = 4;</code>
        *
        * <pre>
        * 微信
@@ -2944,7 +2888,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string weChat = 4;</code>
+       * <code>optional string weChat = 4;</code>
        *
        * <pre>
        * 微信
@@ -2957,7 +2901,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string weChat = 4;</code>
+       * <code>optional string weChat = 4;</code>
        *
        * <pre>
        * 微信
@@ -2974,10 +2918,10 @@ public final class PlayerMsgProto {
         return this;
       }
 
-      // required string phone = 5;
+      // optional string phone = 5;
       private java.lang.Object phone_ = "";
       /**
-       * <code>required string phone = 5;</code>
+       * <code>optional string phone = 5;</code>
        *
        * <pre>
        * 手机号
@@ -2987,7 +2931,7 @@ public final class PlayerMsgProto {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required string phone = 5;</code>
+       * <code>optional string phone = 5;</code>
        *
        * <pre>
        * 手机号
@@ -3005,7 +2949,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string phone = 5;</code>
+       * <code>optional string phone = 5;</code>
        *
        * <pre>
        * 手机号
@@ -3025,7 +2969,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string phone = 5;</code>
+       * <code>optional string phone = 5;</code>
        *
        * <pre>
        * 手机号
@@ -3042,7 +2986,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string phone = 5;</code>
+       * <code>optional string phone = 5;</code>
        *
        * <pre>
        * 手机号
@@ -3055,7 +2999,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string phone = 5;</code>
+       * <code>optional string phone = 5;</code>
        *
        * <pre>
        * 手机号
@@ -3072,10 +3016,10 @@ public final class PlayerMsgProto {
         return this;
       }
 
-      // required int64 nickChangeDate = 6;
+      // optional int64 nickChangeDate = 6;
       private long nickChangeDate_ ;
       /**
-       * <code>required int64 nickChangeDate = 6;</code>
+       * <code>optional int64 nickChangeDate = 6;</code>
        *
        * <pre>
        * 上次修改昵称时间
@@ -3085,7 +3029,7 @@ public final class PlayerMsgProto {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int64 nickChangeDate = 6;</code>
+       * <code>optional int64 nickChangeDate = 6;</code>
        *
        * <pre>
        * 上次修改昵称时间
@@ -3095,7 +3039,7 @@ public final class PlayerMsgProto {
         return nickChangeDate_;
       }
       /**
-       * <code>required int64 nickChangeDate = 6;</code>
+       * <code>optional int64 nickChangeDate = 6;</code>
        *
        * <pre>
        * 上次修改昵称时间
@@ -3108,7 +3052,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required int64 nickChangeDate = 6;</code>
+       * <code>optional int64 nickChangeDate = 6;</code>
        *
        * <pre>
        * 上次修改昵称时间
@@ -3121,10 +3065,10 @@ public final class PlayerMsgProto {
         return this;
       }
 
-      // required string unionID = 7;
+      // optional string unionID = 7;
       private java.lang.Object unionID_ = "";
       /**
-       * <code>required string unionID = 7;</code>
+       * <code>optional string unionID = 7;</code>
        *
        * <pre>
        * unionID
@@ -3134,7 +3078,7 @@ public final class PlayerMsgProto {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required string unionID = 7;</code>
+       * <code>optional string unionID = 7;</code>
        *
        * <pre>
        * unionID
@@ -3152,7 +3096,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string unionID = 7;</code>
+       * <code>optional string unionID = 7;</code>
        *
        * <pre>
        * unionID
@@ -3172,7 +3116,7 @@ public final class PlayerMsgProto {
         }
       }
       /**
-       * <code>required string unionID = 7;</code>
+       * <code>optional string unionID = 7;</code>
        *
        * <pre>
        * unionID
@@ -3189,7 +3133,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string unionID = 7;</code>
+       * <code>optional string unionID = 7;</code>
        *
        * <pre>
        * unionID
@@ -3202,7 +3146,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required string unionID = 7;</code>
+       * <code>optional string unionID = 7;</code>
        *
        * <pre>
        * unionID
@@ -3219,10 +3163,10 @@ public final class PlayerMsgProto {
         return this;
       }
 
-      // required int64 registerDate = 8;
+      // optional int64 registerDate = 8;
       private long registerDate_ ;
       /**
-       * <code>required int64 registerDate = 8;</code>
+       * <code>optional int64 registerDate = 8;</code>
        *
        * <pre>
        * 注册时间
@@ -3232,7 +3176,7 @@ public final class PlayerMsgProto {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required int64 registerDate = 8;</code>
+       * <code>optional int64 registerDate = 8;</code>
        *
        * <pre>
        * 注册时间
@@ -3242,7 +3186,7 @@ public final class PlayerMsgProto {
         return registerDate_;
       }
       /**
-       * <code>required int64 registerDate = 8;</code>
+       * <code>optional int64 registerDate = 8;</code>
        *
        * <pre>
        * 注册时间
@@ -3255,7 +3199,7 @@ public final class PlayerMsgProto {
         return this;
       }
       /**
-       * <code>required int64 registerDate = 8;</code>
+       * <code>optional int64 registerDate = 8;</code>
        *
        * <pre>
        * 注册时间
@@ -5052,10 +4996,10 @@ public final class PlayerMsgProto {
       "MsgSC\022\016\n\006status\030\001 \002(\005\022\017\n\007message\030\002 \002(\t\0221" +
       "\n\013playerInfos\030\003 \001(\0132\034.com.game.proto.Pla" +
       "yerInfoPB\"\234\001\n\014PlayerInfoPB\022\016\n\006userID\030\001 \002" +
-      "(\005\022\020\n\010nickName\030\002 \002(\t\022\014\n\004head\030\003 \002(\t\022\016\n\006we" +
-      "Chat\030\004 \002(\t\022\r\n\005phone\030\005 \002(\t\022\026\n\016nickChangeD" +
-      "ate\030\006 \002(\003\022\017\n\007unionID\030\007 \002(\t\022\024\n\014registerDa" +
-      "te\030\010 \002(\003\"\242\001\n\022UpdatePlayerInfoPB\022\016\n\006userI",
+      "(\005\022\020\n\010nickName\030\002 \001(\t\022\014\n\004head\030\003 \001(\t\022\016\n\006we" +
+      "Chat\030\004 \001(\t\022\r\n\005phone\030\005 \001(\t\022\026\n\016nickChangeD" +
+      "ate\030\006 \001(\003\022\017\n\007unionID\030\007 \001(\t\022\024\n\014registerDa" +
+      "te\030\010 \001(\003\"\242\001\n\022UpdatePlayerInfoPB\022\016\n\006userI",
       "D\030\001 \002(\005\022\020\n\010nickName\030\002 \002(\t\022\014\n\004head\030\003 \002(\t\022" +
       "\016\n\006weChat\030\004 \002(\t\022\r\n\005phone\030\005 \002(\t\022\026\n\016nickCh" +
       "angeDate\030\006 \002(\003\022\017\n\007unionID\030\007 \002(\t\022\024\n\014regis" +

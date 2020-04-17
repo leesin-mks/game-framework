@@ -9,4 +9,6 @@ public final class CSProtocol
     public static final short PING = 0x0001;
 
     public static final short REGISTER = 0x0002;
+
+    public static final short FORWARD_MESSAGE = 0x0003;
 }

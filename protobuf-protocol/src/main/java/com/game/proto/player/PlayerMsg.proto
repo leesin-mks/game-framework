@@ -20,14 +20,13 @@ message LoginMsgSC //result from server  step1
 message PlayerInfoPB 					// playerInfo
 {
 	required int32 userID = 1;						// 用户ID
-	required string nickName = 2;					// 昵称
-	required string head = 3;						// 用户头像
-	required string weChat = 4;						// 微信
-	required string phone = 5;						// 手机号
-	required int64 nickChangeDate = 6;				// 上次修改昵称时间
-	required string unionID = 7;					// unionID
-	required int64 registerDate = 8;				// 注册时间
-
+	optional string nickName = 2;					// 昵称
+	optional string head = 3;						// 用户头像
+	optional string weChat = 4;						// 微信
+	optional string phone = 5;						// 手机号
+	optional int64 nickChangeDate = 6;				// 上次修改昵称时间
+	optional string unionID = 7;					// unionID
+	optional int64 registerDate = 8;				// 注册时间
 }
 
 message UpdatePlayerInfoPB 				//	playerInfo

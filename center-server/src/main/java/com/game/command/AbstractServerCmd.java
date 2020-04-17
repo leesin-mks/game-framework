@@ -34,7 +34,6 @@ public abstract class AbstractServerCmd implements ICommand
             LOGGER.error("client null error!");
         }
         ServerClient server = (ServerClient) client.getHolder();
-
         if (server == null)
         {
             ServerCmdTask task = new ServerCmdTask(this, packet, client);
@@ -42,7 +41,7 @@ public abstract class AbstractServerCmd implements ICommand
         }
         else
         {
-            LoginServerCmdTask task = new LoginServerCmdTask(this, packet, server);
+            UserServerCmdTask task = new UserServerCmdTask(this, packet, server);
             server.addCommandTask(task);
         }
     }

@@ -17,4 +17,6 @@ public interface IMessageModule
 
     void sendLoginOutMessage(int status);
 
+    void sendLoginGameServer();
+
 }

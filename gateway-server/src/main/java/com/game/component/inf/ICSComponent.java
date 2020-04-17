@@ -14,4 +14,6 @@ public interface ICSComponent extends IComponent
     void ping();
 
     void sendToAll(CommonMessage message);
+
+    void forwardMessage(int userID, int toServer, byte[] packet);
 }

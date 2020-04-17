@@ -7,11 +7,15 @@
  */
 package com.game.module;
 
+import com.game.component.ComponentManager;
+import com.game.component.inf.ICSComponent;
 import com.game.module.inf.IMessageModule;
 import com.game.net.IClientConnection;
 import com.game.object.ProxyPlayer;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
+import com.game.pb.PlayerMsgProto.LoginMsgCS;
 import com.game.pb.PlayerMsgProto.LoginMsgSC;
+import com.game.pb.command.ProtocolInProto.ProtocolIn;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.type.ModuleType;
 
@@ -29,6 +33,8 @@ public class MessageModule extends PlayerModule implements IMessageModule
     {
         super(player, ModuleType.MESSAGE);
     }
+
+    private static ICSComponent csComponent;
 
     @Override
     public boolean init()
@@ -86,6 +92,31 @@ public class MessageModule extends PlayerModule implements IMessageModule
         msg.setCode(ProtocolOut.USER_LOGIN_OUT_VALUE);
         msg.setBody(builder.build().toByteString());
         sendTCP(msg.build().toByteArray());
+    }
+
+    @Override
+    public void sendLoginGameServer()
+    {
+        CommonMsgPB.Builder msg = CommonMsgPB.newBuilder();
+        msg.setCode(ProtocolIn.USER_LOGIN_VALUE);
+
+        LoginMsgCS.Builder builder = LoginMsgCS.newBuilder();
+        builder.setUserID(player.getPlayerInfo().getId());
+        builder.setChannel(player.getPlayerInfo().getPlatformType());
+        builder.setPassword("");
+        msg.setBody(builder.build().toByteString());
+
+        getCsComponent().forwardMessage(player.getPlayerInfo().getId(), player.getGameServerID(),
+                msg.build().toByteArray());
+    }
+
+    private ICSComponent getCsComponent()
+    {
+        if (csComponent == null)
+        {
+            csComponent = (ICSComponent) ComponentManager.getInstance().getComponent(ICSComponent.NAME);
+        }
+        return csComponent;
     }
 
 }

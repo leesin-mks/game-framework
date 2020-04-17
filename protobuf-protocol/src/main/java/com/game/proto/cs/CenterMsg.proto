@@ -5,9 +5,10 @@ option java_outer_classname = "CenterMsgProto";
 
 message ForwardMsg
 {
-    required int32 formServerID = 1;
+    required int32 fromServerID = 1;
     required int32 toServerID = 2;
-    optional bytes packet = 3;
+    optional int32 userID = 3;
+    optional bytes packet = 4;
 }
 
 message RegisterMsg

@@ -16,6 +16,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.game.GateWayServer;
 import com.game.command.CSProtocol;
 import com.game.component.inf.ICSComponent;
 import com.game.component.inf.IServerListComponent;
@@ -24,7 +25,9 @@ import com.game.cs.CSServerConn;
 import com.game.entity.bean.ServerListBean;
 import com.game.net.CommonMessage;
 import com.game.net.netty.NettyCommonCodecFactory;
+import com.game.pb.CenterMsgProto.ForwardMsg;
 import com.game.type.ServerType;
+import com.google.protobuf.ByteString;
 
 /**
  * @author jacken
@@ -176,6 +179,26 @@ public class CSComponent implements ICSComponent
         for (CSServerConn server : serverList)
         {
             server.send(message);
+        }
+    }
+
+    @Override
+    public void forwardMessage(int userID, int toServer, byte[] packet)
+    {
+        CommonMessage msg = new CommonMessage(CSProtocol.FORWARD_MESSAGE);
+
+        ForwardMsg.Builder builder = ForwardMsg.newBuilder();
+        builder.setFromServerID(GateWayServer.getInstance().getServerID());
+        builder.setToServerID(toServer);
+        builder.setUserID(userID);
+        builder.setPacket(ByteString.copyFrom(packet));
+
+        msg.setBody(builder.build().toByteArray());
+
+        CSServerConn conn = serverList.get(0);
+        if (conn != null)
+        {
+            conn.send(msg);
         }
     }
 

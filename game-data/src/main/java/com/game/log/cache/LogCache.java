@@ -277,7 +277,7 @@ public class LogCache implements ILogCache
     {
         logHandler = this.loadLogHandle();
         ((ITimerComponent) ComponentManager.getInstance().getComponent(TimerComponent.NAME)).addJob(
-                this.getClass().getName(), LogSaveJob.class, 5 * 1000);
+                this.getClass().getName(), LogSaveJob.class, 60 * 1000);
         executorService = Executors.newFixedThreadPool(2, new NamedThreadFactory("log-drive-pool"));
         actionQueue = new SelfDrivenTaskQueue<>(executorService);
         actionDelayQueue = new SelfDrivenTaskQueue<>(executorService);

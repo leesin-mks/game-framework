@@ -22,16 +22,16 @@ public class ResultMessage
      * 异常信息，返回状态为成功时为空
      */
     private String msg;
-    
+
     /**
      * 返回标识，标记从哪个接口返回
      */
     private String site;
-    
+
     /**
      * 登录返回信息
      */
-    private String info;
+    private String data;
 
     /**
      * @return the status
@@ -76,20 +76,21 @@ public class ResultMessage
     }
 
     /**
-     * @param site the site to set
+     * @param site
+     *            the site to set
      */
     public void setSite(String site)
     {
         this.site = site;
     }
 
-    public String getInfo()
+    public String getData()
     {
-        return info;
+        return data;
     }
 
-    public void setInfo(String info)
+    public void setData(String data)
     {
-        this.info = info;
+        this.data = data;
     }
 }

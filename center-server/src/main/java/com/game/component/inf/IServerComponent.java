@@ -17,4 +17,6 @@ public interface IServerComponent extends IComponent
     void removeServerClient(ServerClient client);
 
     void sendToAll(CommonMessage message);
+
+    void forwardMsg(int toServerID, byte[] packet);
 }

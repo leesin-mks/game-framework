@@ -23,6 +23,7 @@ import com.game.component.CSComponent;
 import com.game.component.CommandComponent;
 import com.game.component.ComponentManager;
 import com.game.component.LanguageComponent;
+import com.game.component.PlayerComponent;
 import com.game.component.RedisComponent;
 import com.game.component.ServerListComponent;
 import com.game.config.GlobalConfigManager;
@@ -137,6 +138,8 @@ public class GateWayServer extends com.bdsk.event.EventSource
                 return false;
             if (!componentManager.addComponent(NettyWSComponent.class.getName()))
                 return false;
+            if (!componentManager.addComponent(PlayerComponent.class.getName()))
+                return false;
             // 启动
             if (!componentManager.start())
             {
@@ -201,6 +204,11 @@ public class GateWayServer extends com.bdsk.event.EventSource
     public ServerListBean getBean()
     {
         return this.bean;
+    }
+
+    public int getServerID()
+    {
+        return bean.getId();
     }
 
     public void setBean(ServerListBean bean)
@@ -280,7 +288,6 @@ public class GateWayServer extends com.bdsk.event.EventSource
                     }
                 }
             }
-
         }
         else
         {

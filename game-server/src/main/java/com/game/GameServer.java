@@ -20,8 +20,10 @@ import org.slf4j.LoggerFactory;
 import com.game.bll.ServerBussiness;
 import com.game.component.CSCommandComponent;
 import com.game.component.CSComponent;
+import com.game.component.CommandComponent;
 import com.game.component.ComponentManager;
 import com.game.component.LanguageComponent;
+import com.game.component.PlayerComponent;
 import com.game.component.RedisComponent;
 import com.game.component.ServerListComponent;
 import com.game.config.GlobalConfigManager;
@@ -127,9 +129,13 @@ public class GameServer extends com.bdsk.event.EventSource
                 return false;
             if (!componentManager.addComponent(ServerListComponent.class.getName()))
                 return false;
+            if (!componentManager.addComponent(CommandComponent.class.getName()))
+                return false;
             if (!componentManager.addComponent(CSCommandComponent.class.getName()))
                 return false;
             if (!componentManager.addComponent(CSComponent.class.getName()))
+                return false;
+            if (!componentManager.addComponent(PlayerComponent.class.getName()))
                 return false;
             // 启动
             if (!componentManager.start())
@@ -288,6 +294,11 @@ public class GameServer extends com.bdsk.event.EventSource
         String serverPid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
         System.out.println("Server pid: " + serverPid);
         LOGGER.error("Server pid: " + serverPid);
+    }
+
+    public int getServerID()
+    {
+        return bean.getId();
     }
 
 }

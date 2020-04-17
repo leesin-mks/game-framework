@@ -7,12 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common-util" />
+        <module name="frame-work" />
         <module name="game-data" />
         <module name="game-server" />
-        <module name="frame-work" />
-        <module name="login-server" />
-        <module name="protobuf-protocol" />
         <module name="common-lib" />
+        <module name="protobuf-protocol" />
         <module name="center-server" />
         <module name="gateway-server" />
         <module name="test-client" />
@@ -26,7 +25,7 @@
       <module name="game-data" target="1.8" />
       <module name="game-server" target="1.8" />
       <module name="gateway-server" target="1.8" />
-      <module name="login-server" target="1.8" />
+      <module name="login-server" target="8" />
       <module name="protobuf-protocol" target="1.8" />
       <module name="test-client" target="1.8" />
     </bytecodeTargetLevel>

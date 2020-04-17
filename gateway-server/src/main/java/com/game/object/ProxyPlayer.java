@@ -12,6 +12,7 @@ import com.game.command.UserCmdTask;
 import com.game.component.ComponentManager;
 import com.game.component.IRedisComponent;
 import com.game.component.inf.IPlayerComponent;
+import com.game.entity.bean.PlayerInfo;
 import com.game.module.MessageModule;
 import com.game.module.inf.IMessageModule;
 import com.game.module.inf.IModule;
@@ -21,6 +22,8 @@ import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.type.ModuleType;
 import com.game.type.RedisConst;
 import com.game.util.StackMessagePrint;
+import com.game.util.StringUtil;
+import com.google.protobuf.ByteString;
 
 /**
  * @date 2020年04月09日 18:49
@@ -42,11 +45,13 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
 
     private IMessageModule messageModule;
 
-    private int userID;
+    private PlayerInfo playerInfo;
 
-    public ProxyPlayer(int userID, IClientConnection clientConn)
+    private int gameServerID;
+
+    public ProxyPlayer(PlayerInfo playerInfo, IClientConnection clientConn)
     {
-        this.userID = userID;
+        this.playerInfo = playerInfo;
         this.clientConn = clientConn;
         clientConn.setHolder(this);
         moduleMap = new LinkedHashMap<>();
@@ -56,7 +61,7 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
     @Override
     public void onDisconnect()
     {
-        LOGGER.info("Proxy player disconnect: {}");
+        LOGGER.info("Proxy player disconnect: {}", playerInfo.getId());
     }
 
     @Override
@@ -89,8 +94,27 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
         cmdQueue.complete();
     }
 
+    public PlayerInfo getPlayerInfo()
+    {
+        return playerInfo;
+    }
+
     public boolean login()
     {
+        IRedisComponent rc = (IRedisComponent) ComponentManager.getInstance().getComponent(
+                IRedisComponent.NAME);
+        String serverSessionKey = rc.get(RedisConst.USER_GS_SERVER_KEY + playerInfo.getId());
+        if (!StringUtil.isNumeric(serverSessionKey))
+        {
+            return false;
+        }
+        gameServerID = Integer.parseInt(serverSessionKey);
+        IPlayerComponent pc = (IPlayerComponent) ComponentManager.getInstance().getComponent(IPlayerComponent.NAME);
+        pc.add(playerInfo.getId(), this);
+        messageModule = (MessageModule) getModule(ModuleType.MESSAGE);
+        messageModule.sendLoginGameServer();
+
+        LOGGER.info("Login success: {}", playerInfo.getId());
         return true;
     }
 
@@ -100,11 +124,21 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
         this.clientConn.closeConnection(true);
         this.clientConn = clientConn;
         clientConn.setHolder(this);
+
+        messageModule = (MessageModule) getModule(ModuleType.MESSAGE);
+        messageModule.sendLoginGameServer();
+
+        LOGGER.info("Reconnect success: {}", playerInfo.getId());
     }
 
     public void sendPacket(CommonMsgPB.Builder commonMessage)
     {
         messageModule.sendTCP(commonMessage.build().toByteArray());
+    }
+
+    public void sendPacket(ByteString message)
+    {
+        messageModule.sendTCP(message.toByteArray());
     }
 
     public void sendPacket(byte[] message)
@@ -136,7 +170,7 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
 
         if (!isShutDown)
         {
-            LOGGER.error("玩家失去连接, userID : {}", userID);
+            LOGGER.error("玩家失去连接, userID : {}", playerInfo.getId());
         }
         else
         {
@@ -150,33 +184,37 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
         {
             IPlayerComponent playerComponent = (IPlayerComponent) ComponentManager.getInstance().getComponent(
                     IPlayerComponent.NAME);
-            ProxyPlayer player = playerComponent.getPlayerByUserID(userID);
+            ProxyPlayer player = playerComponent.getPlayerByUserID(playerInfo.getId());
             if (player == this)
             {
-                playerComponent.remove(userID);
+                playerComponent.remove(playerInfo.getId());
                 IRedisComponent rc = (IRedisComponent) ComponentManager.getInstance().getComponent(
                         IRedisComponent.NAME);
-                String token = rc.get(RedisConst.USER_SESSION_KEY + userID);
+                String token = rc.get(RedisConst.USER_SESSION_KEY + playerInfo.getId());
                 if (token != null)
                 {
-                    rc.setex(RedisConst.USER_SESSION_KEY + userID, 600, token);
+                    rc.setex(RedisConst.USER_SESSION_KEY + playerInfo.getId(), 600, token);
                 }
-                rc.del(RedisConst.USER_SERVER_KEY + userID);
+                rc.del(RedisConst.USER_GW_SERVER_KEY + playerInfo.getId());
             }
             else
             {
                 StackMessagePrint.printStackTrace();
-                LOGGER.warn("Other player already when user offline: {}", userID);
+                LOGGER.warn("Other player already when user offline: {}", playerInfo.getId());
             }
         }
         catch (Exception e)
         {
-            LOGGER.error("Catch error when user quit: {}", userID, e);
+            LOGGER.error("Catch error when user quit: {}", playerInfo.getId(), e);
         }
         finally
         {
-            LOGGER.info("Player offline id: {}", userID);
+            LOGGER.info("Player offline id: {}", playerInfo.getId());
         }
     }
 
+    public int getGameServerID()
+    {
+        return gameServerID;
+    }
 }

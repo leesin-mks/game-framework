@@ -1,12 +1,19 @@
 package com.game.component;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.game.server.ServerClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.game.command.CSProtocol;
 import com.game.component.inf.IServerComponent;
 import com.game.net.CommonMessage;
+import com.game.server.ServerClient;
 import com.google.gson.Gson;
+import com.google.protobuf.ByteString;
+
+import sun.rmi.runtime.Log;
 
 /**
  * @date 2020年03月31日 15:38
@@ -14,7 +21,9 @@ import com.google.gson.Gson;
  */
 public class ServerComponent implements IServerComponent
 {
-    private Set<ServerClient> servers;
+    private static Logger LOGGER = LoggerFactory.getLogger(ServerComponent.class);
+
+    private Map<Integer, ServerClient> servers;
 
     private static final Gson gson = new Gson();
 
@@ -27,7 +36,7 @@ public class ServerComponent implements IServerComponent
     @Override
     public boolean initialize()
     {
-        servers = new HashSet<ServerClient>();
+        servers = new HashMap<>();
         return true;
     }
 
@@ -40,7 +49,7 @@ public class ServerComponent implements IServerComponent
     @Override
     public void stop()
     {
-        for (ServerClient server : servers)
+        for (ServerClient server : servers.values())
         {
             server.getClientConnection().closeConnection(true);
         }
@@ -60,7 +69,7 @@ public class ServerComponent implements IServerComponent
     @Override
     public void sendToAll(CommonMessage message)
     {
-        for (ServerClient server : servers)
+        for (ServerClient server : servers.values())
         {
             server.send(message);
         }
@@ -74,7 +83,7 @@ public class ServerComponent implements IServerComponent
     @Override
     public synchronized void addServerClient(ServerClient client)
     {
-        servers.add(client);
+        servers.put(client.getServerID(), client);
     }
 
     /*
@@ -85,7 +94,19 @@ public class ServerComponent implements IServerComponent
     @Override
     public synchronized void removeServerClient(ServerClient client)
     {
-        servers.remove(client);
+        servers.remove(client.getServerID());
     }
 
+    public void forwardMsg(int toServerID, byte[] packet)
+    {
+        ServerClient serverClient = servers.get(toServerID);
+        if (serverClient == null)
+        {
+            LOGGER.warn("Can find server client: {}", toServerID);
+            return;
+        }
+        CommonMessage commonMessage = new CommonMessage(CSProtocol.FORWARD_MESSAGE);
+        commonMessage.setBody(packet);
+        serverClient.send(commonMessage);
+    }
 }

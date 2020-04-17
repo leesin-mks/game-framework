@@ -11,15 +11,15 @@ public final class CenterMsgProto {
   public interface ForwardMsgOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required int32 formServerID = 1;
+    // required int32 fromServerID = 1;
     /**
-     * <code>required int32 formServerID = 1;</code>
+     * <code>required int32 fromServerID = 1;</code>
      */
-    boolean hasFormServerID();
+    boolean hasFromServerID();
     /**
-     * <code>required int32 formServerID = 1;</code>
+     * <code>required int32 fromServerID = 1;</code>
      */
-    int getFormServerID();
+    int getFromServerID();
 
     // required int32 toServerID = 2;
     /**
@@ -31,13 +31,23 @@ public final class CenterMsgProto {
      */
     int getToServerID();
 
-    // optional bytes packet = 3;
+    // optional int32 userID = 3;
     /**
-     * <code>optional bytes packet = 3;</code>
+     * <code>optional int32 userID = 3;</code>
+     */
+    boolean hasUserID();
+    /**
+     * <code>optional int32 userID = 3;</code>
+     */
+    int getUserID();
+
+    // optional bytes packet = 4;
+    /**
+     * <code>optional bytes packet = 4;</code>
      */
     boolean hasPacket();
     /**
-     * <code>optional bytes packet = 3;</code>
+     * <code>optional bytes packet = 4;</code>
      */
     com.google.protobuf.ByteString getPacket();
   }
@@ -94,7 +104,7 @@ public final class CenterMsgProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              formServerID_ = input.readInt32();
+              fromServerID_ = input.readInt32();
               break;
             }
             case 16: {
@@ -102,8 +112,13 @@ public final class CenterMsgProto {
               toServerID_ = input.readInt32();
               break;
             }
-            case 26: {
+            case 24: {
               bitField0_ |= 0x00000004;
+              userID_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
               packet_ = input.readBytes();
               break;
             }
@@ -147,20 +162,20 @@ public final class CenterMsgProto {
     }
 
     private int bitField0_;
-    // required int32 formServerID = 1;
-    public static final int FORMSERVERID_FIELD_NUMBER = 1;
-    private int formServerID_;
+    // required int32 fromServerID = 1;
+    public static final int FROMSERVERID_FIELD_NUMBER = 1;
+    private int fromServerID_;
     /**
-     * <code>required int32 formServerID = 1;</code>
+     * <code>required int32 fromServerID = 1;</code>
      */
-    public boolean hasFormServerID() {
+    public boolean hasFromServerID() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 formServerID = 1;</code>
+     * <code>required int32 fromServerID = 1;</code>
      */
-    public int getFormServerID() {
-      return formServerID_;
+    public int getFromServerID() {
+      return fromServerID_;
     }
 
     // required int32 toServerID = 2;
@@ -179,25 +194,42 @@ public final class CenterMsgProto {
       return toServerID_;
     }
 
-    // optional bytes packet = 3;
-    public static final int PACKET_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString packet_;
+    // optional int32 userID = 3;
+    public static final int USERID_FIELD_NUMBER = 3;
+    private int userID_;
     /**
-     * <code>optional bytes packet = 3;</code>
+     * <code>optional int32 userID = 3;</code>
      */
-    public boolean hasPacket() {
+    public boolean hasUserID() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional bytes packet = 3;</code>
+     * <code>optional int32 userID = 3;</code>
+     */
+    public int getUserID() {
+      return userID_;
+    }
+
+    // optional bytes packet = 4;
+    public static final int PACKET_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString packet_;
+    /**
+     * <code>optional bytes packet = 4;</code>
+     */
+    public boolean hasPacket() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes packet = 4;</code>
      */
     public com.google.protobuf.ByteString getPacket() {
       return packet_;
     }
 
     private void initFields() {
-      formServerID_ = 0;
+      fromServerID_ = 0;
       toServerID_ = 0;
+      userID_ = 0;
       packet_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -205,7 +237,7 @@ public final class CenterMsgProto {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasFormServerID()) {
+      if (!hasFromServerID()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -221,13 +253,16 @@ public final class CenterMsgProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, formServerID_);
+        output.writeInt32(1, fromServerID_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, toServerID_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, packet_);
+        output.writeInt32(3, userID_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, packet_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -240,7 +275,7 @@ public final class CenterMsgProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, formServerID_);
+          .computeInt32Size(1, fromServerID_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -248,7 +283,11 @@ public final class CenterMsgProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, packet_);
+          .computeInt32Size(3, userID_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, packet_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -366,12 +405,14 @@ public final class CenterMsgProto {
 
       public Builder clear() {
         super.clear();
-        formServerID_ = 0;
+        fromServerID_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         toServerID_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        packet_ = com.google.protobuf.ByteString.EMPTY;
+        userID_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        packet_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -403,13 +444,17 @@ public final class CenterMsgProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.formServerID_ = formServerID_;
+        result.fromServerID_ = fromServerID_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
         result.toServerID_ = toServerID_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.userID_ = userID_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
         }
         result.packet_ = packet_;
         result.bitField0_ = to_bitField0_;
@@ -428,11 +473,14 @@ public final class CenterMsgProto {
 
       public Builder mergeFrom(com.game.pb.CenterMsgProto.ForwardMsg other) {
         if (other == com.game.pb.CenterMsgProto.ForwardMsg.getDefaultInstance()) return this;
-        if (other.hasFormServerID()) {
-          setFormServerID(other.getFormServerID());
+        if (other.hasFromServerID()) {
+          setFromServerID(other.getFromServerID());
         }
         if (other.hasToServerID()) {
           setToServerID(other.getToServerID());
+        }
+        if (other.hasUserID()) {
+          setUserID(other.getUserID());
         }
         if (other.hasPacket()) {
           setPacket(other.getPacket());
@@ -442,7 +490,7 @@ public final class CenterMsgProto {
       }
 
       public final boolean isInitialized() {
-        if (!hasFormServerID()) {
+        if (!hasFromServerID()) {
           
           return false;
         }
@@ -472,35 +520,35 @@ public final class CenterMsgProto {
       }
       private int bitField0_;
 
-      // required int32 formServerID = 1;
-      private int formServerID_ ;
+      // required int32 fromServerID = 1;
+      private int fromServerID_ ;
       /**
-       * <code>required int32 formServerID = 1;</code>
+       * <code>required int32 fromServerID = 1;</code>
        */
-      public boolean hasFormServerID() {
+      public boolean hasFromServerID() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 formServerID = 1;</code>
+       * <code>required int32 fromServerID = 1;</code>
        */
-      public int getFormServerID() {
-        return formServerID_;
+      public int getFromServerID() {
+        return fromServerID_;
       }
       /**
-       * <code>required int32 formServerID = 1;</code>
+       * <code>required int32 fromServerID = 1;</code>
        */
-      public Builder setFormServerID(int value) {
+      public Builder setFromServerID(int value) {
         bitField0_ |= 0x00000001;
-        formServerID_ = value;
+        fromServerID_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 formServerID = 1;</code>
+       * <code>required int32 fromServerID = 1;</code>
        */
-      public Builder clearFormServerID() {
+      public Builder clearFromServerID() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        formServerID_ = 0;
+        fromServerID_ = 0;
         onChanged();
         return this;
       }
@@ -538,37 +586,70 @@ public final class CenterMsgProto {
         return this;
       }
 
-      // optional bytes packet = 3;
-      private com.google.protobuf.ByteString packet_ = com.google.protobuf.ByteString.EMPTY;
+      // optional int32 userID = 3;
+      private int userID_ ;
       /**
-       * <code>optional bytes packet = 3;</code>
+       * <code>optional int32 userID = 3;</code>
        */
-      public boolean hasPacket() {
+      public boolean hasUserID() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional bytes packet = 3;</code>
+       * <code>optional int32 userID = 3;</code>
+       */
+      public int getUserID() {
+        return userID_;
+      }
+      /**
+       * <code>optional int32 userID = 3;</code>
+       */
+      public Builder setUserID(int value) {
+        bitField0_ |= 0x00000004;
+        userID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 userID = 3;</code>
+       */
+      public Builder clearUserID() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional bytes packet = 4;
+      private com.google.protobuf.ByteString packet_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes packet = 4;</code>
+       */
+      public boolean hasPacket() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes packet = 4;</code>
        */
       public com.google.protobuf.ByteString getPacket() {
         return packet_;
       }
       /**
-       * <code>optional bytes packet = 3;</code>
+       * <code>optional bytes packet = 4;</code>
        */
       public Builder setPacket(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         packet_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bytes packet = 3;</code>
+       * <code>optional bytes packet = 4;</code>
        */
       public Builder clearPacket() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         packet_ = getDefaultInstance().getPacket();
         onChanged();
         return this;
@@ -1009,10 +1090,10 @@ public final class CenterMsgProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\030proto/cs/CenterMsg.proto\022\016com.game.pro" +
-      "to\"F\n\nForwardMsg\022\024\n\014formServerID\030\001 \002(\005\022\022" +
-      "\n\ntoServerID\030\002 \002(\005\022\016\n\006packet\030\003 \001(\014\"\037\n\013Re" +
-      "gisterMsg\022\020\n\010serverID\030\001 \002(\005B\035\n\013com.game." +
-      "pbB\016CenterMsgProto"
+      "to\"V\n\nForwardMsg\022\024\n\014fromServerID\030\001 \002(\005\022\022" +
+      "\n\ntoServerID\030\002 \002(\005\022\016\n\006userID\030\003 \001(\005\022\016\n\006pa" +
+      "cket\030\004 \001(\014\"\037\n\013RegisterMsg\022\020\n\010serverID\030\001 " +
+      "\002(\005B\035\n\013com.game.pbB\016CenterMsgProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1024,7 +1105,7 @@ public final class CenterMsgProto {
           internal_static_com_game_proto_ForwardMsg_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_game_proto_ForwardMsg_descriptor,
-              new java.lang.String[] { "FormServerID", "ToServerID", "Packet", });
+              new java.lang.String[] { "FromServerID", "ToServerID", "UserID", "Packet", });
           internal_static_com_game_proto_RegisterMsg_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_com_game_proto_RegisterMsg_fieldAccessorTable = new
