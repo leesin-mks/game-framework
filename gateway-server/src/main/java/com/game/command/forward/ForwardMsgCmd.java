@@ -2,7 +2,10 @@ package com.game.command.forward;
 
 import com.game.command.AbstractUserCmd;
 import com.game.command.ICode;
+import com.game.component.ComponentManager;
+import com.game.component.inf.ICSComponent;
 import com.game.object.ProxyPlayer;
+import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolInProto.ProtocolIn;
 import com.google.protobuf.ByteString;
 
@@ -11,10 +14,17 @@ import com.google.protobuf.ByteString;
  * @auth zm
  */
 @ICode(code = ProtocolIn.FORWARD_MESSAGE_VALUE, desc = "转发消息")
-public class ForwardMsgCmd extends AbstractUserCmd {
+public class ForwardMsgCmd extends AbstractUserCmd
+{
 
-	@Override
-	public void execute(ProxyPlayer player, ByteString packet) {
-
-	}
+    @Override
+    public void execute(ProxyPlayer player, ByteString packet, short code)
+    {
+        CommonMsgPB.Builder msg = CommonMsgPB.newBuilder();
+        msg.setCode(code);
+        msg.setBody(packet);
+        ICSComponent csComponent = (ICSComponent) ComponentManager.getInstance().getComponent(ICSComponent.NAME);
+        csComponent.forwardMessage(player.getPlayerInfo().getId(), player.getGameServerID(),
+                msg.build().toByteString());
+    }
 }

@@ -6,10 +6,12 @@ import java.util.concurrent.Executors;
 import com.game.command.SelfDrivenAction;
 import com.game.command.SelfDrivenTaskQueue;
 import com.game.component.ComponentManager;
+import com.game.component.PlayerComponent;
 import com.game.component.PressCommandComponent;
 import com.game.net.HttpLoginClient;
 import com.game.net.PressClient;
 import com.game.net.PressPacketHandler;
+import com.game.timer.TimerComponent;
 
 public class PressManager
 {
@@ -55,6 +57,8 @@ public class PressManager
     {
         ComponentManager componentManager = ComponentManager.getInstance();
         componentManager.addComponent(PressCommandComponent.class.getName());
+        componentManager.addComponent(TimerComponent.class.getName());
+        componentManager.addComponent(PlayerComponent.class.getName());
 
         if (!componentManager.start())
         {

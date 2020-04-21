@@ -16,12 +16,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.game.Job.PingJob;
 import com.game.bean.StateCode;
 import com.game.component.inf.IPlayerComponent;
 import com.game.module.inf.IMessageModule;
 import com.game.objec.GamePlayer;
+import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.CommonMsgProto.CommonMsgPB.Builder;
+import com.game.pb.command.ProtocolOutProto.ProtocolOut;
+import com.game.timer.ITimerComponent;
 import com.game.type.ModuleType;
+import com.google.protobuf.ByteString;
 
 /**
  * @author Jacken
@@ -71,6 +76,10 @@ public class PlayerComponent implements IPlayerComponent
     @Override
     public boolean start()
     {
+        ITimerComponent timerComponent = (ITimerComponent) ComponentManager.getInstance().getComponent(
+                ITimerComponent.NAME);
+        timerComponent.addJob("PingJob", PingJob.class, "0/10 * * * * ?");
+
         return true;
     }
 
@@ -84,7 +93,7 @@ public class PlayerComponent implements IPlayerComponent
     {
         for (GamePlayer player : players.values())
         {
-          //   player.disconnect(true, true, StateCode.SERVER_CLOSE);
+            // player.disconnect(true, true, StateCode.SERVER_CLOSE);
         }
     }
 
@@ -184,6 +193,24 @@ public class PlayerComponent implements IPlayerComponent
         for (GamePlayer player : players.values())
         {
             player.sendPacket(message);
+        }
+    }
+
+    @Override
+    public void ping()
+    {
+        CommonMsgPB.Builder msg = CommonMsgPB.newBuilder();
+        msg.setCode(ProtocolOut.PING_VALUE);
+        msg.setBody(ByteString.EMPTY);
+
+        for (GamePlayer player : players.values())
+        {
+            if (player.getPing() >= 1)
+            {
+                player.setOnline(false);
+            }
+            player.setPing(player.getPing() + 1);
+            player.sendPacket(msg);
         }
     }
 

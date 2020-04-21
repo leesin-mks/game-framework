@@ -47,6 +47,10 @@ public class GamePlayer implements ISequenceTask
 
     private int gateServerID;
 
+    private int ping;
+
+    private boolean online;
+
     public GamePlayer(PlayerInfo playerInfo, CSServerConn clientConn)
     {
         this.playerInfo = playerInfo;
@@ -85,6 +89,11 @@ public class GamePlayer implements ISequenceTask
             return false;
         }
 
+        if (!initGateWay())
+        {
+            return false;
+        }
+
         messageModule = (MessageModule) getModule(ModuleType.MESSAGE);
         try
         {
@@ -113,15 +122,7 @@ public class GamePlayer implements ISequenceTask
             {
                 return false;
             }
-            IRedisComponent rc = (IRedisComponent) ComponentManager.getInstance().getComponent(
-                    IRedisComponent.NAME);
-            String serverSessionKey = rc.get(RedisConst.USER_GW_SERVER_KEY + playerInfo.getId());
-            if (!StringUtil.isNumeric(serverSessionKey))
-            {
-                return false;
-            }
-            gateServerID = Integer.parseInt(serverSessionKey);
-            messageModule = (MessageModule) getModule(ModuleType.MESSAGE);
+            setOnline(true);
 
             LOGGER.info("Login success: {}", playerInfo.getId());
             return true;
@@ -135,6 +136,21 @@ public class GamePlayer implements ISequenceTask
 
     public boolean reconnection(CSServerConn clientConn)
     {
+        if (!initGateWay())
+        {
+            return false;
+        }
+        sendInitDetail();
+        afterDataLoaded();
+        this.serverConn = clientConn;
+        setOnline(true);
+
+        LOGGER.info("Reconnect success: {}", playerInfo.getId());
+        return true;
+    }
+
+    private boolean initGateWay()
+    {
         IRedisComponent rc = (IRedisComponent) ComponentManager.getInstance().getComponent(
                 IRedisComponent.NAME);
         String serverSessionKey = rc.get(RedisConst.USER_GW_SERVER_KEY + playerInfo.getId());
@@ -143,14 +159,7 @@ public class GamePlayer implements ISequenceTask
             LOGGER.warn("Can not find gate way server: {}", serverSessionKey);
             return false;
         }
-        sendInitDetail();
-        afterDataLoaded();
-        this.serverConn = clientConn;
         gateServerID = Integer.parseInt(serverSessionKey);
-
-        messageModule = (MessageModule) getModule(ModuleType.MESSAGE);
-
-        LOGGER.info("Reconnect success: {}", playerInfo.getId());
         return true;
     }
 
@@ -291,5 +300,25 @@ public class GamePlayer implements ISequenceTask
     public int getGateServerID()
     {
         return gateServerID;
+    }
+
+    public int getPing()
+    {
+        return ping;
+    }
+
+    public void setPing(int ping)
+    {
+        this.ping = ping;
+    }
+
+    public boolean isOnline()
+    {
+        return online;
+    }
+
+    public void setOnline(boolean online)
+    {
+        this.online = online;
     }
 }

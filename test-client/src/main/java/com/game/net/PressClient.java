@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.client.PressNettyWSServerConnector;
+import com.game.component.ComponentManager;
+import com.game.component.inf.IPlayerComponent;
 import com.game.object.LoginResultBean;
 import com.game.object.PressPlayer;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
@@ -19,7 +21,10 @@ public class PressClient extends PressNettyWSServerConnector implements Runnable
     public PressClient(String ip, int port, LoginResultBean loginResult, IServerPacketHandler packetHandler)
     {
         super(ip, port, packetHandler);
-        setPlayer(new PressPlayer(this));
+        PressPlayer player = new PressPlayer(loginResult.getUserID(), this);
+        setPlayer(player);
+        IPlayerComponent pc = (IPlayerComponent) ComponentManager.getInstance().getComponent(IPlayerComponent.NAME);
+        pc.addPlayer(player);
         this.loginResult = loginResult;
     }
 

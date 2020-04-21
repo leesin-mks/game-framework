@@ -185,13 +185,19 @@ public class CSComponent implements ICSComponent
     @Override
     public void forwardMessage(int userID, int toServer, byte[] packet)
     {
+        forwardMessage(userID, toServer, ByteString.copyFrom(packet));
+    }
+
+    @Override
+    public void forwardMessage(int userID, int toServer, ByteString packet)
+    {
         CommonMessage msg = new CommonMessage(CSProtocol.FORWARD_MESSAGE);
 
         ForwardMsg.Builder builder = ForwardMsg.newBuilder();
         builder.setFromServerID(GateWayServer.getInstance().getServerID());
         builder.setToServerID(toServer);
         builder.setUserID(userID);
-        builder.setPacket(ByteString.copyFrom(packet));
+        builder.setPacket(packet);
 
         msg.setBody(builder.build().toByteArray());
 

@@ -60,7 +60,10 @@ public abstract class AbstractUserCmd implements ICommand
 
     }
 
-    public abstract void execute(ProxyPlayer player, ByteString packet);
+    public void execute(ProxyPlayer player, ByteString packet)
+    {
+
+    }
 
     public void execute(ProxyPlayer player, ByteString packet, short code)
     {
