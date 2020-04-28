@@ -8,7 +8,6 @@
 package com.game.component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,16 +15,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.game.Job.PingJob;
+import com.game.Job.PlayerJob;
 import com.game.bean.StateCode;
 import com.game.component.inf.IPlayerComponent;
-import com.game.module.inf.IMessageModule;
 import com.game.objec.GamePlayer;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.CommonMsgProto.CommonMsgPB.Builder;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.timer.ITimerComponent;
-import com.game.type.ModuleType;
 import com.google.protobuf.ByteString;
 
 /**
@@ -39,10 +36,6 @@ public class PlayerComponent implements IPlayerComponent
     private Map<Integer, GamePlayer> players;
 
     private Object locker = new Object();
-
-    private com.bdsk.event.IEventListener gameNoticeListener;
-
-    private Map<Integer, Integer> online;
 
     /*
      * (non-Javadoc)
@@ -64,7 +57,6 @@ public class PlayerComponent implements IPlayerComponent
     public boolean initialize()
     {
         players = new ConcurrentHashMap<>();
-        online = new HashMap<Integer, Integer>();
         return true;
     }
 
@@ -78,7 +70,7 @@ public class PlayerComponent implements IPlayerComponent
     {
         ITimerComponent timerComponent = (ITimerComponent) ComponentManager.getInstance().getComponent(
                 ITimerComponent.NAME);
-        timerComponent.addJob("PingJob", PingJob.class, "0/10 * * * * ?");
+        timerComponent.addJob("PingJob", PlayerJob.class, "0/10 * * * * ?");
 
         return true;
     }
@@ -93,7 +85,7 @@ public class PlayerComponent implements IPlayerComponent
     {
         for (GamePlayer player : players.values())
         {
-            // player.disconnect(true, true, StateCode.SERVER_CLOSE);
+            player.disconnect(true, true, StateCode.SERVER_CLOSE);
         }
     }
 
@@ -154,9 +146,7 @@ public class PlayerComponent implements IPlayerComponent
         }
         if (temp != null)
         {
-            IMessageModule messageModule = (IMessageModule) temp.getModule(ModuleType.MESSAGE);
-            messageModule.sendLoginOutMessage(StateCode.REPEAT_LOGIN);
-            // temp.disconnect(true);
+            temp.disconnect(true);
             LOGGER.warn("Add player but exist: {}", userId);
         }
         return true;
@@ -193,6 +183,14 @@ public class PlayerComponent implements IPlayerComponent
         for (GamePlayer player : players.values())
         {
             player.sendPacket(message);
+        }
+    }
+
+    public void clearOfflinePlayer()
+    {
+        for (GamePlayer player : players.values())
+        {
+            player.checkOffline();
         }
     }
 

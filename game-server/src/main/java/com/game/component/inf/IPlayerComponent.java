@@ -58,6 +58,8 @@ public interface IPlayerComponent extends IComponent
 
     void sendToAll(byte[] message);
 
+    void clearOfflinePlayer();
+
     void ping();
 
 }

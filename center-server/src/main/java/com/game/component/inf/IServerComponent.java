@@ -2,6 +2,7 @@ package com.game.component.inf;
 
 import com.game.component.IComponent;
 import com.game.net.CommonMessage;
+import com.game.pb.CenterMsgProto.CSForwardMsg;
 import com.game.server.ServerClient;
 
 /**
@@ -18,5 +19,5 @@ public interface IServerComponent extends IComponent
 
     void sendToAll(CommonMessage message);
 
-    void forwardMsg(int toServerID, byte[] packet);
+    void forwardMsg(CSForwardMsg msg);
 }

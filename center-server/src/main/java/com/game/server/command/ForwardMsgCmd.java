@@ -5,7 +5,7 @@ import com.game.command.CSProtocol;
 import com.game.command.ICode;
 import com.game.component.ComponentManager;
 import com.game.component.inf.IServerComponent;
-import com.game.pb.CenterMsgProto.ForwardMsg;
+import com.game.pb.CenterMsgProto.CSForwardMsg;
 import com.game.server.ServerClient;
 import com.google.protobuf.InvalidProtocolBufferException;
 
@@ -23,8 +23,8 @@ public class ForwardMsgCmd extends AbstractServerCmd
     {
         try
         {
-            ForwardMsg msg = ForwardMsg.parseFrom(packet);
-            getServerComponent().forwardMsg(msg.getToServerID(), packet);
+            CSForwardMsg msg = CSForwardMsg.parseFrom(packet);
+            getServerComponent().forwardMsg(msg);
         }
         catch (InvalidProtocolBufferException e)
         {

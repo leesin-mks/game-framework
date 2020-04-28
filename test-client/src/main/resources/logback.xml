@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration scan="false" scanPeriod="30 seconds" debug="false">
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<Target>System.out</Target>
+		<!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">  
+			<level>WARN</level>
+		</filter>-->  
+		<encoder>
+			<pattern>%d|%-5level|%thread|%caller{1}%msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<filter class="ch.qos.logback.classic.filter.LevelFilter">  
+			<level>ERROR</level>  
+			<onMatch>ACCEPT</onMatch>  
+			<onMismatch>DENY</onMismatch>  
+		</filter>-->
+		<encoder>
+			<pattern>%d|%-5level|%thread|%caller{1}%msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>100</maxHistory>
+		</rollingPolicy>
+	</appender>
+  	<root level="INFO">
+    	<appender-ref ref="CONSOLE"/>
+    	<appender-ref ref="FILE"/>
+  	</root>
+</configuration>

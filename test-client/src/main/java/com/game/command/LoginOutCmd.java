@@ -1,10 +1,10 @@
 package com.game.command;
 
-import com.game.action.GetPlayerInfoAction;
+import com.game.component.ComponentManager;
+import com.game.component.inf.IPlayerComponent;
 import com.game.object.PressPlayer;
-import com.game.pb.PlayerMsgProto.LoginMsgCS;
+import com.game.pb.PlayerMsgProto.LoginMsgSC;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
-import com.game.test.PressManager;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 
@@ -17,9 +17,14 @@ public class LoginOutCmd extends AbstractPressCmd
     {
         try
         {
-            LoginMsgCS msg = LoginMsgCS.parseFrom(packet);
-            System.out.println("Login result: " + msg);
-            PressManager.addAction(new GetPlayerInfoAction(player));
+            LoginMsgSC msg = LoginMsgSC.parseFrom(packet);
+            if (msg.getStatus() == 1)
+            {
+                IPlayerComponent pc = (IPlayerComponent) ComponentManager.getInstance().getComponent(
+                        IPlayerComponent.NAME);
+                pc.addPlayer(player);
+            }
+            System.out.println("Login out: " + msg);
         }
         catch (InvalidProtocolBufferException e)
         {

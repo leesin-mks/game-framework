@@ -5,6 +5,7 @@ import com.game.command.ICode;
 import com.game.component.ComponentManager;
 import com.game.component.inf.ICSComponent;
 import com.game.object.ProxyPlayer;
+import com.game.pb.CenterMsgProto.MsgToUSer;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolInProto.ProtocolIn;
 import com.google.protobuf.ByteString;
@@ -23,8 +24,12 @@ public class ForwardMsgCmd extends AbstractUserCmd
         CommonMsgPB.Builder msg = CommonMsgPB.newBuilder();
         msg.setCode(code);
         msg.setBody(packet);
+
+        MsgToUSer.Builder msgToUserBuilder = MsgToUSer.newBuilder();
+        msgToUserBuilder.setUserID(player.getPlayerInfo().getId());
+        msgToUserBuilder.setBody(msg.build().toByteString());
+
         ICSComponent csComponent = (ICSComponent) ComponentManager.getInstance().getComponent(ICSComponent.NAME);
-        csComponent.forwardMessage(player.getPlayerInfo().getId(), player.getGameServerID(),
-                msg.build().toByteString());
+        csComponent.msgToUser(player.getGameServerID(), msgToUserBuilder.build().toByteString());
     }
 }

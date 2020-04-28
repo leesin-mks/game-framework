@@ -1,17 +1,19 @@
 /*
  * MessageModule
  *
- * 2016骞�2鏈�22鏃�
  *
  * All rights reserved. This material is confidential and proprietary to Jacken
  */
 package com.game.module;
 
+import com.game.command.CSProtocol;
 import com.game.component.ComponentManager;
 import com.game.component.inf.ICSComponent;
 import com.game.module.inf.IMessageModule;
 import com.game.net.IClientConnection;
 import com.game.object.ProxyPlayer;
+import com.game.pb.CenterMsgProto.MsgToUSer;
+import com.game.pb.CenterMsgProto.PlayerOnDisconnectMsg;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.PlayerMsgProto.LoginMsgCS;
 import com.game.pb.PlayerMsgProto.LoginMsgSC;
@@ -106,8 +108,20 @@ public class MessageModule extends PlayerModule implements IMessageModule
         builder.setPassword("");
         msg.setBody(builder.build().toByteString());
 
-        getCsComponent().forwardMessage(player.getPlayerInfo().getId(), player.getGameServerID(),
-                msg.build().toByteArray());
+        MsgToUSer.Builder msgToUserBuilder = MsgToUSer.newBuilder();
+        msgToUserBuilder.setUserID(player.getPlayerInfo().getId());
+        msgToUserBuilder.setBody(msg.build().toByteString());
+
+        getCsComponent().msgToUser(player.getGameServerID(), msgToUserBuilder.build().toByteString());
+    }
+
+    public void sendOnDisconnect()
+    {
+        PlayerOnDisconnectMsg.Builder builder = PlayerOnDisconnectMsg.newBuilder();
+        builder.setUserID(player.getPlayerInfo().getId());
+
+        getCsComponent().forwardMessage(player.getGameServerID(), builder.build().toByteString(),
+                CSProtocol.PLAYER_ON_DISCONNECT);
     }
 
     private ICSComponent getCsComponent()

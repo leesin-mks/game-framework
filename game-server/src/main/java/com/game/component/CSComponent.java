@@ -25,7 +25,7 @@ import com.game.cs.CSServerConn;
 import com.game.entity.bean.ServerListBean;
 import com.game.net.CommonMessage;
 import com.game.net.netty.NettyCommonCodecFactory;
-import com.game.pb.CenterMsgProto.ForwardMsg;
+import com.game.pb.CenterMsgProto.CSForwardMsg;
 import com.game.type.ServerType;
 import com.google.protobuf.ByteString;
 
@@ -159,12 +159,7 @@ public class CSComponent implements ICSComponent
 
     private CSServerConn findServerByID(int id)
     {
-        for (CSServerConn server : serverList)
-        {
-            if (server.getBean().getId() == id)
-                return server;
-        }
-        return null;
+        return serverMap.get(id);
     }
 
     /*
@@ -183,21 +178,21 @@ public class CSComponent implements ICSComponent
     }
 
     @Override
-    public void forwardMessage(int userID, int toServer, byte[] packet)
+    public void forwardMessage(int toServer, byte[] packet, short code)
     {
-        forwardMessage(userID, toServer, ByteString.copyFrom(packet));
+        forwardMessage(toServer, ByteString.copyFrom(packet), code);
     }
 
     @Override
-    public void forwardMessage(int userID, int toServer, ByteString packet)
+    public void forwardMessage(int toServer, ByteString packet, short code)
     {
         CommonMessage msg = new CommonMessage(CSProtocol.FORWARD_MESSAGE);
 
-        ForwardMsg.Builder builder = ForwardMsg.newBuilder();
+        CSForwardMsg.Builder builder = CSForwardMsg.newBuilder();
         builder.setFromServerID(GameServer.getInstance().getServerID());
         builder.setToServerID(toServer);
-        builder.setUserID(userID);
-        builder.setPacket(packet);
+        builder.setCode(code);
+        builder.setBody(packet);
 
         msg.setBody(builder.build().toByteArray());
 
@@ -207,4 +202,11 @@ public class CSComponent implements ICSComponent
             conn.send(msg);
         }
     }
+
+    @Override
+    public void msgToUser(int toServer, ByteString packet)
+    {
+        forwardMessage(toServer, packet, CSProtocol.MESSAGE_TO_USER);
+    }
+
 }

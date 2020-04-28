@@ -14,6 +14,6 @@ public class PingJob implements Job {
 	@Override
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		IPlayerComponent pc = (IPlayerComponent) ComponentManager.getInstance().getComponent(IPlayerComponent.NAME);
-		pc.ping();
+		// pc.ping();
 	}
 }

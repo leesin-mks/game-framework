@@ -26,118 +26,137 @@ import com.game.type.ServerStateType;
 /**
  * @author jacken
  */
-public class CSServerConn extends NettyServerConnector implements ISequenceTask {
+public class CSServerConn extends NettyServerConnector implements ISequenceTask
+{
 
-	private ServerListBean bean;
+    private ServerListBean bean;
 
-	private String ipPort;
+    private String ipPort;
 
-	/**
-	 * 命令队列
-	 */
-	private SelfDrivenTaskQueue<CSCmdTask> cmdQueue = new SelfDrivenTaskQueue<CSCmdTask>(
-			ComponentManager.getInstance().getUserCmdThreadPool());
+    /**
+     * 命令队列
+     */
+    private SelfDrivenTaskQueue<CSCmdTask> cmdQueue = new SelfDrivenTaskQueue<CSCmdTask>(
+            ComponentManager.getInstance().getUserCmdThreadPool());
 
-	/**
-	 * @param bean
-	 * @param packetHandler
-	 * @param class1
-	 */
-	public CSServerConn(ServerListBean bean, IServerPacketHandler packetHandler,
-						Class<NettyCommonCodecFactory> class1) {
-		super(bean.getInnerIp(), Integer.parseInt(bean.getInnerPort()), packetHandler, class1);
-		this.bean = bean;
-		ipPort = bean.getIp() + ":" + bean.getPort();
-	}
+    /**
+     * @param bean
+     * @param packetHandler
+     * @param class1
+     */
+    public CSServerConn(ServerListBean bean, IServerPacketHandler packetHandler,
+            Class<NettyCommonCodecFactory> class1)
+    {
+        super(bean.getInnerIp(), Integer.parseInt(bean.getInnerPort()), packetHandler, class1);
+        this.bean = bean;
+        ipPort = bean.getIp() + ":" + bean.getPort();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.bdsk.net.netty.NettyServerConnector#disconnect()
-	 */
-	@Override
-	public void disconnect() {
-		disconnect(true);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.bdsk.net.netty.NettyServerConnector#disconnect()
+     */
+    @Override
+    public void disconnect()
+    {
+        disconnect(true);
+    }
 
-	public void disconnect(boolean reconnect) {
-		super.disconnect();
-		if (reconnect && !isServerClosed()) {
-			ITimerComponent tc = (ITimerComponent) ComponentManager.getInstance().getComponent(ITimerComponent.NAME);
-			tc.addDelayJob(this.getClass().getName() + bean.getId(), CSReconnectJob.class, 5000, -1, 5000, this);
-		}
-	}
+    public void disconnect(boolean reconnect)
+    {
+        super.disconnect();
+        if (reconnect && !isServerClosed())
+        {
+            ITimerComponent tc = (ITimerComponent) ComponentManager.getInstance().getComponent(ITimerComponent.NAME);
+            tc.addDelayJob(this.getClass().getName() + bean.getId(), CSReconnectJob.class, 5000, -1, 5000, this);
+        }
+    }
 
-	public void reconnect() {
-		if (!isConnected() && GameServer.getInstance().getStatus() == ServerStateType.RUNNING.getValue()) {
-			if (!connect()) {
-				LOGGER.error("Reconnect fightserver fail... id:" + bean.getId());
-				return;
-			} else {
-				sendRegister();
-				LOGGER.error("Reconnect fightserver success! id:" + bean.getId());
-			}
-		}
-		ITimerComponent tc = (ITimerComponent) ComponentManager.getInstance().getComponent(ITimerComponent.NAME);
-		tc.deleteJob(this.getClass().getName() + bean.getId());
-		tc.deleteJob("VideoPingJob");
-	}
+    public void reconnect()
+    {
+        if (!isConnected() && GameServer.getInstance().getStatus() == ServerStateType.RUNNING.getValue())
+        {
+            if (!connect())
+            {
+                LOGGER.error("Reconnect fightserver fail... id:" + bean.getId());
+                return;
+            }
+            else
+            {
+                sendRegister();
+                LOGGER.error("Reconnect fightserver success! id:" + bean.getId());
+            }
+        }
+        ITimerComponent tc = (ITimerComponent) ComponentManager.getInstance().getComponent(ITimerComponent.NAME);
+        tc.deleteJob(this.getClass().getName() + bean.getId());
+        tc.deleteJob("VideoPingJob");
+    }
 
-	public ServerListBean getBean() {
-		return bean;
-	}
+    public ServerListBean getBean()
+    {
+        return bean;
+    }
 
-	public String getIpPort() {
-		return ipPort;
-	}
+    public String getIpPort()
+    {
+        return ipPort;
+    }
 
-	public void setIpPort(String ipPort) {
-		this.ipPort = ipPort;
-	}
+    public void setIpPort(String ipPort)
+    {
+        this.ipPort = ipPort;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.bdsk.command.ISequenceTask#getSequenceTaskName()
-	 */
-	@Override
-	public String getSequenceTaskName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.bdsk.command.ISequenceTask#getSequenceTaskName()
+     */
+    @Override
+    public String getSequenceTaskName()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.bdsk.command.ISequenceTask#addCommandTask(java.lang.Runnable)
-	 */
-	@Override
-	public <T extends Runnable> void addCommandTask(T task) {
-		cmdQueue.add((CSCmdTask) task);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.bdsk.command.ISequenceTask#addCommandTask(java.lang.Runnable)
+     */
+    @Override
+    public <T extends Runnable> void addCommandTask(T task)
+    {
+        cmdQueue.add((CSCmdTask) task);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.bdsk.command.ISequenceTask#finishOneCommandTask()
-	 */
-	@Override
-	public void finishOneCommandTask() {
-		cmdQueue.complete();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.bdsk.command.ISequenceTask#finishOneCommandTask()
+     */
+    @Override
+    public void finishOneCommandTask()
+    {
+        cmdQueue.complete();
+    }
 
-	/**
-	 *
-	 */
-	public void sendRegister() {
-		CommonMessage message = new CommonMessage(CSProtocol.REGISTER);
-		RegisterMsg.Builder builder = RegisterMsg.newBuilder();
-		builder.setServerID(GameServer.getInstance().getBean().getId());
-		message.setBody(builder.build().toByteArray());
-		send(message);
-	}
+    /**
+     *
+     */
+    public void sendRegister()
+    {
+        CommonMessage message = new CommonMessage(CSProtocol.REGISTER);
+        RegisterMsg.Builder builder = RegisterMsg.newBuilder();
+        builder.setServerID(GameServer.getInstance().getBean().getId());
+        message.setBody(builder.build().toByteArray());
+        send(message);
+    }
 
-	public int getServerID() {
-		return bean == null ? -1 : bean.getId();
-	}
+    public int getServerID()
+    {
+        return bean == null ? -1 : bean.getId();
+    }
+
 }

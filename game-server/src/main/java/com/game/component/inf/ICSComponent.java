@@ -16,7 +16,9 @@ public interface ICSComponent extends IComponent
 
     void sendToAll(CommonMessage message);
 
-    void forwardMessage(int userID, int toServer, byte[] packet);
+    void forwardMessage(int toServer, byte[] packet, short code);
 
-    void forwardMessage(int userID, int toServer, ByteString packet);
+    void forwardMessage(int toServer, ByteString packet, short code);
+
+    void msgToUser(int toServer, ByteString packet);
 }

@@ -7,11 +7,14 @@
  */
 package com.game.module;
 
+import com.game.command.CSProtocol;
 import com.game.component.ComponentManager;
 import com.game.component.inf.ICSComponent;
 import com.game.entity.bean.PlayerInfo;
 import com.game.module.inf.IMessageModule;
 import com.game.objec.GamePlayer;
+import com.game.pb.CenterMsgProto.MsgToUSer;
+import com.game.pb.CenterMsgProto.PlayerDisconnectMsg;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.PlayerMsgProto.LoginMsgSC;
 import com.game.pb.PlayerMsgProto.PlayerInfoPB;
@@ -65,29 +68,28 @@ public class MessageModule extends PlayerModule implements IMessageModule
     @Override
     public void sendTCP(byte[] message)
     {
-        ICSComponent csComponent = (ICSComponent) ComponentManager.getInstance().getComponent(ICSComponent.NAME);
-        csComponent.forwardMessage(player.getPlayerInfo().getId(), player.getGateServerID(), message);
+        sendTCP(ByteString.copyFrom(message));
     }
 
     @Override
     public void sendTCP(ByteString message)
     {
-        ICSComponent csComponent = (ICSComponent) ComponentManager.getInstance().getComponent(ICSComponent.NAME);
-        csComponent.forwardMessage(player.getPlayerInfo().getId(), player.getGateServerID(), message);
+        MsgToUSer.Builder builder = MsgToUSer.newBuilder();
+        builder.setUserID(player.getPlayerInfo().getId());
+        builder.setBody(message);
+        getCsComponent().msgToUser(player.getGateServerID(), builder.build().toByteString());
     }
 
-
     @Override
-    public void sendLoginOutMessage(int status)
+    public void sendLoginOutMessage(boolean shutdown, boolean sendLLoginOut, int type)
     {
-        LoginMsgSC.Builder builder = LoginMsgSC.newBuilder();
-        builder.setStatus(status);
-        builder.setMessage("");
-
-        CommonMsgPB.Builder msg = CommonMsgPB.newBuilder();
-        msg.setCode(ProtocolOut.USER_LOGIN_OUT_VALUE);
-        msg.setBody(builder.build().toByteString());
-        sendTCP(msg.build().toByteString());
+        PlayerDisconnectMsg.Builder builder = PlayerDisconnectMsg.newBuilder();
+        builder.setUserID(player.getPlayerInfo().getId());
+        builder.setShutDown(shutdown);
+        builder.setSendLoinOut(sendLLoginOut);
+        builder.setType(type);
+        getCsComponent().forwardMessage(player.getGateServerID(), builder.build().toByteString(),
+                CSProtocol.PLAYER_DISCONNECT);
     }
 
     private ICSComponent getCsComponent()

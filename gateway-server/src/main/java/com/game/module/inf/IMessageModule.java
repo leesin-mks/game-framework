@@ -19,4 +19,6 @@ public interface IMessageModule
 
     void sendLoginGameServer();
 
+    void sendOnDisconnect();
+
 }

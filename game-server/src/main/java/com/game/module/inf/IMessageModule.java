@@ -20,7 +20,7 @@ public interface IMessageModule
 
     void sendTCP(ByteString message);
 
-    void sendLoginOutMessage(int status);
+    void sendLoginOutMessage(boolean shutdown, boolean sendLLoginOut, int type);
 
     void sendLoginSuccess();
 

@@ -1,5 +1,6 @@
 package com.game.objec;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.game.module.inf.IModule;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.type.ModuleType;
 import com.game.type.RedisConst;
+import com.game.util.StackMessagePrint;
 import com.game.util.StringUtil;
 
 /**
@@ -50,6 +52,10 @@ public class GamePlayer implements ISequenceTask
     private int ping;
 
     private boolean online;
+
+    protected long offlineTime;
+
+    protected Date loginTime;
 
     public GamePlayer(PlayerInfo playerInfo, CSServerConn clientConn)
     {
@@ -123,6 +129,8 @@ public class GamePlayer implements ISequenceTask
                 return false;
             }
             setOnline(true);
+            setPing(0);
+            loginTime = new Date();
 
             LOGGER.info("Login success: {}", playerInfo.getId());
             return true;
@@ -144,9 +152,89 @@ public class GamePlayer implements ISequenceTask
         afterDataLoaded();
         this.serverConn = clientConn;
         setOnline(true);
+        setPing(0);
+        loginTime = new Date();
 
         LOGGER.info("Reconnect success: {}", playerInfo.getId());
         return true;
+    }
+
+    public void disconnect(boolean isShutDown)
+    {
+        disconnect(isShutDown, false, 0);
+    }
+
+    public void disconnect(boolean isShutDown, boolean sendLoginOut, int type)
+    {
+        // 通知客户端离线
+        messageModule.sendLoginOutMessage(isShutDown, sendLoginOut, type);
+
+        if (isShutDown)
+        {
+            offline();
+        }
+        else
+        {
+            setOnline(false);
+            LOGGER.error("玩家失去连接, userID : {}", getPlayerInfo().getId());
+        }
+    }
+
+    protected void offline()
+    {
+        try
+        {
+            IPlayerComponent playerComponent = (IPlayerComponent) ComponentManager.getInstance().getComponent(
+                    IPlayerComponent.NAME);
+            GamePlayer player = playerComponent.getPlayerByUserID(playerInfo.getId());
+            if (player == this)
+            {
+                setOnline(false);
+
+                playerComponent.remove(playerInfo.getId());
+                IRedisComponent rc = (IRedisComponent) ComponentManager.getInstance().getComponent(
+                        IRedisComponent.NAME);
+                String token = rc.get(RedisConst.USER_SESSION_KEY + getPlayerInfo().getId());
+                if (token != null)
+                {
+                    rc.setex(RedisConst.USER_SESSION_KEY + getPlayerInfo().getId(), 600, token);
+
+                }
+                rc.del(RedisConst.USER_GW_SERVER_KEY + playerInfo.getId());
+            }
+            else
+            {
+                StackMessagePrint.printStackTrace();
+                LOGGER.error("Player error when user quit: {}, other player already!", playerInfo.getId());
+            }
+        }
+        catch (Exception e)
+        {
+            LOGGER.error("catch error when user quit:{}", playerInfo.getId(), e);
+        }
+        finally
+        {
+            LOGGER.info("Player before offline id: {}", playerInfo.getId());
+            Date offlineTime = new Date();
+            playerInfo.setState(0);
+            playerInfo.setOfflineTime(offlineTime);
+            // 保存数据
+            saveModuleData();
+            LOGGER.info("Player offline id: {}", playerInfo.getId());
+        }
+    }
+
+    public boolean checkOffline()
+    {
+        // 1.5 * 60*1000 = 90000
+        long offlineTick = System.currentTimeMillis() - offlineTime;
+        if ((!online && (offlineTick > 90000 && loginTime != null) || ping >= 3))
+        {
+            disconnect(true);
+            LOGGER.info("Player checkOffline id: {}", playerInfo.getId());
+            return true;
+        }
+        return false;
     }
 
     private boolean initGateWay()
@@ -320,5 +408,9 @@ public class GamePlayer implements ISequenceTask
     public void setOnline(boolean online)
     {
         this.online = online;
+        if (!online)
+        {
+            offlineTime = System.currentTimeMillis();
+        }
     }
 }

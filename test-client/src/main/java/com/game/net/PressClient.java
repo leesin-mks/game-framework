@@ -23,8 +23,6 @@ public class PressClient extends PressNettyWSServerConnector implements Runnable
         super(ip, port, packetHandler);
         PressPlayer player = new PressPlayer(loginResult.getUserID(), this);
         setPlayer(player);
-        IPlayerComponent pc = (IPlayerComponent) ComponentManager.getInstance().getComponent(IPlayerComponent.NAME);
-        pc.addPlayer(player);
         this.loginResult = loginResult;
     }
 

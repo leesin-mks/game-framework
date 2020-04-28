@@ -27,16 +27,17 @@ public class PressManager
         init();
         loadComponent();
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 1; i <= 500; i++)
         {
-            pushPlayer();
+            pushPlayer(i);
         }
+        // pushPlayer(1);
 
     }
 
-    public static void pushPlayer()
+    public static void pushPlayer(int i)
     {
-        HttpLoginClient pressHttpClient = new HttpLoginClient("1", "23wqe", "qq", "5000");
+        HttpLoginClient pressHttpClient = new HttpLoginClient("1", String.valueOf(i), "qq", "5000");
         if (pressHttpClient.httpLogin())
         {
             PressClient pressClient = new PressClient(pressHttpClient.getLoginResult().getIp(),

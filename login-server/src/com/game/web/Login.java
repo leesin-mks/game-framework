@@ -79,7 +79,7 @@ public class Login extends HttpServlet
             case DEVICE:      // 设备号登录
             {
                 info = new PlayerInfo();
-                info.setId(1);
+                info.setId(Integer.parseInt(unionID));
                 info.setPlatformType(1);
 
                 state = StateCode.LOGIN_SUCCESS;

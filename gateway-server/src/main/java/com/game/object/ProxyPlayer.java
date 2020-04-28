@@ -61,6 +61,10 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
     @Override
     public void onDisconnect()
     {
+        if (messageModule != null)
+        {
+            messageModule.sendOnDisconnect();
+        }
         LOGGER.info("Proxy player disconnect: {}", playerInfo.getId());
     }
 
@@ -168,13 +172,13 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
             clientConn.closeConnection(true);
         }
 
-        if (!isShutDown)
+        if (isShutDown)
         {
-            LOGGER.error("玩家失去连接, userID : {}", playerInfo.getId());
+            offline();
         }
         else
         {
-            offline();
+            LOGGER.error("玩家失去连接, userID : {}", playerInfo.getId());
         }
     }
 
@@ -190,12 +194,6 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
                 playerComponent.remove(playerInfo.getId());
                 IRedisComponent rc = (IRedisComponent) ComponentManager.getInstance().getComponent(
                         IRedisComponent.NAME);
-                String token = rc.get(RedisConst.USER_SESSION_KEY + playerInfo.getId());
-                if (token != null)
-                {
-                    rc.setex(RedisConst.USER_SESSION_KEY + playerInfo.getId(), 600, token);
-                }
-                rc.del(RedisConst.USER_GW_SERVER_KEY + playerInfo.getId());
             }
             else
             {

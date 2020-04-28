@@ -6,14 +6,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.game.command.CSProtocol;
 import com.game.component.inf.IServerComponent;
 import com.game.net.CommonMessage;
+import com.game.pb.CenterMsgProto.CSForwardMsg;
 import com.game.server.ServerClient;
 import com.google.gson.Gson;
-import com.google.protobuf.ByteString;
-
-import sun.rmi.runtime.Log;
 
 /**
  * @date 2020年03月31日 15:38
@@ -97,16 +94,16 @@ public class ServerComponent implements IServerComponent
         servers.remove(client.getServerID());
     }
 
-    public void forwardMsg(int toServerID, byte[] packet)
+    public void forwardMsg(CSForwardMsg msg)
     {
-        ServerClient serverClient = servers.get(toServerID);
+        ServerClient serverClient = servers.get(msg.getToServerID());
         if (serverClient == null)
         {
-            LOGGER.warn("Can find server client: {}", toServerID);
+            LOGGER.warn("Can find server client: {}", msg.getToServerID());
             return;
         }
-        CommonMessage commonMessage = new CommonMessage(CSProtocol.FORWARD_MESSAGE);
-        commonMessage.setBody(packet);
+        CommonMessage commonMessage = new CommonMessage((short) msg.getCode());
+        commonMessage.setBody(msg.getBody().toByteArray());
         serverClient.send(commonMessage);
     }
 }

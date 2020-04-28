@@ -3,15 +3,34 @@ package com.game.proto;
 option java_package = "com.game.pb";
 option java_outer_classname = "CenterMsgProto";
 
-message ForwardMsg
+message CSForwardMsg        // center服务器转发消息
 {
-    required int32 fromServerID = 1;
-    required int32 toServerID = 2;
-    optional int32 userID = 3;
-    optional bytes packet = 4;
+    required int32 fromServerID = 1;        // 转发消息始服务器
+    required int32 toServerID = 2;          // 转发消息终服务器
+    required int32 code = 3;                // 转发的协议号
+    optional bytes body = 4;                // 转发的胞体
+}
+
+message MsgToUSer       // 转发给玩家
+{
+    optional int32 userID = 1;              // 玩家id
+    optional bytes body = 2;                // 包体
 }
 
 message RegisterMsg
 {
     required int32 serverID = 1;
+}
+
+message PlayerDisconnectMsg
+{
+    required int32 userID = 1;                // 玩家id
+    optional bool shutDown = 2;               // 是否立即关闭
+    optional bool sendLoinOut = 3;            // 是否登出
+    optional int32 type = 4;                  // 提示类型
+}
+
+message PlayerOnDisconnectMsg
+{
+    required int32 userID = 1;                // 玩家id
 }
