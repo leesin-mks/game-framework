@@ -5,7 +5,7 @@
  *
  * All rights reserved. This material is confidential and proprietary to Jacken
  */
-package com.bdsk.event;
+package com.game.event;
 
 import java.util.EventObject;
 

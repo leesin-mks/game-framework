@@ -81,13 +81,13 @@ public class DBComponent implements IComponent
      */
     public void addDBHelper(String dbName, DBHelper dbHelper)
     {
-        LOGGER.info("addDBHelper!" + dbName);
+        LOGGER.info("addDBHelper: {}", dbName);
         synchronized (dbHelpers)
         {
             DBHelper temp = dbHelpers.get(dbName);
             if (temp != null)
             {
-                throw new RuntimeException("Already exit the dbHelper!");
+                throw new RuntimeException("Already exit the dbHelper: " + dbName);
             }
             else
             {
@@ -129,7 +129,7 @@ public class DBComponent implements IComponent
         }
         catch (Exception e)
         {
-            LOGGER.error("init database error!", e);
+            LOGGER.error("init data base error!", e);
         }
         return false;
     }
@@ -167,10 +167,9 @@ public class DBComponent implements IComponent
     {
         synchronized (pools)
         {
-            Set<Entry<String, IDBPool>> entries = pools.entrySet();
-            for (Entry<String, IDBPool> entry : entries)
+            for (IDBPool pool : pools.values())
             {
-                entry.getValue().shutDown();
+                pool.shutDown();
             }
         }
     }

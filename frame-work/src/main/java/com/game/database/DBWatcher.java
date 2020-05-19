@@ -19,9 +19,9 @@ import com.game.util.TimeUtil;
 public class DBWatcher
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(DBWatcher.class);
-    private long first = 0;
-    private long second = 0;
-    private long end = 0;
+    private long first;
+    private long second;
+    private long end;
 
     public DBWatcher()
     {
@@ -50,7 +50,7 @@ public class DBWatcher
      * @param procName
      *            此次执行事务的别名
      */
-    public void keeyRecords(String procName)
+    public void keyRecords(String procName)
     {
         long spendTime = end - first;
         if (spendTime > 1000)

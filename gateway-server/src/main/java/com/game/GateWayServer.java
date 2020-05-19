@@ -41,7 +41,7 @@ import com.game.web.WebComponent;
  * @author leesin
  *
  */
-public class GateWayServer extends com.bdsk.event.EventSource
+public class GateWayServer
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(GateWayServer.class);
 

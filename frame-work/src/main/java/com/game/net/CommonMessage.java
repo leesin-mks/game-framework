@@ -10,9 +10,12 @@ package com.game.net;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.game.pb.PlayerMsgProto.LoginMsgCS;
 
 /**
  * @author jacken
@@ -284,5 +287,23 @@ public class CommonMessage implements Serializable
             }
         }
         return String.format("%s. content:%s.", headerToStr(), str);
+    }
+
+    public static void main(String[] args)
+    {
+        short code = 1;
+
+        LoginMsgCS.Builder builder = LoginMsgCS.newBuilder();
+        builder.setUserID(1);
+        builder.setPassword("sda");
+        CommonMessage msg = new CommonMessage(code);
+        msg.setBody(builder.build().toByteArray());
+
+        ByteBuffer buf = msg.toByteBuffer();
+
+        // System.out.println(Arrays.toString(msg.getBody()));
+
+        // System.out.println(Arrays.toString(buf.array()));
+
     }
 }

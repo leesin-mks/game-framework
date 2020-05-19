@@ -14,7 +14,7 @@ package com.game.database;
 public class DBParameter
 {
     private String direction;
-    private int dbtype;
+    private int dbType;
     private Object info;
 
     /**
@@ -31,13 +31,13 @@ public class DBParameter
     public DBParameter(String ParameterDirection, int Types, Object info)
     {
         this.direction = ParameterDirection;
-        this.dbtype = Types;
+        this.dbType = Types;
         this.info = info;
     }
 
     public DBParameter(int Types, Object info)
     {
-        this.dbtype = Types;
+        this.dbType = Types;
         this.info = info;
     }
 
@@ -53,7 +53,7 @@ public class DBParameter
     public DBParameter(String ParameterDirection, int Types)
     {
         this.direction = ParameterDirection;
-        this.dbtype = Types;
+        this.dbType = Types;
     }
 
     public String getDirection()
@@ -61,9 +61,9 @@ public class DBParameter
         return direction;
     }
 
-    public int getDbtype()
+    public int getDbType()
     {
-        return dbtype;
+        return dbType;
     }
 
     public Object getResult()

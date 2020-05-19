@@ -198,14 +198,13 @@ public class GamePlayer implements ISequenceTask
                 if (token != null)
                 {
                     rc.setex(RedisConst.USER_SESSION_KEY + getPlayerInfo().getId(), 600, token);
-
                 }
                 rc.del(RedisConst.USER_GW_SERVER_KEY + playerInfo.getId());
             }
             else
             {
-                StackMessagePrint.printStackTrace();
-                LOGGER.error("Player error when user quit: {}, other player already!", playerInfo.getId());
+                LOGGER.error("Player error when user quit: {}, other player already, stack message: {}",
+                        playerInfo.getId(), StackMessagePrint.printStackTrace());
             }
         }
         catch (Exception e)
@@ -228,6 +227,7 @@ public class GamePlayer implements ISequenceTask
     {
         // 1.5 * 60*1000 = 90000
         long offlineTick = System.currentTimeMillis() - offlineTime;
+        offlineTick = 100000000;
         if ((!online && (offlineTick > 90000 && loginTime != null) || ping >= 3))
         {
             disconnect(true);
@@ -275,13 +275,13 @@ public class GamePlayer implements ISequenceTask
             {
                 if (!module.init() && !(module instanceof MessageModule))
                 {
-                    LOGGER.error(module.getType() + " module init error.");
+                    LOGGER.warn("Init player module failed: {},  module: {}", playerInfo.getId(), module.getType());
                     result = false;
                 }
             }
             catch (Exception e)
             {
-                LOGGER.error(module.getType() + " module init error.", e);
+                LOGGER.error("Init player module error: {},  module: {}", playerInfo.getId(), module.getType(), e);
                 result = false;
             }
         }

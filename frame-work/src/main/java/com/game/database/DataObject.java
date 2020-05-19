@@ -13,9 +13,9 @@ package com.game.database;
  */
 public class DataObject
 {
-    private short op = 0;
+    private short op;
 
-    private long tick = 0;
+    private long tick;
 
     public DataObject(boolean insert)
     {

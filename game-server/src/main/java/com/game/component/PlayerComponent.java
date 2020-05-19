@@ -35,7 +35,7 @@ public class PlayerComponent implements IPlayerComponent
 
     private Map<Integer, GamePlayer> players;
 
-    private Object locker = new Object();
+    private static final Object locker = new Object();
 
     /*
      * (non-Javadoc)
@@ -70,7 +70,7 @@ public class PlayerComponent implements IPlayerComponent
     {
         ITimerComponent timerComponent = (ITimerComponent) ComponentManager.getInstance().getComponent(
                 ITimerComponent.NAME);
-        timerComponent.addJob("PingJob", PlayerJob.class, "0/10 * * * * ?");
+        timerComponent.addJob("PingJob", PlayerJob.class, "*/10 * * * * ?");
 
         return true;
     }
@@ -119,10 +119,7 @@ public class PlayerComponent implements IPlayerComponent
     {
         synchronized (locker)
         {
-            if (players.containsKey(userId))
-            {
-                players.remove(userId);
-            }
+            players.remove(userId);
         }
     }
 
@@ -188,9 +185,12 @@ public class PlayerComponent implements IPlayerComponent
 
     public void clearOfflinePlayer()
     {
-        for (GamePlayer player : players.values())
+        synchronized (locker)
         {
-            player.checkOffline();
+            for (GamePlayer player : players.values())
+            {
+                player.checkOffline();
+            }
         }
     }
 

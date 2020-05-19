@@ -40,7 +40,7 @@ import com.game.web.WebComponent;
  * @author leesin
  *
  */
-public class CenterServer extends com.bdsk.event.EventSource
+public class CenterServer
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(CenterServer.class);
 

@@ -36,7 +36,7 @@ public class TimerComponent implements ITimerComponent
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(TimerComponent.class);
 
-    private static Scheduler scheduler = null;
+    private static Scheduler scheduler;
 
     private static SchedulerFactory schedulerFactory;
 
@@ -56,7 +56,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("初始化定时器异常，", e);
+            LOGGER.error("初始化定时器异常: ", e);
             return false;
         }
         return true;
@@ -77,7 +77,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("定时器关闭异常，", e);
+            LOGGER.error("定时器关闭异常: ", e);
         }
     }
 
@@ -124,7 +124,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("添加定时器任务异常，", e);
+            LOGGER.error("添加定时器任务异常: ", e);
         }
     }
 
@@ -145,7 +145,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("添加定时器任务异常，", e);
+            LOGGER.error("添加定时器任务异常: ", e);
         }
     }
 
@@ -162,7 +162,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("添加定时器任务异常，", e);
+            LOGGER.error("添加定时器任务异常: ", e);
         }
     }
 
@@ -174,11 +174,11 @@ public class TimerComponent implements ITimerComponent
             scheduler.pauseTrigger(TriggerKey.triggerKey(jobName));// 停止触发器
             JobKey key = new JobKey(jobName, "quartzGroup");
             scheduler.deleteJob(key);// 删除任务
-            LOGGER.error("删除定时任务: " + jobName);
+            LOGGER.error("删除定时任务: {}", jobName);
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("删除定时器任务异常，", e);
+            LOGGER.error("删除定时器任务异常: ", e);
         }
     }
 
@@ -188,7 +188,7 @@ public class TimerComponent implements ITimerComponent
     {
         try
         {
-            LOGGER.error("添加定时任务" + jobName);
+            LOGGER.info("添加定时任务: {}", jobName);
             JobDetail jobDetail = JobBuilder.newJob(job).withIdentity(jobName, "quartzGroup").build();
 
             SimpleTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, "quartzGroup").startAt(
@@ -201,7 +201,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("添加定时器任务异常，", e);
+            LOGGER.error("添加定时器任务异常: ", e);
         }
     }
 
@@ -214,7 +214,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("检查定时器任务存在异常, ", e);
+            LOGGER.error("检查定时器任务存在异常: ", e);
         }
         return false;
     }
@@ -228,7 +228,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("暂停定时器任务异常, ", e);
+            LOGGER.error("暂停定时器任务异常: ", e);
         }
     }
 
@@ -241,7 +241,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("恢复定时器任务异常, ", e);
+            LOGGER.error("恢复定时器任务异常: ", e);
         }
     }
 
@@ -253,7 +253,7 @@ public class TimerComponent implements ITimerComponent
         }
         catch (SchedulerException e)
         {
-            LOGGER.error("获取定时器任务状态异常, ", e);
+            LOGGER.error("获取定时器任务状态异常: ", e);
         }
         return TriggerState.NONE;
     }

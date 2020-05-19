@@ -5,7 +5,7 @@
  *
  * All rights reserved. This material is confidential and proprietary to Jacken
  */
-package com.bdsk.event;
+package com.game.event;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,15 +29,9 @@ public class EventSource implements IEventSource
     /**
      * 监听都列表。同一事件，可能存在多个相同的监听者。
      */
-    private Map<Integer, Collection<IEventListener>> listeners;
+    private Map<Integer, Collection<IEventListener>> listeners = new ConcurrentHashMap<>();
 
-    private ReadWriteLock lock;
-
-    public EventSource()
-    {
-        this.listeners = new ConcurrentHashMap<Integer, Collection<IEventListener>>();
-        this.lock = new ReentrantReadWriteLock();
-    }
+    private ReadWriteLock lock = new ReentrantReadWriteLock();
 
     /**
      * 将监听者加入到指定事件类型的监听队列中。
@@ -51,7 +45,9 @@ public class EventSource implements IEventSource
     public void addListener(int eventType, IEventListener listener)
     {
         if (listener == null)
+        {
             LOGGER.error("listener is null", new NullPointerException());
+        }
 
         Collection<IEventListener> lstns = this.listeners.get(eventType);
         if (lstns == null)
@@ -64,7 +60,7 @@ public class EventSource implements IEventSource
                 lstns = this.listeners.get(eventType);
                 if (lstns == null)
                 {
-                    lstns = new LinkedList<IEventListener>();
+                    lstns = new LinkedList<>();
                     lstns.add(listener);
                     this.listeners.put(eventType, lstns);
                 }
@@ -138,7 +134,7 @@ public class EventSource implements IEventSource
             Collection<IEventListener> lstns = this.listeners.get(arg.getEventType());
             if (lstns != null)
             {
-                lstns = new ArrayList<IEventListener>(lstns);
+                lstns = new ArrayList<>(lstns);
                 for (IEventListener item : lstns)
                 {
                     item.onEvent(arg);
@@ -167,11 +163,11 @@ public class EventSource implements IEventSource
         try
         {
             this.lock.writeLock().lock();
-            Collection<IEventListener> lstns = listeners.get(eventType);
-            if (lstns != null)
+            Collection<IEventListener> eventListeners = listeners.get(eventType);
+            if (eventListeners != null)
             {
-                lstns = new ArrayList<IEventListener>(lstns);
-                for (IEventListener item : lstns)
+                eventListeners = new ArrayList<>(eventListeners);
+                for (IEventListener item : eventListeners)
                 {
                     item.onEvent(new EventArg(this, eventType));
                 }

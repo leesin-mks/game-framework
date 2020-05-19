@@ -84,7 +84,7 @@ public class DBHelper
         finally
         {
             closeConn(conn, pstmt);
-            watcher.keeyRecords(sql);
+            watcher.keyRecords(sql);
         }
         return result;
     }
@@ -132,7 +132,7 @@ public class DBHelper
         finally
         {
             closeConn(conn, pstmt);
-            watcher.keeyRecords(sql);
+            watcher.keyRecords(sql);
         }
         return result;
     }
@@ -187,7 +187,7 @@ public class DBHelper
             finally
             {
                 closeConn(conn, pstmt, rs);
-                watcher.keeyRecords(sql);
+                watcher.keyRecords(sql);
             }
         }
         else
@@ -237,7 +237,7 @@ public class DBHelper
             finally
             {
                 closeConn(conn, pstmt, rs);
-                watcher.keeyRecords(sql);
+                watcher.keyRecords(sql);
             }
         }
         else
@@ -298,7 +298,7 @@ public class DBHelper
             finally
             {
                 closeConn(conn, pstmt);
-                watcher.keeyRecords(sql);
+                watcher.keyRecords(sql);
             }
         }
         else
@@ -354,7 +354,7 @@ public class DBHelper
         {
 
             closeConn(conn, pstmt);
-            watcher.keeyRecords(sql);
+            watcher.keyRecords(sql);
         }
         return null;
     }
@@ -397,7 +397,7 @@ public class DBHelper
         finally
         {
             closeConn(conn, stmt);
-            watcher.keeyRecords("sqlBatch");
+            watcher.keyRecords("sqlBatch");
         }
         if (results != null)
         {
@@ -443,7 +443,7 @@ public class DBHelper
             return null;
         for (Map.Entry<Integer, DBParameter> entry : parms.entrySet())
         {
-            pstmt.registerOutParameter(entry.getKey(), entry.getValue().getDbtype());
+            pstmt.registerOutParameter(entry.getKey(), entry.getValue().getDbType());
         }
 
         return pstmt;

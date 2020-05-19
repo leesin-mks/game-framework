@@ -149,8 +149,6 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
             String ip = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().toString();
             LOGGER.debug("recv: {}, {}", ip, packet.headerToStr());
         }
-
-        return;
     }
 
     // 获取密钥上下文

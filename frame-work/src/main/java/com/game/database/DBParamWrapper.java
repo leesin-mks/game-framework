@@ -15,14 +15,14 @@ import java.util.HashMap;
  */
 public class DBParamWrapper
 {
-    private HashMap<Integer, DBParameter> params = null;// in 参数
-    private HashMap<Integer, DBParameter> outParams = null;// out 参数 （存储过程有用到）
-    private int p = 0;
+    private HashMap<Integer, DBParameter> params;           // in 参数
+    private HashMap<Integer, DBParameter> outParams;        // out 参数 （存储过程有用到）
+    private int p;
 
     public DBParamWrapper()
     {
-        this.params = new HashMap<Integer, DBParameter>();
-        this.outParams = new HashMap<Integer, DBParameter>();
+        this.params = new HashMap<>();
+        this.outParams = new HashMap<>();
     }
 
     /**

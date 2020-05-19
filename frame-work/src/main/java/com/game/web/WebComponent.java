@@ -70,11 +70,12 @@ public class WebComponent implements IComponent
             resourceHandler = new ResourceHandler();
             resourceHandler.setResourceBase(GlobalConfigManager.getInstance().getWebServerConfig().getResourcePath());
 
-            handlerList.addHandler(context);
+            // handList顺序执行, 有报错才会执行下一个, resourceHandler要放在servletHandler前面
             handlerList.addHandler(resourceHandler);
+            handlerList.addHandler(context);
 
             server.setHandler(handlerList);
-            // server.setHandler(context);
+            server.setHandler(context);
             server.setAttribute("CharacterEncoding", "UTF-8");
             loadServletByWebServerConfig();
             server.start();
