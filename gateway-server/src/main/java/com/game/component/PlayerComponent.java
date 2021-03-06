@@ -35,8 +35,6 @@ public class PlayerComponent implements IPlayerComponent
 
     private Object locker = new Object();
 
-    private com.bdsk.event.IEventListener gameNoticeListener;
-
     private Map<Integer, Integer> online;
 
     /*

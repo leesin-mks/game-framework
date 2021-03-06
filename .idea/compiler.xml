@@ -6,15 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common-util" />
         <module name="frame-work" />
         <module name="game-data" />
+        <module name="common-util" />
         <module name="game-server" />
-        <module name="common-lib" />
-        <module name="protobuf-protocol" />
         <module name="center-server" />
         <module name="gateway-server" />
         <module name="test-client" />
+        <module name="common-lib" />
+        <module name="recharge-server" />
+        <module name="protobuf-protocol" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -27,6 +28,7 @@
       <module name="gateway-server" target="1.8" />
       <module name="login-server" target="8" />
       <module name="protobuf-protocol" target="1.8" />
+      <module name="recharge-server" target="1.8" />
       <module name="test-client" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -35,12 +37,13 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="center-server" options="" />
       <module name="common-util" options="" />
-      <module name="frame-work" options="" />
+      <module name="frame-work" options="-parameters" />
       <module name="game-data" options="" />
       <module name="game-server" options="" />
       <module name="gateway-server" options="" />
       <module name="login-server" options="" />
       <module name="protobuf-protocol" options="" />
+      <module name="recharge-server" options="-parameters" />
       <module name="test-client" options="" />
     </option>
   </component>

@@ -1,3 +1,8 @@
 game-server/log
 center-server/log
 gateway-server/log
+recharge-server/log
+game-server/target
+center-server/target
+gateway-server/target
+recharge-server/target

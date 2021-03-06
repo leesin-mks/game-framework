@@ -1,31 +1,29 @@
 /*
- * GameServer
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.game;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.management.ManagementFactory;
 
+import com.game.util.OutPutUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.bll.ServerBussiness;
-import com.game.component.CSCommandComponent;
-import com.game.component.CSComponent;
-import com.game.component.CommandComponent;
-import com.game.component.ComponentManager;
-import com.game.component.LanguageComponent;
-import com.game.component.PlayerComponent;
-import com.game.component.RedisComponent;
-import com.game.component.ServerListComponent;
+import com.game.component.*;
 import com.game.config.GlobalConfigManager;
 import com.game.database.DBComponent;
 import com.game.entity.bean.ServerListBean;
@@ -34,13 +32,14 @@ import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.timer.TimerComponent;
 import com.game.type.ServerStateType;
+import com.game.util.Uptime;
 import com.game.web.WebComponent;
 
 /**
- * @author leesin
+ * @author: Lee Sin
  *
  */
-public class GameServer
+public class GameServer implements IServer
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(GameServer.class);
 
@@ -58,7 +57,7 @@ public class GameServer
 
     /**
      * 获取实例
-     * 
+     *
      * @return INSTANCE
      */
     public static GameServer getInstance()
@@ -68,11 +67,12 @@ public class GameServer
 
     /**
      * @param args
+     *            – command line arguments
      */
     public static void main(String[] args)
     {
-        long time = System.currentTimeMillis();
         LOGGER.info("GameServer is starting...");
+        System.out.println("-->" + OutPutUtil.lineSeparator);
         if (args.length <= 0)
         {
             LOGGER.error("Please input the global config path.");
@@ -81,23 +81,21 @@ public class GameServer
         // 初始化配置管理器。
         if (!GlobalConfigManager.getInstance().init(args[0]))
         {
-            LOGGER.error("GameServer has started failed because of initing config.");
+            LOGGER.warn("GameServer has started failed because of init config.");
             System.exit(1);
         }
         Runtime.getRuntime().addShutdownHook(new BaseShutdownHooker(GameServer.getInstance()));
 
         if (!GameServer.getInstance().LoadComponents())
         {
-            LOGGER.error("GameServer has started failed");
+            LOGGER.warn("GameServer has started failed");
             System.out.print("GameServer has started failed");
             System.exit(1);
         }
         printServerVersion();
         printServerPID();
-        System.out.print(String.format("GameServer has started successfully, taken %d millis.\n",
-                System.currentTimeMillis() - time));
-        LOGGER.error(String.format("GameServer has started successfully, taken %d millis.",
-                System.currentTimeMillis() - time));
+        System.out.printf("GameServer has started successfully, taken %d millis.%n", Uptime.getUptime());
+        LOGGER.info("GameServer has started successfully, taken {} millis.", Uptime.getUptime());
         GameServer.getInstance().setStatus(1);
     }
 
@@ -155,6 +153,7 @@ public class GameServer
      * 停止回调
      *
      */
+    @Override
     public void callBackStop()
     {
         setStatus(ServerStateType.SHUTTING_DOWN.getValue());
