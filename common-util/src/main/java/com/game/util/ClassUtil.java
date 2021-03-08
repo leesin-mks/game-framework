@@ -15,12 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
@@ -47,15 +42,13 @@ public class ClassUtil
     public static String[] getPackageAllClassName(String classLocation,
             String packageName)
     {
-
         // 将packageName分解
         String[] packagePathSplit = packageName.split("[.]");
         String realClassLocation = classLocation;
         int packageLength = packagePathSplit.length;
         for (int i = 0; i < packageLength; i++)
         {
-            realClassLocation = realClassLocation + File.separator
-                    + packagePathSplit[i];
+            realClassLocation = realClassLocation + File.separator + packagePathSplit[i];
         }
         File packeageDir = new File(realClassLocation);
         if (packeageDir.isDirectory())
@@ -75,7 +68,7 @@ public class ClassUtil
     public static Set<Class<?>> getClasses(Package pack)
     {
         // 第一个class类的集合
-        Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
+        Set<Class<?>> classes = new LinkedHashSet<>();
         // 是否循环迭代
         boolean recursive = true;
         // 获取包的名字 并进行替换
@@ -170,10 +163,8 @@ public class ClassUtil
         }
         catch (IOException e)
         {
-            LOGGER.error("get classes error.", e);
+            LOGGER.error("Get classes error: ", e);
         }
-        // int count = classes.size();
-        // System.out.println("class size" + count);
         return classes;
     }
 
@@ -196,7 +187,7 @@ public class ClassUtil
             return;
         }
         // 如果存在 就获取包下的所有文件 包括目录
-        File[] dirfiles = dir.listFiles(new FileFilter()
+        File[] dirFiles = dir.listFiles(new FileFilter()
         {
             // 自定义过滤规则 如果可以循环(包含子目录) 或则是以.class结尾的文件(编译好的java类文件)
             public boolean accept(File file)
@@ -208,7 +199,7 @@ public class ClassUtil
 
         // 循环所有文件
 
-        for (File file : dirfiles)
+        for (File file : dirFiles)
         {
             // 如果是目录 则继续扫描
             if (file.isDirectory())
@@ -261,15 +252,15 @@ public class ClassUtil
             List<String> dirs = new ArrayList<String>();
             while (resources.hasMoreElements())
             {
-                URL resource = (URL) resources.nextElement();
+                URL resource = resources.nextElement();
                 dirs.add(resource.getFile());
             }
-            TreeSet<String> classes = new TreeSet<String>();
+            TreeSet<String> classes = new TreeSet<>();
             for (String directory : dirs)
             {
                 classes.addAll(findClasses(directory, packageName));
             }
-            ArrayList<Class<?>> classList = new ArrayList<Class<?>>();
+            ArrayList<Class<?>> classList = new ArrayList<>();
             for (String clazz : classes)
             {
                 classList.add(Class.forName(clazz));
@@ -348,7 +339,7 @@ public class ClassUtil
     /**
      * 构造一个不定参数的类
      * 
-     * @param className
+     * @param newOneClass
      * @param args
      * @return
      * @throws ClassNotFoundException
@@ -359,12 +350,32 @@ public class ClassUtil
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public static Object newInstance(Class<?> newoneClass, String args)
+    public static Object newInstance(Class<?> newOneClass, String args)
             throws SecurityException, NoSuchMethodException,
             IllegalArgumentException, InstantiationException,
             IllegalAccessException, InvocationTargetException
     {
-        Constructor<?> con = newoneClass.getConstructor(String.class);
+        Constructor<?> con = newOneClass.getConstructor(String.class);
         return con.newInstance(args);
+    }
+
+    public static Class<?> deduceMainApplicationClass()
+    {
+        try
+        {
+            StackTraceElement[] stackTrace = new RuntimeException().getStackTrace();
+            for (StackTraceElement stackTraceElement : stackTrace)
+            {
+                if ("main".equals(stackTraceElement.getMethodName()))
+                {
+                    return Class.forName(stackTraceElement.getClassName());
+                }
+            }
+        }
+        catch (ClassNotFoundException ex)
+        {
+            // Swallow and continue
+        }
+        return null;
     }
 }

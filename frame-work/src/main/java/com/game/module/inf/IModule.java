@@ -10,7 +10,7 @@ package com.game.module.inf;
 import com.game.type.ModuleType;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IModule

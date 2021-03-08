@@ -1,10 +1,19 @@
 /*
- * SelfDrivenTaskQueue
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.game.command;
 
 import java.util.Queue;
@@ -13,28 +22,28 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author jacken
- *
+ * @author leesin
+ * @since 1.0.0
  */
 public class SelfDrivenTaskQueue<Task extends Runnable>
 {
     /** 执行Task的线程池 */
-    private ExecutorService threadPool = null;
+    private final ExecutorService threadPool;
 
     /**
      * 任务队列。队头元素是正在执行的任务。
      */
-    private Queue<Task> taskQueue = null;
+    private final Queue<Task> taskQueue;
 
     /** 运行锁，用于确保同时最多只能有一个任务在执行。任务队列本身是线程安全的。 */
-    private ReentrantLock runningLock = null;
+    private final ReentrantLock runningLock;
 
     public SelfDrivenTaskQueue(ExecutorService exeService)
     {
         this.threadPool = exeService;
 
         // 使用无锁线程安全队列
-        this.taskQueue = new ConcurrentLinkedQueue<Task>();
+        this.taskQueue = new ConcurrentLinkedQueue<>();
 
         this.runningLock = new ReentrantLock();
     }
@@ -43,6 +52,7 @@ public class SelfDrivenTaskQueue<Task extends Runnable>
      * 往任务队列中添加任务。
      * 
      * @param task
+     *            task
      */
     public void add(Task task)
     {
@@ -82,7 +92,7 @@ public class SelfDrivenTaskQueue<Task extends Runnable>
             // 移除已经完成的任务。
             this.taskQueue.remove();
             // 完成一个任务后，如果还有任务，则继续执行。
-            if (this.taskQueue.isEmpty() == false)
+            if (!this.taskQueue.isEmpty())
             {
                 this.threadPool.submit(this.taskQueue.peek());
             }

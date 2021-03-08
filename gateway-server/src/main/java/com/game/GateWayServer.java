@@ -1,31 +1,26 @@
 /*
- * GameServer
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package com.game;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.management.ManagementFactory;
+package com.game;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.bll.ServerBussiness;
-import com.game.component.CSCommandComponent;
-import com.game.component.CSComponent;
-import com.game.component.CommandComponent;
-import com.game.component.ComponentManager;
-import com.game.component.LanguageComponent;
-import com.game.component.PlayerComponent;
-import com.game.component.RedisComponent;
-import com.game.component.ServerListComponent;
+import com.game.component.*;
 import com.game.config.GlobalConfigManager;
 import com.game.database.DBComponent;
 import com.game.entity.bean.ServerListBean;
@@ -35,13 +30,14 @@ import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.timer.TimerComponent;
 import com.game.type.ServerStateType;
+import com.game.util.Uptime;
 import com.game.web.WebComponent;
 
 /**
  * @author leesin
  *
  */
-public class GateWayServer
+public class GateWayServer implements IServer
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(GateWayServer.class);
 
@@ -69,10 +65,10 @@ public class GateWayServer
 
     /**
      * @param args
+     *            – command line arguments
      */
     public static void main(String[] args)
     {
-        long time = System.currentTimeMillis();
         LOGGER.info("GameServer is starting...");
         if (args.length <= 0)
         {
@@ -87,25 +83,24 @@ public class GateWayServer
         }
         Runtime.getRuntime().addShutdownHook(new BaseShutdownHooker(GateWayServer.getInstance()));
 
-        if (!GateWayServer.getInstance().LoadComponents())
+        if (!GateWayServer.getInstance().loadComponents())
         {
             LOGGER.info("GameServer has started failed");
             System.out.print("GameServer has started failed");
             System.exit(1);
         }
-        printServerVersion();
-        printServerPID();
-        System.out.print(String.format("GameServer has started successfully, taken %d millis.\n",
-                System.currentTimeMillis() - time));
-        LOGGER.info(String.format("GameServer has started successfully, taken %d millis.",
-                System.currentTimeMillis() - time));
+        IServer.printServerVersion();
+        IServer.printServerPID();
+        System.out.printf("GateWayServer has started successfully, taken %d millis.%n", Uptime.getUptime());
+        LOGGER.info("GateWayServer has started successfully, taken {} millis.", Uptime.getUptime());
         GateWayServer.getInstance().setStatus(ServerStateType.RUNNING.getValue());
     }
 
     /**
      * @return load result
      */
-    protected boolean LoadComponents()
+    @Override
+    public boolean loadComponents()
     {
         try
         {
@@ -158,6 +153,7 @@ public class GateWayServer
      * 停止回调
      *
      */
+    @Override
     public void callBackStop()
     {
         setStatus(ServerStateType.SHUTTING_DOWN.getValue());
@@ -227,80 +223,6 @@ public class GateWayServer
         {
             LOGGER.error("找不到服务器配置");
         }
-    }
-
-    private static void printServerVersion()
-    {
-        String versionPath = GlobalConfigManager.getInstance().getServerConfig().getVersionPath();
-        versionPath = versionPath == null ? "./version.txt" : versionPath;
-        File file = new File(versionPath);
-        if (file.exists())
-        {
-            FileInputStream fis = null;
-            InputStreamReader isr = null;
-            BufferedReader br = null;
-            try
-            {
-                fis = new FileInputStream(file);
-                isr = new InputStreamReader(fis);
-                br = new BufferedReader(isr);
-                String version = br.readLine();
-                System.out.println("Server version: " + version);
-                LOGGER.error("Server version: " + version);
-            }
-            catch (IOException e)
-            {
-                LOGGER.error("Read version file error: ", e);
-            }
-            finally
-            {
-                if (br != null)
-                {
-                    try
-                    {
-                        br.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                if (isr != null)
-                {
-                    try
-                    {
-                        isr.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                if (fis != null)
-                {
-                    try
-                    {
-                        fis.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        else
-        {
-            System.out.println("Can not find version file");
-            LOGGER.error("Can not find version file");
-        }
-    }
-
-    private static void printServerPID()
-    {
-        String serverPid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        System.out.println("Server pid: " + serverPid);
-        LOGGER.error("Server pid: " + serverPid);
     }
 
 }

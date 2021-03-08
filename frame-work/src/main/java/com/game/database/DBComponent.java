@@ -1,10 +1,19 @@
 /*
- * DBComponent
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.game.database;
 
 import java.util.List;
@@ -24,7 +33,7 @@ import com.game.database.pool.BoneCPDBPool;
 import com.game.database.pool.IDBPool;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class DBComponent implements IComponent
@@ -33,16 +42,16 @@ public class DBComponent implements IComponent
 
     public static final String NAME = "DBComponent";
 
-    /*
+    /**
      * pools保存所有的连接池的信息 key对应是这个连接池的名字
+     *
      */
-    private Map<String, IDBPool> pools = new ConcurrentHashMap<String, IDBPool>();
-    private Map<String, DBHelper> dbHelpers = new ConcurrentHashMap<String, DBHelper>();
+    private final Map<String, IDBPool> pools = new ConcurrentHashMap<>();
+    private final Map<String, DBHelper> dbHelpers = new ConcurrentHashMap<>();
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#getName()
      */
     @Override
     public String getName()
@@ -54,7 +63,9 @@ public class DBComponent implements IComponent
      * 添加连接池，并启动连接池
      * 
      * @param dbName
+     *            database name
      * @param pool
+     *            database pool
      */
     public void addDBPool(String dbName, IDBPool pool)
     {
@@ -74,10 +85,12 @@ public class DBComponent implements IComponent
     }
 
     /**
-     * 添加Hepler
+     * 添加Helper
      * 
      * @param dbName
+     *            database name
      * @param dbHelper
+     *            database helper
      */
     public void addDBHelper(String dbName, DBHelper dbHelper)
     {
@@ -96,10 +109,9 @@ public class DBComponent implements IComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#initialize()
      */
     @Override
     public boolean initialize()
@@ -108,9 +120,9 @@ public class DBComponent implements IComponent
         {
             Element element = GlobalConfigManager.getInstance().getElement(GlobalConfigManager.PATH_DATABASE);
             List<?> dbs = element.elements("pool");
-            for (int i = 0; i < dbs.size(); i++)
+            for (Object o : dbs)
             {
-                Element db = (Element) dbs.get(i);// 获取DB的节点，可以有多个DB节点
+                Element db = (Element) o;// 获取DB的节点，可以有多个DB节点
                 List<?> dbConfigs = db.elements();// 获取每个DB节点下面的具体数据库的配置文件
                 for (Object object : dbConfigs)
                 {
@@ -134,10 +146,9 @@ public class DBComponent implements IComponent
         return false;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#start()
      */
     @Override
     public boolean start()
@@ -157,10 +168,9 @@ public class DBComponent implements IComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#stop()
      */
     @Override
     public void stop()
@@ -174,10 +184,9 @@ public class DBComponent implements IComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#reload()
      */
     @Override
     public boolean reload()

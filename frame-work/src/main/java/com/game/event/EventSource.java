@@ -1,15 +1,24 @@
 /*
- * EventSource
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.game.event;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -19,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author jacken
+ * @author leesin
  *         事件源。同一事件类型，支持多个监听者，并且监听者对象可以相同。
  */
 public class EventSource implements IEventSource
@@ -29,9 +38,9 @@ public class EventSource implements IEventSource
     /**
      * 监听都列表。同一事件，可能存在多个相同的监听者。
      */
-    private Map<Integer, Collection<IEventListener>> listeners = new ConcurrentHashMap<>();
+    private final Map<Integer, LinkedHashSet<IEventListener>> listeners = new ConcurrentHashMap<>();
 
-    private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
     /**
      * 将监听者加入到指定事件类型的监听队列中。
@@ -49,24 +58,24 @@ public class EventSource implements IEventSource
             LOGGER.error("listener is null", new NullPointerException());
         }
 
-        Collection<IEventListener> lstns = this.listeners.get(eventType);
-        if (lstns == null)
+        LinkedHashSet<IEventListener> listeners = this.listeners.get(eventType);
+        if (listeners == null)
         {
             try
             {
                 // 加写锁确保没有并发问题。
                 this.lock.writeLock().lock();
 
-                lstns = this.listeners.get(eventType);
-                if (lstns == null)
+                listeners = this.listeners.get(eventType);
+                if (listeners == null)
                 {
-                    lstns = new LinkedList<>();
-                    lstns.add(listener);
-                    this.listeners.put(eventType, lstns);
+                    listeners = new LinkedHashSet<>();
+                    listeners.add(listener);
+                    this.listeners.put(eventType, listeners);
                 }
                 else
                 {
-                    lstns.add(listener);
+                    listeners.add(listener);
                 }
             }
             catch (Exception e)
@@ -80,7 +89,7 @@ public class EventSource implements IEventSource
         }
         else
         {
-            lstns.add(listener);
+            listeners.add(listener);
         }
         LOGGER.debug("Added a listener: {}, {}", eventType, listener);
     }
@@ -100,10 +109,10 @@ public class EventSource implements IEventSource
         {
             this.lock.writeLock().lock();
 
-            Collection<IEventListener> lstns = this.listeners.get(eventType);
-            if (lstns != null)
+            Collection<IEventListener> listeners = this.listeners.get(eventType);
+            if (listeners != null)
             {
-                lstns.remove(listener);
+                listeners.remove(listener);
             }
         }
         catch (Exception e)
@@ -131,11 +140,11 @@ public class EventSource implements IEventSource
         {
             this.lock.writeLock().lock();
 
-            Collection<IEventListener> lstns = this.listeners.get(arg.getEventType());
-            if (lstns != null)
+            Collection<IEventListener> listeners = this.listeners.get(arg.getEventType());
+            if (listeners != null)
             {
-                lstns = new ArrayList<>(lstns);
-                for (IEventListener item : lstns)
+                listeners = new ArrayList<>(listeners);
+                for (IEventListener item : listeners)
                 {
                     item.onEvent(arg);
                 }

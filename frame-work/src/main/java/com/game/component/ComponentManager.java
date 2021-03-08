@@ -1,19 +1,23 @@
 /*
- * ComponentManager
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.game.component;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,28 +28,28 @@ import org.slf4j.LoggerFactory;
 import com.game.util.StringUtil;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ComponentManager
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(ComponentManager.class);
 
-    private ClassLoader loader = null;
+    private final ClassLoader loader;
 
     /** 组件集合 */
-    private Map<String, IComponent> modules = null;
+    private final Map<String, IComponent> modules;
 
-    private List<String> modulesKeys = null;
+    private final List<String> modulesKeys;
 
     /** 组件线程池 */
-    private ExecutorService userCmdThreadPool = Executors.newFixedThreadPool(4);
+    private final ExecutorService userCmdThreadPool = Executors.newFixedThreadPool(4);
 
     private ComponentManager()
     {
         loader = Thread.currentThread().getContextClassLoader();
-        modules = new ConcurrentHashMap<String, IComponent>();
-        modulesKeys = new LinkedList<String>();
+        modules = new ConcurrentHashMap<>();
+        modulesKeys = new LinkedList<>();
     }
 
     private static class LazyHolder
@@ -56,7 +60,7 @@ public class ComponentManager
     /**
      * 获取ComponentManager实例。
      * 
-     * @return
+     * @return single instance
      */
     public static ComponentManager getInstance()
     {
@@ -67,11 +71,8 @@ public class ComponentManager
      * 添加组件。
      * 
      * @param className
-     *            组件类名
-     * @return
-     * @throws ClassNotFoundException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
+     *            component simple name
+     * @return the add component result
      */
     public boolean addComponent(String className)
     {
@@ -89,19 +90,9 @@ public class ComponentManager
 
             return true;
         }
-        catch (ClassNotFoundException e)
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
         {
-            LOGGER.error("", e);
-            return false;
-        }
-        catch (InstantiationException e)
-        {
-            LOGGER.error("", e);
-            return false;
-        }
-        catch (IllegalAccessException e)
-        {
-            LOGGER.error("", e);
+            LOGGER.error("Add component error: ", e);
             return false;
         }
     }
@@ -111,7 +102,7 @@ public class ComponentManager
      * 
      * @param componentName
      *            组件名称
-     * @return
+     * @return component instance
      */
     public IComponent getComponent(String componentName)
     {
@@ -123,7 +114,7 @@ public class ComponentManager
      * 
      * @param componentName
      *            组件名称
-     * @return
+     * @return component instance
      */
     @SuppressWarnings("unchecked")
     public static <T> T component(String componentName)
@@ -144,7 +135,7 @@ public class ComponentManager
     /**
      * 初始化组件管理器。
      * 
-     * @return
+     * @return the init result
      */
     public boolean init()
     {
@@ -154,21 +145,15 @@ public class ComponentManager
     /**
      * 启动组件管理器。
      * 
-     * @return
+     * @return starting result
      */
     public boolean start()
     {
-        if (initModules() == false)
+        if (!initModules())
         {
             return false;
         }
-
-        if (startModules() == false)
-        {
-            return false;
-        }
-
-        return true;
+        return startModules();
     }
 
     /**
@@ -184,14 +169,16 @@ public class ComponentManager
      */
     public boolean reLoad()
     {
-        Set<Entry<String, IComponent>> entrys = modules.entrySet();
-        if (entrys != null && entrys.size() > 0)
+        Set<Entry<String, IComponent>> entries = modules.entrySet();
+        if (!entries.isEmpty())
         {
-            for (Entry<String, IComponent> entry : entrys)
+            for (Entry<String, IComponent> entry : entries)
             {
                 IComponent module = entry.getValue();
-                if (!this.reLoadModule(module))
+                if (!this.reloadModule(module))
+                {
                     return false;
+                }
             }
         }
         return true;
@@ -201,6 +188,7 @@ public class ComponentManager
      * 根据组件名重新加载指定组件
      * 
      * @param names
+     *            component name
      */
     public boolean reLoad(String... names)
     {
@@ -217,7 +205,7 @@ public class ComponentManager
             IComponent module = modules.get(name);
             if (null != module)
             {
-                if (!this.reLoadModule(module))
+                if (!this.reloadModule(module))
                     return false;
             }
         }
@@ -226,19 +214,25 @@ public class ComponentManager
 
     /**
      * 重新加载组件
+     * 
+     * @param module
+     *            component
+     *
      */
-    private boolean reLoadModule(IComponent module)
+    private boolean reloadModule(IComponent module)
     {
         try
         {
-            module.reload();
-            LOGGER.error("Component {} reload success.", module.getName());
-            return true;
+            if (module.reload())
+            {
+                LOGGER.error("Component {} reload success.", module.getName());
+                return true;
+            }
         }
         catch (Exception e)
         {
-            LOGGER.error("Component {} reload error.", module.getName());
             e.printStackTrace();
+            LOGGER.error("Component {} reload error.", module.getName());
         }
         return false;
     }
@@ -255,9 +249,9 @@ public class ComponentManager
             try
             {
                 module = modules.get(moduleName);
-                if (module.initialize() == false)
+                if (!module.initialize())
                 {
-                    LOGGER.error(moduleName + "initialize false.");
+                    LOGGER.warn(moduleName + "initialize false.");
                     return false;
                 }
             }
@@ -265,10 +259,10 @@ public class ComponentManager
             {
                 if (module != null)
                 {
-                    this.modules.remove(module.getClass());
+                    this.modules.remove(module.getName());
                     module.stop();
                 }
-                LOGGER.error("", e);
+                LOGGER.error("Init module error: ", e);
                 return false;
             }
         }
@@ -279,7 +273,7 @@ public class ComponentManager
     /**
      * 启动所有组件。
      * 
-     * @return
+     * @return start result
      */
     private boolean startModules()
     {
@@ -291,27 +285,24 @@ public class ComponentManager
             {
                 module = modules.get(moduleName);
                 LOGGER.info("Component {} is starting...", module.getName());
-                if (module.start() == false)
+                if (!module.start())
                 {
-                    LOGGER.error("Component {} has started failed.",
-                            module.getName());
+                    LOGGER.warn("Component {} has started failed.", module.getName());
                     return false;
                 }
-                LOGGER.info("Component {} has started successfully.",
-                        module.getName());
+                LOGGER.info("Component {} has started successfully.", module.getName());
             }
             catch (Throwable e)
             {
                 if (module != null)
                 {
-                    this.modules.remove(module.getClass());
+                    this.modules.remove(moduleName);
                     module.stop();
                 }
-                LOGGER.error("", e);
+                LOGGER.error("Component start error: ", e);
                 return false;
             }
         }
-
         return true;
     }
 
@@ -320,29 +311,26 @@ public class ComponentManager
      */
     private void stopModules()
     {
-        List<String> stack = new ArrayList<String>();
+        List<String> stack = new ArrayList<>();
         for (int i = (modulesKeys.size() - 1); i >= 0; i--)
         {
             stack.add(modulesKeys.get(i));
         }
 
-        IComponent module = null;
-        Iterator<String> iterator = stack.iterator();
-        while (iterator.hasNext())
+        IComponent module;
+        for (String s : stack)
         {
-            module = modules.get(iterator.next());
+            module = modules.get(s);
             try
             {
                 module.stop();
             }
             catch (Exception e)
             {
-                LOGGER.error("module stop error: {}", module.getName(), e);
+                LOGGER.error("Module stop error: {}", module.getName(), e);
             }
         }
-
         modules.clear();
-        modules = null;
     }
 
     /**

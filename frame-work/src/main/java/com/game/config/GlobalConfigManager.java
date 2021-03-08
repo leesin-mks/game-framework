@@ -1,10 +1,19 @@
 /*
- * GlobalConfigManager
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.game.config;
 
 import java.util.HashMap;
@@ -29,12 +38,12 @@ public class GlobalConfigManager
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalConfigManager.class);
 
     /** 配置文件根Document */
-    private Document documentRoot = null;
+    private Document documentRoot;
 
     private ServerConfig serverConfig;
     private WebServerConfig webServerConfig;
     private RequestConfig requestConfig;
-    private Map<String, String> webResourceConfig = null;
+    private Map<String, String> webResourceConfig;
 
     public static final String PATH_DATABASE = "/config/database";
     public static final String PATH_SERVER = "/config/server";
@@ -42,7 +51,7 @@ public class GlobalConfigManager
     public static final String PATH_REQUEST = "/config/request";
     public static final String PATH_WEB = "/config/web";
     public static final String PATH_CHAT = "config/chat";
-    public static final String PATH_WEBRESOURCE = "config/webresource";
+    public static final String PATH_WEB_RESOURCE = "config/webresource";
 
     private static final class LazyLoader
     {
@@ -52,7 +61,7 @@ public class GlobalConfigManager
     /**
      * 获取实例
      * 
-     * @return
+     * @return single instance
      */
     public static GlobalConfigManager getInstance()
     {
@@ -147,10 +156,9 @@ public class GlobalConfigManager
                 {
                     requestConfig = new RequestConfig();
                     Element tag = getElement(PATH_REQUEST);
-                    if (tag.elementTextTrim("adminIP").isEmpty() == false)
+                    if (!tag.elementTextTrim("adminIP").isEmpty())
                     {
-                        String[] IPs = tag.elementTextTrim("adminIP").split(
-                                "\\|");
+                        String[] IPs = tag.elementTextTrim("adminIP").split("\\|");
                         requestConfig.setAdminIPs(IPs);
                     }
                 }
@@ -187,7 +195,7 @@ public class GlobalConfigManager
                 if (webResourceConfig == null)
                 {
                     webResourceConfig = new HashMap<String, String>();
-                    Element tag = getElement(PATH_WEBRESOURCE);
+                    Element tag = getElement(PATH_WEB_RESOURCE);
                     webResourceConfig.put("ip", tag.attributeValue("ip"));
                     webResourceConfig.put("port", tag.attributeValue("port"));
                 }

@@ -1,10 +1,19 @@
 /*
- * BaseDao
+ * Copyright 2016-2021 the original author or authors.
  *
- * 2016年2月17日
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * All rights reserved. This material is confidential and proprietary to Jacken
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.game.database.dao;
 
 import java.sql.ResultSet;
@@ -21,16 +30,17 @@ import com.game.database.DBParamWrapper;
 import com.game.database.DataReader;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class BaseDao<T>
 {
+    protected static final Logger LOGGER = LoggerFactory.getLogger(BaseDao.class);
+
     /**
      * 数据库Helper
      */
-    protected DBHelper dbhelper = null;
-    protected static final Logger LOGGER = LoggerFactory.getLogger(BaseDao.class);
+    protected DBHelper dbhelper;
 
     public BaseDao(DBHelper helper)
     {
@@ -49,14 +59,11 @@ public abstract class BaseDao<T>
      *            查询的脚本
      * @param paramWrapper
      *            参数
-     * @return
+     * @return update result
      */
     public boolean update(String sql, DBParamWrapper paramWrapper)
     {
-        boolean result = false;
-        result = getDBHelper().execNoneQuery(sql, paramWrapper) > -1 ? true
-                : false;
-        return result;
+        return getDBHelper().execNoneQuery(sql, paramWrapper) > -1;
     }
 
     /**
@@ -66,7 +73,7 @@ public abstract class BaseDao<T>
      *            查询的脚本
      * @param paramWrapper
      *            参数
-     * @return
+     * @return add result
      */
     public int add(String sql, DBParamWrapper paramWrapper)
     {
@@ -77,14 +84,14 @@ public abstract class BaseDao<T>
     {
         statement.clearBatch();
         statement.close();
-        statement = null;
     }
 
     /**
      * 根据脚本执行查询操作，不带参数
      * 
      * @param sql
-     * @return
+     *            sql
+     * @return query entity
      */
     public T query(String sql)
     {
@@ -98,25 +105,17 @@ public abstract class BaseDao<T>
      *            查询的脚本
      * @param paramWrapper
      *            参数
-     * @return
+     * @return query entity
      */
     public T query(String sql, DBParamWrapper paramWrapper)
     {
-        T result = getDBHelper().executeQuery(sql, paramWrapper,
-                new DataReader<T>()
-                {
-                    @Override
-                    public T readData(ResultSet rs, Object... objects)
-                            throws Exception
-                    {
-                        if (rs.last())
-                        {
-                            return BaseDao.this.rsToEntity(rs);
-                        }
-                        return null;
-                    }
-                });
-        return result;
+        return getDBHelper().executeQuery(sql, paramWrapper, (DataReader<T>) (rs, objects) -> {
+            if (rs.last())
+            {
+                return this.rsToEntity(rs);
+            }
+            return null;
+        });
     }
 
     /**
@@ -124,7 +123,7 @@ public abstract class BaseDao<T>
      * 
      * @param sql
      *            查询的脚本
-     * @return
+     * @return list entities
      */
     public List<T> queryList(String sql)
     {
@@ -142,29 +141,20 @@ public abstract class BaseDao<T>
      */
     public List<T> queryList(String sql, DBParamWrapper paramWrapper)
     {
-        List<T> entitis = getDBHelper().executeQuery(sql, paramWrapper,
-                new DataReader<List<T>>()
-                {
-
-                    @Override
-                    public List<T> readData(ResultSet rs, Object... objects)
-                            throws Exception
-                    {
-                        return BaseDao.this.rsToEntityList(rs);
-                    }
-                });
-        return entitis;
+        return getDBHelper().executeQuery(sql, paramWrapper,
+                (DataReader<List<T>>) (rs, objects) -> BaseDao.this.rsToEntityList(rs));
     }
 
     /**
      * 将ResultSet转换成List
      * 
      * @param rs
-     * @return
+     *            result set
+     * @return list entities
      */
     protected List<T> rsToEntityList(ResultSet rs)
     {
-        List<T> entitis = new ArrayList<T>();
+        List<T> entities = new ArrayList<>();
         if (rs != null)
         {
             try
@@ -172,23 +162,25 @@ public abstract class BaseDao<T>
                 while (rs.next())
                 {
                     T entity = rsToEntity(rs);
-                    entitis.add(entity);
+                    entities.add(entity);
                 }
             }
             catch (Exception e)
             {
-                LOGGER.error("Resultset转成实体出错", e);
+                LOGGER.error("Result set translate error: ", e);
             }
         }
-        return entitis;
+        return entities;
     }
 
     /**
-     * 将resultset转为实体对象
+     * 将result set转为实体对象
      * 
      * @param rs
-     * @return
+     *            result set
+     * @return result bean
      * @throws SQLException
+     *             if translate error
      */
     protected abstract T rsToEntity(ResultSet rs) throws SQLException;
 }

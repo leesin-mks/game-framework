@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.game;
 
-import java.io.*;
-import java.lang.management.ManagementFactory;
-
-import com.game.util.OutPutUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,11 +29,12 @@ import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.timer.TimerComponent;
 import com.game.type.ServerStateType;
+import com.game.util.OutPutUtil;
 import com.game.util.Uptime;
 import com.game.web.WebComponent;
 
 /**
- * @author: Lee Sin
+ * @author leesin
  *
  */
 public class GameServer implements IServer
@@ -75,7 +73,7 @@ public class GameServer implements IServer
         System.out.println("-->" + OutPutUtil.lineSeparator);
         if (args.length <= 0)
         {
-            LOGGER.error("Please input the global config path.");
+            LOGGER.warn("Please input the global config path.");
             System.exit(1);
         }
         // 初始化配置管理器。
@@ -84,25 +82,28 @@ public class GameServer implements IServer
             LOGGER.warn("GameServer has started failed because of init config.");
             System.exit(1);
         }
+        IServer.printServerVersion();
+        IServer.printServerPID();
         Runtime.getRuntime().addShutdownHook(new BaseShutdownHooker(GameServer.getInstance()));
 
-        if (!GameServer.getInstance().LoadComponents())
+        if (!GameServer.getInstance().loadComponents())
         {
             LOGGER.warn("GameServer has started failed");
             System.out.print("GameServer has started failed");
             System.exit(1);
         }
-        printServerVersion();
-        printServerPID();
+        IServer.printServerVersion();
+        IServer.printServerPID();
         System.out.printf("GameServer has started successfully, taken %d millis.%n", Uptime.getUptime());
         LOGGER.info("GameServer has started successfully, taken {} millis.", Uptime.getUptime());
-        GameServer.getInstance().setStatus(1);
+        GameServer.getInstance().setStatus(ServerStateType.RUNNING.getValue());
     }
 
     /**
      * @return load result
      */
-    protected boolean LoadComponents()
+    @Override
+    public boolean loadComponents()
     {
         try
         {
@@ -220,81 +221,7 @@ public class GameServer implements IServer
         }
     }
 
-    private static void printServerVersion()
-    {
-        String versionPath = GlobalConfigManager.getInstance().getServerConfig().getVersionPath();
-        versionPath = versionPath == null ? "./version.txt" : versionPath;
-        File file = new File(versionPath);
-        if (file.exists())
-        {
-            FileInputStream fis = null;
-            InputStreamReader isr = null;
-            BufferedReader br = null;
-            try
-            {
-                fis = new FileInputStream(file);
-                isr = new InputStreamReader(fis);
-                br = new BufferedReader(isr);
-                String version = br.readLine();
-                System.out.println("Server version: " + version);
-                LOGGER.error("Server version: " + version);
-            }
-            catch (IOException e)
-            {
-                LOGGER.error("Read version file error: ", e);
-            }
-            finally
-            {
-                if (br != null)
-                {
-                    try
-                    {
-                        br.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                if (isr != null)
-                {
-                    try
-                    {
-                        isr.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                if (fis != null)
-                {
-                    try
-                    {
-                        fis.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        }
-        else
-        {
-            System.out.println("Can not find version file");
-            LOGGER.error("Can not find version file");
-        }
-    }
-
-    private static void printServerPID()
-    {
-        String serverPid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        System.out.println("Server pid: " + serverPid);
-        LOGGER.error("Server pid: " + serverPid);
-    }
-
+    @Override
     public int getServerID()
     {
         return bean.getId();

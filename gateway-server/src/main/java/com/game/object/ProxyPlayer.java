@@ -27,7 +27,7 @@ import com.google.protobuf.ByteString;
 
 /**
  * @date 2020年04月09日 18:49
- * @auth zm
+ * @author leesin
  */
 public class ProxyPlayer implements IConnectionHolder, ISequenceTask
 {

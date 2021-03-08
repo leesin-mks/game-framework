@@ -16,14 +16,13 @@
 
 package com.game;
 
-import java.lang.management.ManagementFactory;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.component.ComponentManager;
 import com.game.component.LanguageComponent;
 import com.game.config.GlobalConfigManager;
+import com.game.entity.bean.ServerListBean;
 import com.game.timer.TimerComponent;
 import com.game.type.ServerStateType;
 import com.game.util.Uptime;
@@ -34,6 +33,8 @@ public class RechargeServer implements IServer
     private static final Logger LOGGER = LoggerFactory.getLogger(RechargeServer.class);
 
     private int status;
+
+    private ServerListBean bean;
 
     /**
      * 单例加载器
@@ -64,19 +65,20 @@ public class RechargeServer implements IServer
         // 初始化配置管理器。
         if (!GlobalConfigManager.getInstance().init(args[0]))
         {
-            LOGGER.error("RechargeServer has started failed because of initing config.");
+            LOGGER.error("RechargeServer has started failed because of init config.");
             System.exit(1);
         }
         Runtime.getRuntime().addShutdownHook(new BaseShutdownHooker(RechargeServer.getInstance()));
 
-        if (!RechargeServer.getInstance().LoadComponents())
+        if (!RechargeServer.getInstance().loadComponents())
         {
             LOGGER.error("RechargeServer has started failed");
             System.out.print("RechargeServer has started failed");
             System.exit(1);
         }
 
-        printServerPID();
+        IServer.printServerPID();
+        IServer.printServerVersion();
         System.out.printf("RechargeServer has started successfully, taken %d millis.%n", Uptime.getUptime());
         LOGGER.info("RechargeServer has started successfully, taken {}} millis.", Uptime.getUptime());
     }
@@ -84,7 +86,8 @@ public class RechargeServer implements IServer
     /**
      * @return load result
      */
-    protected boolean LoadComponents()
+    @Override
+    public boolean loadComponents()
     {
         try
         {
@@ -115,6 +118,12 @@ public class RechargeServer implements IServer
         return true;
     }
 
+    @Override
+    public int getServerID()
+    {
+        return bean.getId();
+    }
+
     /**
      * 停止回调
      *
@@ -129,6 +138,7 @@ public class RechargeServer implements IServer
     /**
      * @return the status
      */
+    @Override
     public int getStatus()
     {
         return status;
@@ -160,10 +170,14 @@ public class RechargeServer implements IServer
         }
     }
 
-    private static void printServerPID()
+    public ServerListBean getBean()
     {
-        String serverPid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        System.out.println("Server pid: " + serverPid);
-        LOGGER.error("Server pid: " + serverPid);
+        return this.bean;
     }
+
+    public void setBean(ServerListBean bean)
+    {
+        this.bean = bean;
+    }
+
 }

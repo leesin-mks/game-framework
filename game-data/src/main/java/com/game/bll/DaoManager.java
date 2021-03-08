@@ -21,12 +21,12 @@ import com.game.database.DBHelper;
 public class DaoManager
 {
     /**
-     * 游戏主库hepler
+     * 游戏主库helper
      */
     public static final DBHelper DB_MASTER_HELPER = ((DBComponent) ComponentManager.getInstance().getComponent(
             "DBComponent")).getDBHelper(ConnString.getMasterDB());
     /**
-     * 游戏从库hepler
+     * 游戏从库helper
      */
     public static final DBHelper DB_SLAVE_HELPER = ((DBComponent) ComponentManager.getInstance().getComponent(
             "DBComponent")).getDBHelper(ConnString.getSlaveDB());

@@ -8,7 +8,7 @@
 package com.game.database;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ConnString

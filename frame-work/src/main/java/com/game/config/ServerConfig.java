@@ -82,7 +82,7 @@ public class ServerConfig
     /**
      * 获取服务器TCP监听端口。
      * 
-     * @return the ports
+     * @return the port
      */
     public String getPort()
     {
@@ -92,7 +92,7 @@ public class ServerConfig
     /**
      * 设置服务器TCP监听端口。(支持多端口, 端口之间逗号分隔)
      * 
-     * @param ports
+     * @param port
      *            the ports to set
      */
     public void setPort(String port)

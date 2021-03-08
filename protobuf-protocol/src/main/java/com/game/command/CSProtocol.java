@@ -2,7 +2,7 @@ package com.game.command;
 
 /**
  * @date 2020年03月04日 19:40
- * @auth leesin
+ * @author leesin
  */
 public final class CSProtocol
 {
