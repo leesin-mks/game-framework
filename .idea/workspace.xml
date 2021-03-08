@@ -68,6 +68,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2900097" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
@@ -89,15 +90,13 @@
       <recent name="com.game.Job" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GameServer">
-    <configuration name="CenterServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.CenterServer" />
-      <module name="center-server" />
-      <option name="PROGRAM_PARAMETERS" value="../common-lib/config/center/global.xml" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/center-server" />
+  <component name="RunManager" selected="Application.CopyrightUtil">
+    <configuration name="CommonMessage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.net.CommonMessage" />
+      <module name="frame-work" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.game.server.*" />
+          <option name="PATTERN" value="com.game.net.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -105,12 +104,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommonMessage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.net.CommonMessage" />
-      <module name="frame-work" />
+    <configuration name="CopyrightUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.util.CopyrightUtil" />
+      <module name="common-util" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.game.net.*" />
+          <option name="PATTERN" value="com.game.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -253,20 +252,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.CenterServer" />
       <item itemvalue="Application.GameServer" />
       <item itemvalue="Application.Test" />
       <item itemvalue="Application.CommonMessage" />
       <item itemvalue="Application.RechargeServer" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.27" />
+      <item itemvalue="Application.CopyrightUtil" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CopyrightUtil" />
         <item itemvalue="Application.GameServer" />
         <item itemvalue="Application.RechargeServer" />
         <item itemvalue="Application.CommonMessage" />
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.CenterServer" />
       </list>
     </recent_temporary>
   </component>
@@ -346,7 +345,7 @@
       <workItem from="1589530865677" duration="5534000" />
       <workItem from="1589878681065" duration="9441000" />
       <workItem from="1615021882525" duration="6658000" />
-      <workItem from="1615171399777" duration="16559000" />
+      <workItem from="1615171399777" duration="25264000" />
     </task>
     <servers />
   </component>
@@ -362,8 +361,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/game-server/src/main/java/com/game/objec/GamePlayer.java</url>
-          <line>205</line>
+          <line>221</line>
           <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/frame-work/src/main/java/com/game/event/EventSource.java</url>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
