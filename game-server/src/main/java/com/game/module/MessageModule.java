@@ -21,7 +21,7 @@ import com.game.component.ComponentManager;
 import com.game.component.inf.ICSComponent;
 import com.game.entity.bean.PlayerInfo;
 import com.game.module.inf.IMessageModule;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.pb.CenterMsgProto.MsgToUSer;
 import com.game.pb.CenterMsgProto.PlayerDisconnectMsg;
 import com.game.pb.CommonMsgProto.CommonMsgPB;

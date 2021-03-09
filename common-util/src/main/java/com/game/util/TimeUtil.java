@@ -325,6 +325,7 @@ public class TimeUtil
      * 格式化日期
      * 
      * @param date
+     *            date
      * @return
      */
     public static String getDateFormat(java.util.Date date)
@@ -339,8 +340,10 @@ public class TimeUtil
      * 自定义格式化日期
      * 
      * @param date
+     *            date
      * @param dateFormat
-     * @return
+     *            date format
+     * @return the date format string
      */
     public static String getDateFormat(java.util.Date date, String dateFormat)
     {
@@ -353,7 +356,7 @@ public class TimeUtil
     /**
      * 自定义格式化日期, 支持设置语言区
      * 
-     * @param date
+     * @param date date
      * @param dateFormat
      * @param locale
      * @return

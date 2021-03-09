@@ -22,12 +22,11 @@ import com.game.command.ICode;
 import com.game.component.ComponentManager;
 import com.game.component.inf.IPlayerComponent;
 import com.game.cs.CSServerConn;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.pb.CenterMsgProto.PlayerOnDisconnectMsg;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
- * @date 2020年04月27日 14:46
  * @author leesin
  */
 @ICode(code = CSProtocol.PLAYER_ON_DISCONNECT, desc = "玩家断线")
@@ -39,7 +38,7 @@ public class PlayerOnDisconnectCmd extends AbstractServerCmd
     @Override
     public void execute(CSServerConn client, byte[] packet)
     {
-        PlayerOnDisconnectMsg msg = null;
+        PlayerOnDisconnectMsg msg;
         try
         {
             msg = PlayerOnDisconnectMsg.parseFrom(packet);

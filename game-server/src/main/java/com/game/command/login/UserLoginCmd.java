@@ -26,7 +26,7 @@ import com.game.component.LanguageComponent;
 import com.game.component.inf.IPlayerComponent;
 import com.game.cs.CSServerConn;
 import com.game.entity.bean.PlayerInfo;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.PlayerMsgProto.LoginMsgCS;
 import com.game.pb.PlayerMsgProto.LoginMsgSC;

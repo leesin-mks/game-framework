@@ -19,7 +19,7 @@ package com.game.component.inf;
 import java.util.List;
 
 import com.game.component.IComponent;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.pb.CommonMsgProto.CommonMsgPB.Builder;
 
 /**

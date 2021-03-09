@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.game.module.inf.IMessageModule;
 import com.game.module.inf.IModule;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.type.ModuleType;
 
 /**

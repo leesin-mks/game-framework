@@ -18,7 +18,7 @@ package com.game.command.ping;
 
 import com.game.command.AbstractUserCmd;
 import com.game.command.ICode;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.pb.command.ProtocolInProto.ProtocolIn;
 import com.google.protobuf.ByteString;
 

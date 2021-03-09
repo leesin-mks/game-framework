@@ -345,7 +345,7 @@
       <workItem from="1589530865677" duration="5534000" />
       <workItem from="1589878681065" duration="9441000" />
       <workItem from="1615021882525" duration="6658000" />
-      <workItem from="1615171399777" duration="47732000" />
+      <workItem from="1615171399777" duration="49680000" />
     </task>
     <servers />
   </component>
@@ -360,7 +360,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/game-server/src/main/java/com/game/objec/GamePlayer.java</url>
+          <url>file://$PROJECT_DIR$/game-server/src/main/java/com/game/object/GamePlayer.java</url>
           <line>221</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>

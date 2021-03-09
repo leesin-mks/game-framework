@@ -26,7 +26,7 @@ import com.game.command.UserCmdTask;
 import com.game.component.ComponentManager;
 import com.game.component.inf.IPlayerComponent;
 import com.game.cs.CSServerConn;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.pb.CenterMsgProto.MsgToUSer;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolInProto.ProtocolIn;

@@ -26,7 +26,6 @@ import com.game.server.ServerClient;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
- * @date 2020年04月16日 19:26
  * @author leesin
  */
 @ICode(code = CSProtocol.FORWARD_MESSAGE, desc = "转发消息")

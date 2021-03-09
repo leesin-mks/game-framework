@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.game.cs.CSServerConn;
 import com.game.net.IClientConnection;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.google.protobuf.ByteString;
 
 /**

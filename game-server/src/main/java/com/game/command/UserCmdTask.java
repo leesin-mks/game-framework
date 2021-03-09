@@ -19,7 +19,7 @@ package com.game.command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.util.StackMessagePrint;
 import com.google.protobuf.ByteString;
 

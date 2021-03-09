@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.game.objec;
+package com.game.object;
 
 import java.util.Date;
 import java.util.LinkedHashMap;

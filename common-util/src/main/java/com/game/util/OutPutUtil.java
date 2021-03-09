@@ -26,4 +26,9 @@ public class OutPutUtil
                 new sun.security.action.GetPropertyAction("line.separator"));
     }
 
+    public static void newLine(StringBuilder sb)
+    {
+        sb.append(lineSeparator);
+    }
+
 }

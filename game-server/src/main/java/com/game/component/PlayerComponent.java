@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.game.Job.PlayerJob;
 import com.game.bean.StateCode;
 import com.game.component.inf.IPlayerComponent;
-import com.game.objec.GamePlayer;
+import com.game.object.GamePlayer;
 import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.CommonMsgProto.CommonMsgPB.Builder;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
@@ -135,7 +135,7 @@ public class PlayerComponent implements IPlayerComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.game.component.inf.IPlayerComponent#add(int, com.game.objec.GamePlayer)
+     * @see com.game.component.inf.IPlayerComponent#add(int, com.game.object.GamePlayer)
      */
     @Override
     public boolean add(int userId, GamePlayer player)

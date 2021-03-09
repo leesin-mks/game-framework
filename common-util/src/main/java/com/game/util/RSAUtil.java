@@ -18,11 +18,7 @@ package com.game.util;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
@@ -50,6 +46,7 @@ public class RSAUtil
      * 
      * @return KeyPair *
      * @throws Exception
+     *             if generate error
      */
     public static KeyPair generateKeyPair() throws Exception
     {
@@ -61,8 +58,7 @@ public class RSAUtil
             // KEY_SIZE关系到块加密的大小
             final int KEY_SIZE = 1024;
             keyPairGen.initialize(KEY_SIZE, new SecureRandom());
-            KeyPair keyPair = keyPairGen.generateKeyPair();
-            return keyPair;
+            return keyPairGen.generateKeyPair();
         }
         catch (Exception e)
         {
@@ -83,7 +79,7 @@ public class RSAUtil
     public static RSAPublicKey generateRSAPublicKey(byte[] modulus,
             byte[] publicExponent) throws Exception
     {
-        KeyFactory keyFac = null;
+        KeyFactory keyFac;
         try
         {
             keyFac = KeyFactory.getInstance("RSA", new BouncyCastleProvider());
@@ -117,7 +113,7 @@ public class RSAUtil
     public static RSAPrivateKey generateRSAPrivateKey(byte[] modulus,
             byte[] privateExponent) throws Exception
     {
-        KeyFactory keyFac = null;
+        KeyFactory keyFac;
         try
         {
             keyFac = KeyFactory.getInstance("RSA", new BouncyCastleProvider());
@@ -287,48 +283,6 @@ public class RSAUtil
 
     public static void main(String[] args)
     {
-        KeyPair keyPair;
-        try
-        {
-            keyPair = generateKeyPair();
-            RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-            RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-            System.out.print(base64Encode(privateKey.getEncoded()));
-            System.out.print("---------------------------------------\r\n");
-            System.out.print(base64Encode(publicKey.getEncoded()));
-            System.out.print("pri---------------------------------------\r\n");
-            String privt = base64Encode(privateKey.getPrivateExponent().toByteArray());
-            System.out.print(privt);
-            String module = base64Encode(privateKey.getModulus().toByteArray());
-            System.out.print("module---------------------------------------\r\n");
-            System.out.print(module);
-            System.out.print("16---------------------------------------\r\n");
-            System.out.print(privateKey.getModulus().toString(16));
-            // System.out.print(publicKey);
-            String pub = base64Encode(publicKey.getPublicExponent().toByteArray());
-            System.out.print("---------------------------------------\r\n");
-            System.out.print("publicKey.getPublicExponent().toString(16): " + publicKey.getPublicExponent().toString(16));
-
-            String str = "123456789asdfghjkl";
-            str = "{\"pwd\":\"123\",\"time\":\"123456\"}";
-            String secrt = encrypt(module, pub, str);
-            System.out.print("---------------------------------------\r\n");
-            System.out.print("secret: " + secrt);
-            module = "AMKdkIslPzpQjfpg1Tb7QHDjq1EuSqcHx1lOCUCDXWcz1V6zd6IJQjKSB149Lxl/ZeAGh2TWrGNIcE3tGrPsmn4e3NjrRoNLSbhqNPKRgury1L87o6vbqoT9dP9ot9eyop2DGPgpx3ey5nRxNcffAaNXMvOSBQt2D1CkXVtGco6d";
-            privt = "T58AHnV4J0cCtz97q9liVW1Hz1hFkY2UqPxMu7ii85CYyHxbQw9PpnnpCsy0YtWk2+E/7mkHsTzXOYJ6bMctsxh5EcA8MT8DvXerUs6v9ZyQv3yMZtwQl+jw5mvSvc2y3AzMcMx3GIGRR/IEpmr5v0Xs5vk+pQY3Bk3Xk3QhuW8=";
-            //secrt = "jBDpSLST5Q6dxTAurS64HEO+QiFmv0ebeScF7TfMSZuA1CTrHOOTFMfzA5myhGssaSBE7ZeZAhu40Dqw6gHcusBlA01+E97yt1k/REAzjkObVBKuEjIkZGXw8SkEHyv09bbkUoZBkswHc35LU+1A4nKtft5oFoqoy1uGrJ7xIZY=";
-            // secrt = "dw0uFiO7GIMCTvFpV6SDGqjYAknaxyiaUmZ1YmcuHAreH+Xi/+CHq3/Nycw0I5WgpjozUTWJOxJolrlEFm6W3Lp65RdpuCIqP407pYFlm0DrpQx3ZoeoYnNjc4Q9kfk45xaYzD1NgM20V+W4mbI5xm5U/LdABeMHn78ZlKL15KM=";
-            // byte[] bytes = HexStringToBinary(secrt);
-            // secrt = "oEHBkjcYnQ1hWFm8GBqnS5cWV9vujPyuH2VUtPq3VXPqbRegtJd2eqMWDkpTdJTYssKRGxk6WKwbVPGXp4f/m8HkreetgCWbUgNAHzF4IRm3Mwg8hZg4pZd66ajOK4l7";
-            secrt = decrypt(module, privt, secrt);
-            System.out.print("---------------------------------------\r\n");
-            System.out.print(secrt);
-        }
-        catch (Exception e)
-        {
-            LOGGER.error("RSAUtil:main", e);
-
-        }
 
     }
 
