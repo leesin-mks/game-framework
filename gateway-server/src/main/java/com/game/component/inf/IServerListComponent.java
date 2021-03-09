@@ -22,13 +22,12 @@ import com.game.component.IComponent;
 import com.game.entity.bean.ServerListBean;
 
 /**
- * @date 2020年03月31日 15:29
  * @author leesin
  */
 
 public interface IServerListComponent extends IComponent
 {
-    public static final String NAME = "ServerListComponent";
+    String NAME = "ServerListComponent";
 
     List<ServerListBean> getServerListByType(int type);
 }

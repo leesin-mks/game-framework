@@ -22,12 +22,11 @@ import com.game.pb.CenterMsgProto.CSForwardMsg;
 import com.game.server.ServerClient;
 
 /**
- * @date 2020年03月31日 15:29
  * @author leesin
  */
 public interface IServerComponent extends IComponent
 {
-    public static final String NAME = "CenterServerComponent";
+    String NAME = "CenterServerComponent";
 
     void addServerClient(ServerClient client);
 

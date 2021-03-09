@@ -51,7 +51,7 @@ public class MessageModule extends PlayerModule implements IMessageModule
     @Override
     public boolean init()
     {
-        return this.getConnection() == null ? false : true;
+        return this.getConnection() != null;
     }
 
     @Override

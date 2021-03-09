@@ -23,7 +23,6 @@ import com.game.component.ComponentManager;
 import com.game.component.inf.IPlayerComponent;
 
 /**
- * @date 2020年04月21日 14:27
  * @author leesin
  */
 public class PlayerJob implements Job

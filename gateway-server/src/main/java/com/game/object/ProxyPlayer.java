@@ -42,7 +42,6 @@ import com.game.util.StringUtil;
 import com.google.protobuf.ByteString;
 
 /**
- * @date 2020年04月09日 18:49
  * @author leesin
  */
 public class ProxyPlayer implements IConnectionHolder, ISequenceTask
@@ -50,18 +49,18 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
     private final Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     /** 命令队列 */
-    private SelfDrivenTaskQueue<UserCmdTask> cmdQueue = new SelfDrivenTaskQueue<>(
+    private final SelfDrivenTaskQueue<UserCmdTask> cmdQueue = new SelfDrivenTaskQueue<>(
             ComponentManager.getInstance().getUserCmdThreadPool());
 
     /** 玩家连接引用 */
-    private IClientConnection clientConn = null;
+    private IClientConnection clientConn;
 
     /** 模块缓存 */
-    private Map<ModuleType, IModule> moduleMap;
+    private final Map<ModuleType, IModule> moduleMap;
 
     private IMessageModule messageModule;
 
-    private PlayerInfo playerInfo;
+    private final PlayerInfo playerInfo;
 
     private int gameServerID;
 
@@ -208,8 +207,6 @@ public class ProxyPlayer implements IConnectionHolder, ISequenceTask
             if (player == this)
             {
                 playerComponent.remove(playerInfo.getId());
-                IRedisComponent rc = (IRedisComponent) ComponentManager.getInstance().getComponent(
-                        IRedisComponent.NAME);
             }
             else
             {

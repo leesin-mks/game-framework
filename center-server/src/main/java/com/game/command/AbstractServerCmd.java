@@ -36,11 +36,12 @@ public abstract class AbstractServerCmd implements ICommand
      * 用户任务的调度分配， Handler调用
      */
     @Override
-    public void execute(IClientConnection client, byte[] packet) throws Exception
+    public void execute(IClientConnection client, byte[] packet)
     {
         if (client == null)
         {
             LOGGER.error("client null error!");
+            return;
         }
         ServerClient server = (ServerClient) client.getHolder();
         if (server == null)
@@ -69,7 +70,10 @@ public abstract class AbstractServerCmd implements ICommand
     /**
      * server executeConnect全局调用使用
      * 
-     * @param
+     * @param conn
+     *            client connection
+     * @param packet
+     *            packet
      */
     public void executeConnect(IClientConnection conn, byte[] packet)
     {

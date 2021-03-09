@@ -38,7 +38,13 @@ public class UserCmdTask extends AbstractTask
 
     /**
      * @param cmd
+     *            command
      * @param message
+     *            message
+     * @param player
+     *            player
+     * @param code
+     *            protocol code
      */
     public UserCmdTask(AbstractUserCmd cmd, ByteString message, ProxyPlayer player, short code)
     {

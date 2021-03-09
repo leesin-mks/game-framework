@@ -92,7 +92,7 @@ public class LoginManager
 
                 IServerListComponent slc = (IServerListComponent) ComponentManager.getInstance().getComponent(
                         IServerListComponent.NAME);
-                ServerListBean slb = slc.getServerListByID(Integer.valueOf(serverID));
+                ServerListBean slb = slc.getServerListByID(Integer.parseInt(serverID));
                 if (slb != null)
                 {
                     String key = UUID.randomUUID().toString();
@@ -125,15 +125,7 @@ public class LoginManager
     public static void init()
     {
         List<ServerListBean> list = ServerBussiness.getServerList();
-        Iterator<ServerListBean> iterator = list.iterator();
-        while (iterator.hasNext())
-        {
-            ServerListBean bean = iterator.next();
-            if (bean.getServerType() != ServerType.GATE.getValue() || bean.getServerState() == 0)
-            {
-                iterator.remove();
-            }
-        }
+        list.removeIf(bean -> bean.getServerType() != ServerType.GATE.getValue() || bean.getServerState() == 0);
         try
         {
             // for (ServerListBean bean : list)

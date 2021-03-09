@@ -28,7 +28,6 @@ import com.game.config.GlobalConfigManager;
 import com.game.entity.bean.ServerListBean;
 
 /**
- * @date 2020年03月31日 15:32
  * @author leesin
  */
 public class ServerListComponent implements IServerListComponent

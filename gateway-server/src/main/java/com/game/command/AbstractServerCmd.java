@@ -46,12 +46,11 @@ public abstract class AbstractServerCmd implements ICommand
     /**
      * (non-Javadoc)
      * 
-     * @see com.game.command.ICommand#execute(com.game.net.IClientConnection, com.google.protobuf.ByteString)
+     * @see com.game.command.ICommand#execute(com.game.net.IClientConnection, com.google.protobuf.ByteString,short)
      */
     @Override
     public void execute(IClientConnection client, ByteString packet, short code) throws Exception
     {
-        // TODO Auto-generated method stub
 
     }
 

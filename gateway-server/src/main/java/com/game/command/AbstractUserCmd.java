@@ -65,7 +65,6 @@ public abstract class AbstractUserCmd implements ICommand
     @Override
     public void execute(IClientConnection client, byte[] packet) throws Exception
     {
-        // TODO Auto-generated method stub
 
     }
 
@@ -80,9 +79,13 @@ public abstract class AbstractUserCmd implements ICommand
     }
 
     /**
-     * server excute全局调用使用(还没有玩家的)
+     * server executeConnect(还没有玩家的)
      * 
-     * @param
+     * @param conn
+     *            client connection
+     * 
+     * @param packet
+     *            packet
      */
     public void executeConnect(IClientConnection conn, ByteString packet)
     {

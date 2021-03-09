@@ -31,7 +31,11 @@ public class FSCmdTask extends AbstractServerTask
 
     /**
      * @param cmd
+     *            command
      * @param message
+     *            message
+     * @param server
+     *            server connector
      */
     public FSCmdTask(AbstractServerCmd cmd, byte[] message, IServerConnector server)
     {

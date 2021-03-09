@@ -31,8 +31,6 @@ import com.game.net.IClientConnection;
 import com.game.net.IConnectionHolder;
 import com.game.pb.CenterMsgProto.RegisterMsg;
 
-import sun.rmi.runtime.Log;
-
 /**
  * @author leesin
  *
@@ -42,7 +40,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
     private static final Logger LOGGER = LoggerFactory.getLogger(ServerClient.class);
 
     /** 命令队列 */
-    private SelfDrivenTaskQueue<AbstractServerTask> cmdQueue = new SelfDrivenTaskQueue<AbstractServerTask>(
+    private final SelfDrivenTaskQueue<AbstractServerTask> cmdQueue = new SelfDrivenTaskQueue<>(
             ComponentManager.getInstance().getUserCmdThreadPool());
 
     private IClientConnection connection;
@@ -120,6 +118,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
 
     /**
      * @param message
+     *            common message
      */
     public void send(CommonMessage message)
     {

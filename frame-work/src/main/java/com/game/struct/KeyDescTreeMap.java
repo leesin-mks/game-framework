@@ -30,14 +30,7 @@ public class KeyDescTreeMap<K extends Comparable<K>, V>extends TreeMap<K, V>
 
     public KeyDescTreeMap()
     {
-        super(new Comparator<K>()
-        {
-            @Override
-            public int compare(K o1, K o2)
-            {
-                return o2.compareTo(o1);
-            }
-        });
+        super(Comparator.reverseOrder());
     }
 
     @Override

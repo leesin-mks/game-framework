@@ -17,7 +17,6 @@
 package com.game;
 
 import java.io.*;
-import java.lang.management.ManagementFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -30,6 +29,7 @@ import com.game.config.GlobalConfigManager;
 import com.game.database.DBComponent;
 import com.game.manager.LoginManager;
 import com.game.timer.TimerComponent;
+import com.game.util.IOUtil;
 
 /**
  * @author leesin
@@ -47,7 +47,7 @@ public class WebServerListener implements ServletContextListener
     @Override
     public void contextDestroyed(ServletContextEvent arg0)
     {
-        LOGGER.info("------关闭成功-------");
+        LOGGER.info("------Web server listener closed------");
         LoginManager.stop();
         ComponentManager.getInstance().stop();
     }
@@ -76,12 +76,12 @@ public class WebServerListener implements ServletContextListener
             {
                 LoginManager.init();
                 printServerVersion(context.getServletContext().getRealPath(""));
-                printServerPID();
-                LOGGER.info("初始化成功");
+                IServer.printServerPID();
+                LOGGER.info("Init success");
                 return;
             }
         }
-        LOGGER.warn("初始化失败");
+        LOGGER.warn("Init failed");
     }
 
     private static void printServerVersion(String path)
@@ -109,54 +109,14 @@ public class WebServerListener implements ServletContextListener
             }
             finally
             {
-                if (br != null)
-                {
-                    try
-                    {
-                        br.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                if (isr != null)
-                {
-                    try
-                    {
-                        isr.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                if (fis != null)
-                {
-                    try
-                    {
-                        fis.close();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
+                IOUtil.closeIO(br, isr, fis);
             }
-
         }
         else
         {
             System.out.println("Can not find version file");
-            LOGGER.error("Can not find version file");
+            LOGGER.warn("Can not find version file");
         }
-    }
-
-    private static void printServerPID()
-    {
-        String serverPid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-        System.out.println("Server pid: " + serverPid);
-        LOGGER.error("Server pid: " + serverPid);
     }
 
 }

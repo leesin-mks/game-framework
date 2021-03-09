@@ -38,20 +38,20 @@ import com.game.type.ServerStateType;
 public class CSServerConn extends NettyServerConnector implements ISequenceTask
 {
 
-    private ServerListBean bean;
+    private final ServerListBean bean;
 
     private String ipPort;
 
     /**
      * 命令队列
      */
-    private SelfDrivenTaskQueue<CSCmdTask> cmdQueue = new SelfDrivenTaskQueue<CSCmdTask>(
+    private final SelfDrivenTaskQueue<CSCmdTask> cmdQueue = new SelfDrivenTaskQueue<>(
             ComponentManager.getInstance().getUserCmdThreadPool());
 
     /**
-     * @param bean
-     * @param packetHandler
-     * @param class1
+     * @param bean server bean
+     * @param packetHandler packet handler
+     * @param class1 code factory
      */
     public CSServerConn(ServerListBean bean, IServerPacketHandler packetHandler,
             Class<NettyCommonCodecFactory> class1)
@@ -88,13 +88,13 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
         {
             if (!connect())
             {
-                LOGGER.error("Reconnect fightserver fail... id:" + bean.getId());
+                LOGGER.error("Reconnect fight server fail... id:" + bean.getId());
                 return;
             }
             else
             {
                 sendRegister();
-                LOGGER.error("Reconnect fightserver success! id:" + bean.getId());
+                LOGGER.error("Reconnect fight server success! id:" + bean.getId());
             }
         }
         ITimerComponent tc = (ITimerComponent) ComponentManager.getInstance().getComponent(ITimerComponent.NAME);

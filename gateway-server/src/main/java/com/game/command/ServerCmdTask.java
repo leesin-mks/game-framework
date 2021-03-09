@@ -25,12 +25,15 @@ import com.google.protobuf.ByteString;
  */
 public class ServerCmdTask extends AbstractTask
 {
-    private IClientConnection connect;
+    private final IClientConnection connect;
 
     /**
      * @param cmd
+     *            command
      * @param message
-     * @param   connect
+     *            message
+     * @param connect
+     *            client connection
      */
     public ServerCmdTask(AbstractUserCmd cmd, ByteString message, IClientConnection connect)
     {

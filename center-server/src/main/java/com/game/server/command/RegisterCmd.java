@@ -42,7 +42,7 @@ public class RegisterCmd extends AbstractServerCmd
     @Override
     public void exec(ServerClient client, byte[] packet)
     {
-        // TODO Auto-generated method stub
+
     }
 
     /**
@@ -72,7 +72,7 @@ public class RegisterCmd extends AbstractServerCmd
                 IServerComponent.NAME);
         sc.addServerClient(server);
         server.sendRegisterSuccess();
-        LOGGER.info("服务器注册成功, id: {}", msg.getServerID());
+        LOGGER.info("Server Register success id: {}", msg.getServerID());
     }
 
 }

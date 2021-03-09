@@ -20,9 +20,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.game.component.inf.IDataCenterComponent;
 import com.game.timer.ITimerComponent;
 import com.game.type.GlobalVariable;
@@ -31,8 +28,6 @@ import com.game.web.job.ClearRequestFrequencyJob;
 
 public class DataCenterComponent implements IDataCenterComponent
 {
-    private static Logger LOGGER = LoggerFactory.getLogger(DataCenterComponent.class);
-
     private static ITimerComponent timer;
 
     private Map<String, RequestFrequencyBean> requestFrequency;
