@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-/**
- * Date: 2014-3-26
- * 
- * Copyright (C) 2013-2015 7Road. All rights reserved.
- */
-
 package com.game.log.cache;
 
 /**

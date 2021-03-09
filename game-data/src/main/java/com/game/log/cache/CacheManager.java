@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-/**
- * Date: 2014-3-26
- * 
- * Copyright (C) 2013-2015 7Road. All rights reserved.
- */
-
 package com.game.log.cache;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -38,13 +28,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CacheManager
 {
     /** 缓存中的日志 */
-    private Map<String, List<Object>> cache;
+    private final Map<String, List<Object>> cache;
     /** 要向DB中更新的日志 */
-    private Map<String, List<Object>> write;
+    private final Map<String, List<Object>> write;
     /** DB更新失败需再次更新日志 */
-    private Map<String, List<Object>> old;
+    private final Map<String, List<Object>> old;
 
-    private ReentrantLock lock;
+    private final ReentrantLock lock;
 
     private CacheManager()
     {
@@ -62,7 +52,7 @@ public class CacheManager
     /**
      * 获取CacheManager实例。
      * 
-     * @return
+     * @return single instance
      */
     public static CacheManager getInstance()
     {
@@ -73,19 +63,15 @@ public class CacheManager
      * 添加缓存日志
      * 
      * @param log
+     *            log object
      */
     public void add(Object log)
     {
         String key = log.getClass().getSimpleName();
-        List<Object> logs = null;
+        List<Object> logs;
         synchronized (key)
         {
-            logs = cache.get(key);
-            if (logs == null)
-            {
-                logs = new ArrayList<Object>();
-                cache.put(key, logs);
-            }
+            logs = cache.computeIfAbsent(key, k -> new ArrayList<>());
         }
         logs.add(log);
     }
@@ -93,7 +79,7 @@ public class CacheManager
     /**
      * 获取要更新到DB的日志
      * 
-     * @return
+     * @return all log
      */
     public Map<String, List<Object>> getLog()
     {
@@ -147,19 +133,15 @@ public class CacheManager
      * 更新DB失败的日志回收，下次重新写
      * 
      * @param log
+     *            log object
      */
     public void addOld(Object log)
     {
         String key = log.getClass().getSimpleName();
-        List<Object> logs = null;
+        List<Object> logs;
         synchronized (key)
         {
-            logs = old.get(key);
-            if (logs == null)
-            {
-                logs = new ArrayList<Object>();
-                old.put(key, logs);
-            }
+            logs = old.computeIfAbsent(key, k -> new ArrayList<>());
         }
         logs.add(log);
     }

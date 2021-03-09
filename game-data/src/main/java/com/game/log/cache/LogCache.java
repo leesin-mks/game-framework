@@ -14,23 +14,13 @@
  * limitations under the License.
  */
 
-/**
- * Date: 2014-3-26
- * 
- * Copyright (C) 2013-2015 7Road. All rights reserved.
- */
-
 package com.game.log.cache;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
@@ -81,10 +71,10 @@ public class LogCache implements ILogCache
 
     private ExecutorService executorService;
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.road.dota.log.cache.ILogCache#addLog(java.lang.Object)
+     * @see com.game.log.cache.ILogCache#addLog(java.lang.Object)
      */
     @Override
     public <T> void addLog(T log)
@@ -108,10 +98,10 @@ public class LogCache implements ILogCache
         return actionQueue;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.road.dota.log.cache.ILogCache#writeLog()
+     * @see com.game.log.cache.ILogCache#writeLog()
      */
     @Override
     public void writeLog()
@@ -127,8 +117,8 @@ public class LogCache implements ILogCache
             Map<String, List<Object>> logs = CacheManager.getInstance().getLog();
             if (null != logs)
             {
-                Set<Entry<String, List<Object>>> entrys = logs.entrySet();
-                for (Entry<String, List<Object>> entry : entrys)
+                Set<Entry<String, List<Object>>> entries = logs.entrySet();
+                for (Entry<String, List<Object>> entry : entries)
                 {
                     List<Object> value = entry.getValue();
                     if (null != value)
@@ -138,8 +128,8 @@ public class LogCache implements ILogCache
             if (errorLogs.size() > 0)
             {
                 List<List<Object>> list = null;
-                Set<Entry<List<Object>, Integer>> entrys = errorLogs.entrySet();
-                for (Entry<List<Object>, Integer> entry : entrys)
+                Set<Entry<List<Object>, Integer>> entries = errorLogs.entrySet();
+                for (Entry<List<Object>, Integer> entry : entries)
                 {
                     if (entry.getValue() >= this.errorNum)
                     {
@@ -183,8 +173,7 @@ public class LogCache implements ILogCache
                     if (obj != null)
                         logList.add(obj);
                     else
-                        logger.error("logObject is " + obj + ",index:" + i
-                                + ",size:" + max + ",classname:"
+                        logger.warn("logObject is null index:" + i + ",size:" + max + ",classname:"
                                 + log.getClass().getSimpleName());
                 }
                 if (!log.add(logList, conn))
@@ -193,7 +182,7 @@ public class LogCache implements ILogCache
         }
         else
         {
-            logger.error("cachelog error " + key);
+            logger.error("Cache log error: " + key);
         }
     }
 
@@ -206,10 +195,10 @@ public class LogCache implements ILogCache
             CacheManager.getInstance().addOld(value);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.road.pitaya.component.IComponent#getName()
+     * @see com.game.component.IComponent#getName()
      */
     @Override
     public String getName()
@@ -217,48 +206,58 @@ public class LogCache implements ILogCache
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.road.pitaya.component.IComponent#initialize()
+     * @see com.game.component.IComponent#initialize()
      */
     @Override
     public boolean initialize()
     {
         lock = new ReentrantLock();
         errorLogs = new HashMap<>();
-        this.path = System.getProperty("user.dir") // + FileDataServer.ROOT_PATH
-                + FileDataServer.LOGPATH;
+        this.path = System.getProperty("user.dir") + FileDataServer.LOGPATH;  // + FileDataServer.ROOT_PATH
         File dir = new File(path);
+        boolean result = true;
         if (!dir.exists() && !dir.isDirectory())
-            dir.mkdir();
+        {
+            if (!dir.mkdir())
+            {
+                result = false;
+            }
+        }
         File file = new File(path + fileName);
         if (!file.exists())
         {
             try
             {
-                file.createNewFile();
+                if (!file.createNewFile())
+                {
+                    result = false;
+                }
             }
             catch (IOException e)
             {
-                LOGGER.error("writeLog error:", e);
+                LOGGER.error("writeLog error: ", e);
+                result = false;
             }
         }
-        return true;
+        return result;
     }
 
     /**
      * 加载LogHandler的不同接口
      * 
-     * @return
+     * @return log map
      */
     @SuppressWarnings("unchecked")
     private Map<String, ILog<Object>> loadLogHandle()
     {
-        Map<String, ILog<Object>> handleMap = new HashMap<String, ILog<Object>>();
+        Map<String, ILog<Object>> handleMap = new HashMap<>();
 
         // 从相应的包加载LogHandler的不同接口
         List<Class<?>> handlerClass = ClassUtil.getClasses("com.game.log.handle");
+        assert handlerClass != null;
         for (Class<?> class1 : handlerClass)
         {
             LogHandler annotation = class1.getAnnotation(LogHandler.class);
@@ -266,16 +265,11 @@ public class LogCache implements ILogCache
             {
                 try
                 {
-                    handleMap.put(annotation.name(),
-                            (ILog<Object>) class1.newInstance());
+                    handleMap.put(annotation.name(), (ILog<Object>) class1.newInstance());
                 }
-                catch (InstantiationException e)
+                catch (InstantiationException | IllegalAccessException e)
                 {
-                    LOGGER.error("writeLog error:", e);
-                }
-                catch (IllegalAccessException e)
-                {
-                    LOGGER.error("writeLog error:", e);
+                    LOGGER.error("writeLog error: {}", annotation.description(), e);
                 }
             }
         }
@@ -283,10 +277,10 @@ public class LogCache implements ILogCache
         return handleMap;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.road.pitaya.component.IComponent#start()
+     * @see com.game.component.IComponent#start()
      */
     @Override
     public boolean start()
@@ -300,10 +294,10 @@ public class LogCache implements ILogCache
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.road.pitaya.component.IComponent#stop()
+     * @see com.game.component.IComponent#stop()
      */
     @Override
     public void stop()

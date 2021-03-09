@@ -34,6 +34,11 @@ import java.util.Locale;
  */
 public class TimeUtil
 {
+    public static final String[] WORD_NUMBER = new String[] { "a", "b", "c", "d", "e", "f", "g", "h",
+            "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+            "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
+            "6", "7", "8", "9" };
+
     /**
      * 获取系统距1970年1月1日总毫秒
      * 
@@ -59,7 +64,7 @@ public class TimeUtil
      * 
      * @return
      */
-    public static Timestamp getSysteCurTime()
+    public static Timestamp getSystemCurTime()
     {
         Timestamp ts = new Timestamp(getCalendar().getTimeInMillis());
         return ts;
@@ -415,7 +420,7 @@ public class TimeUtil
             return false;
         java.util.Calendar now = getCalendar();
         java.util.Calendar other = getCalendar(date);
-        return dateCompare(now, other) == 0 ? true : false;
+        return dateCompare(now, other) == 0;
     }
 
     /**
@@ -428,7 +433,7 @@ public class TimeUtil
     {
         java.util.Calendar now = getCalendar();
         java.util.Calendar other = getCalendar(getMillisToDate(date));
-        return dateCompare(now, other) == 0 ? true : false;
+        return dateCompare(now, other) == 0;
     }
 
     public static boolean dataCompare5(Date date)
@@ -459,7 +464,7 @@ public class TimeUtil
             return false;
         java.util.Calendar c1 = getCalendar(date1);
         java.util.Calendar c2 = getCalendar(date2);
-        return dateCompare(c1, c2) == 0 ? true : false;
+        return dateCompare(c1, c2) == 0;
     }
 
     /**
@@ -559,7 +564,7 @@ public class TimeUtil
      */
     public static void setAASRefreshTime(int hour, Calendar refreshTime)
     {
-        refreshTime.setTime(getSysteCurTime());
+        refreshTime.setTime(getSystemCurTime());
         refreshTime.set(Calendar.HOUR_OF_DAY, hour);
         refreshTime.set(Calendar.MINUTE, 0);
         refreshTime.set(Calendar.SECOND, 0);
@@ -611,26 +616,20 @@ public class TimeUtil
      */
     public static String getSignStr()
     {
-        String[] strs = new String[] { "a", "b", "c", "d", "e", "f", "g", "h",
-                "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-                "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
-                "6", "7", "8", "9" };
-
         ThreadSafeRandom random = new ThreadSafeRandom();
-        String signStr = "";
+        StringBuffer signStr = new StringBuffer();
         for (int i = 0; i < 6; i++)
         {
-            int j = random.next(strs.length);
-            signStr += strs[j];
-
+            int j = random.next(WORD_NUMBER.length);
+            signStr.append(WORD_NUMBER[j]);
         }
-        return signStr;
+        return signStr.toString();
     }
 
     /**
      * 获取系统时间
      * 
-     * @return
+     * @return calendar
      */
     private static java.util.Calendar getCalendar()
     {
@@ -775,12 +774,11 @@ public class TimeUtil
      */
     public static boolean isTimeOut(Date expDate)
     {
-        Calendar curentDate = Calendar.getInstance();
-        Calendar expirtDate = Calendar.getInstance();
-        expirtDate.setTime(expDate);
+        Calendar currentDate = Calendar.getInstance();
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.setTime(expDate);
 
-        long intervalMillis = expirtDate.getTimeInMillis()
-                - curentDate.getTimeInMillis();
+        long intervalMillis = expireDate.getTimeInMillis() - currentDate.getTimeInMillis();
         return intervalMillis <= 0;
     }
 
@@ -803,8 +801,7 @@ public class TimeUtil
         currentDate.set(Calendar.HOUR_OF_DAY, 5);
         currentDate.set(Calendar.MINUTE, 0);
         currentDate.set(Calendar.SECOND, 0);
-        Date saturday = currentDate.getTime();
-        return saturday;
+        return currentDate.getTime();
     }
 
     /**
@@ -1059,8 +1056,10 @@ public class TimeUtil
     /**
      * 指定时间是否在时间段内
      * 
-     * @param timePeriod
-     * @param date
+     * @param startTime
+     *            start time
+     * @param endTime
+     *            end time
      * @return
      */
     public static int isInTimePeriod(String startTime, String endTime)
@@ -1077,9 +1076,9 @@ public class TimeUtil
     public static Calendar getCalendar(String time)
     {
         // 活动开始时间
-        String strs[] = time.split("\\:");
-        int hour = Integer.valueOf(strs[0]);
-        int minute = Integer.valueOf(strs[1]);
+        String str[] = time.split("\\:");
+        int hour = Integer.valueOf(str[0]);
+        int minute = Integer.valueOf(str[1]);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());

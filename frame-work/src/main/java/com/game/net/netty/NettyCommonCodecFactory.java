@@ -38,14 +38,14 @@ public class NettyCommonCodecFactory extends ByteToMessageCodec<CommonMessage>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyCommonCodecFactory.class);
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.handler.codec.ByteToMessageCodec#decode(io.netty.channel.ChannelHandlerContext,
-     * io.netty.buffer.ByteBuf, java.util.List)
+     *      io.netty.buffer.ByteBuf, java.util.List)
      */
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception
+    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out)
     {
         if (in.readableBytes() < CommonMessage.HDR_SIZE)
         {
@@ -56,7 +56,9 @@ public class NettyCommonCodecFactory extends ByteToMessageCodec<CommonMessage>
         short headerFlag = (short) (in.readShort() & 0xffff);
         if (CommonMessage.HEADER != headerFlag)
         {
-            LOGGER.debug("Illegal client request,can not match header flag. drop a packet,close connection.");
+            if(LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Illegal client request,can not match header flag. drop a packet,close connection.");
+            }
             // session.close();
             return;
         }
@@ -93,14 +95,14 @@ public class NettyCommonCodecFactory extends ByteToMessageCodec<CommonMessage>
 
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.handler.codec.ByteToMessageCodec#encode(io.netty.channel.ChannelHandlerContext, java.lang.Object,
-     * io.netty.buffer.ByteBuf)
+     *      io.netty.buffer.ByteBuf)
      */
     @Override
-    protected void encode(ChannelHandlerContext ctx, CommonMessage in, ByteBuf out) throws Exception
+    protected void encode(ChannelHandlerContext ctx, CommonMessage in, ByteBuf out)
     {
         ByteBuffer buffer = in.toByteBuffer();
 

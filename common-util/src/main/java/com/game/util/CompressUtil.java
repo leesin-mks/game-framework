@@ -19,14 +19,8 @@
  */
 package com.game.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -36,14 +30,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author leesin
- * @date 2011-5-12
- * @version
  * 
  */
 public class CompressUtil
 {
-    private static final Logger log = LoggerFactory
-            .getLogger(CompressUtil.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(CompressUtil.class.getName());
 
     /**
      * 压缩数据
@@ -71,14 +62,7 @@ public class CompressUtil
             }
             output = bos.toByteArray();
 
-            try
-            {
-                bos.close();
-            }
-            catch (IOException e)
-            {
-                log.error("CompressUtil:compress", e);
-            }
+            IOUtil.closeIO(bos);
             compresser.end();
             return output;
         }
@@ -148,7 +132,7 @@ public class CompressUtil
             myFilePath.createNewFile();
 
             FileOutputStream writer = new FileOutputStream(myFilePath);
-            writer.write(isCompress ? compress(str) : str.getBytes("utf-8"));
+            writer.write(isCompress ? compress(str) : str.getBytes(StandardCharsets.UTF_8));
             writer.close();
 
             return "Build:" + filePath + "------ " + message;
@@ -190,7 +174,7 @@ public class CompressUtil
             if (length > 0)
                 index = 38;
             file.seek(length);
-            file.writeBytes(str.substring(index, str.length()));
+            file.writeBytes(str.substring(index));
             file.close();
         }
         catch (IOException e)
@@ -209,29 +193,24 @@ public class CompressUtil
     {
         try
         {
-            Inflater decompresser = new Inflater();
-            decompresser.setInput(compressed, 0, compressed.length);
+            Inflater deCompress = new Inflater();
+            deCompress.setInput(compressed, 0, compressed.length);
             byte[] result = new byte[1024];
             int resultLength;
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            while (decompresser.finished() == false)
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            while (!deCompress.finished())
             {
-                resultLength = decompresser.inflate(result);
-                baos.write(result, 0, resultLength);
+                resultLength = deCompress.inflate(result);
+                byteArrayOutputStream.write(result, 0, resultLength);
             }
-            decompresser.end();
-            return new String(baos.toByteArray(), "UTF-8");
+            deCompress.end();
+            return new String(byteArrayOutputStream.toByteArray(), StandardCharsets.UTF_8);
         }
         catch (DataFormatException e)
         {
-            log.error("CompressUtil:decompress", e);
+            log.error("CompressUtil:decompress: ", e);
         }
-        catch (UnsupportedEncodingException e)
-        {
-            log.error("CompressUtil:decompress", e);
-        }
-
         return null;
     }
 
@@ -256,10 +235,6 @@ public class CompressUtil
             fis.read(b1);
             String dString = decompress(b1);
             System.out.println(dString);
-        }
-        catch (FileNotFoundException e)
-        {
-            log.error("CompressUtil:main", e);
         }
         catch (IOException e)
         {

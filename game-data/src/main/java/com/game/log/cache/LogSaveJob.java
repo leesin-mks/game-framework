@@ -29,7 +29,7 @@ import com.game.component.ComponentManager;
 public class LogSaveJob implements Job
 {
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)

@@ -25,11 +25,11 @@ import java.util.Map;
  */
 public class NameRandomUtil
 {
-    private static Map<Integer, String> names = new HashMap<Integer, String>();
+    private static final Map<Integer, String> names = new HashMap<>();
 
-    private static Map<Integer, String> surNames = new HashMap<Integer, String>();
+    private static final Map<Integer, String> surNames = new HashMap<>();
 
-    private static ThreadSafeRandom random = new ThreadSafeRandom();
+    private static final ThreadSafeRandom random = new ThreadSafeRandom();
 
     static
     {

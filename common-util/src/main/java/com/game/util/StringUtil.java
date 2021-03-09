@@ -28,13 +28,13 @@ public class StringUtil
 
     private static final String PHONE_REG_1 = "^\\+[0-9]+(-)[0-9]{2,11}$";
     private static final String PHONE_REG_2 = "^(1)\\d{10}$";
-    private static Pattern p1 = Pattern.compile(PHONE_REG_1);
-    private static Pattern p2 = Pattern.compile(PHONE_REG_2);
+    private static final Pattern p1 = Pattern.compile(PHONE_REG_1);
+    private static final Pattern p2 = Pattern.compile(PHONE_REG_2);
 
     private static final String ACCOUNT_NAME_REG = "[a-zA-Z0-9_~\\^\\-\\[\\|.@]{6,18}$";
-    private static Pattern p3 = Pattern.compile(ACCOUNT_NAME_REG);
+    private static final Pattern p3 = Pattern.compile(ACCOUNT_NAME_REG);
     private static final String ONLY_W_CN = "[a-zA-Z0-9\u4e00-\u9fa5]+$";       // 字母数字中文
-    private static Pattern p4 = Pattern.compile(ONLY_W_CN);
+    private static final Pattern p4 = Pattern.compile(ONLY_W_CN);
 
     /**
      * 验证email地址是否合法
@@ -72,7 +72,7 @@ public class StringUtil
     /**
      * 判断字符串是否为空。
      * 
-     * @param src
+     * @param src source string
      * @return
      */
     public static boolean isNotNullAndNotEmpty(String src)
@@ -143,7 +143,7 @@ public class StringUtil
      * String is Number
      * 
      * @param str
-     * @return
+     * @return is numeric
      */
     public static boolean isNumeric(String str)
     {

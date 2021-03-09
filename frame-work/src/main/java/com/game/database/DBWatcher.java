@@ -28,7 +28,7 @@ import com.game.util.TimeUtil;
 public class DBWatcher
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(DBWatcher.class);
-    private long first;
+    private final long first;
     private long second;
     private long end;
 

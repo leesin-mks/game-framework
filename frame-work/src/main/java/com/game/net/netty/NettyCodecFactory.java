@@ -174,10 +174,10 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
     }
 
     // 解密整段数据
-    private byte[] decrypt(byte[] data, int[] decryptKey, int length) throws Exception
+    private void decrypt(byte[] data, int[] decryptKey, int length) throws Exception
     {
         if (data.length == 0)
-            return data;
+            return;
 
         if (decryptKey.length < 8)
             throw new Exception("The decryptKey must be 64bits length!");
@@ -202,7 +202,6 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
             data[index] = (byte) plainText;
             decryptKey[index & 0x7] = (byte) (key & 0xff);
         }
-        return data;
     }
 
     @Override
@@ -271,17 +270,17 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
     public static String toHexDump(String description, int[] dump, int start,
             int count)
     {
-        String hexDump = "";
+        StringBuilder hexDump = new StringBuilder();
         if (description != null)
         {
-            hexDump += description;
-            hexDump += "\n";
+            hexDump.append(description);
+            hexDump.append("\n");
         }
         int end = start + count;
         for (int i = start; i < end; i += 16)
         {
-            String text = "";
-            String hex = "";
+            StringBuilder text = new StringBuilder();
+            StringBuilder hex = new StringBuilder();
 
             for (int j = 0; j < 16; j++)
             {
@@ -292,34 +291,34 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
                         val = (val + 256) & 0xFF;
                     if (val < 16)
                     {
-                        hex += "0" + Integer.toHexString(val) + " ";
+                        hex.append("0").append(Integer.toHexString(val)).append(" ");
                     }
                     else
                     {
-                        hex += Integer.toHexString(val) + " ";
+                        hex.append(Integer.toHexString(val)).append(" ");
                     }
 
                     if (val >= 32 && val <= 127)
                     {
-                        text += (char) val;
+                        text.append((char) val);
                     }
                     else
                     {
-                        text += ".";
+                        text.append(".");
                     }
                 }
                 else
                 {
-                    hex += "   ";
-                    text += " ";
+                    hex.append("   ");
+                    text.append(" ");
                 }
             }
-            hex += "  ";
-            hex += text;
-            hex += '\n';
-            hexDump += hex;
+            hex.append("  ");
+            hex.append(text);
+            hex.append('\n');
+            hexDump.append(hex);
         }
-        return hexDump;
+        return hexDump.toString();
     }
 
     public static String toHexDump(String description, byte[] dump, int start,

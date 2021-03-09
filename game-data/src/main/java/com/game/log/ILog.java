@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-/**
- * Date: 2014-7-31
- * 
- * Copyright (C) 2013-2015 7Road. All rights reserved.
- */
-
 package com.game.log;
 
 import java.sql.Connection;
@@ -33,5 +27,5 @@ import java.util.List;
  */
 public interface ILog<T>
 {
-    public boolean add(List<T> logs, Connection conn);
+    boolean add(List<T> logs, Connection conn);
 }

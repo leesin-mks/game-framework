@@ -152,7 +152,7 @@ public interface IBaseDao<T>
      * @param conn
      * @throws SQLException
      */
-    public void addBatch(List<T> list, Connection conn) throws SQLException;
+    void addBatch(List<T> list, Connection conn) throws SQLException;
 
     /**
      * 批量更新
@@ -161,5 +161,5 @@ public interface IBaseDao<T>
      * @param conn
      * @throws SQLException
      */
-    public void updateBatch(List<T> list, Connection conn) throws SQLException;
+    void updateBatch(List<T> list, Connection conn) throws SQLException;
 }

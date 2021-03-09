@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-/**
- * Date: 2014-2-12
- * 
- * Copyright (C) 2013-2015 7Road. All rights reserved.
- */
-
 package com.game.util;
 
 import java.io.File;

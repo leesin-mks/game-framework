@@ -44,13 +44,12 @@ public class NettyServerConnectorHandler extends ChannelInboundHandlerAdapter
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception
     {
-        // TODO Auto-generated method stub
         super.channelInactive(ctx);
         IServerConnector conn = ctx.channel().attr(CommonConst.SERVER_CON).get();
         conn.disconnect();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#exceptionCaught(io.netty.channel.ChannelHandlerContext,

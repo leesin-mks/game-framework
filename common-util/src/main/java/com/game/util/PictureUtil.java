@@ -18,12 +18,7 @@ package com.game.util;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -49,7 +44,7 @@ public class PictureUtil
      * @return data
      * @throws Exception
      */
-    public static int[][] getData(BufferedImage bufferedImage) throws Exception
+    public static int[][] getData(BufferedImage bufferedImage)
     {
         int[][] data = new int[bufferedImage.getWidth()][bufferedImage.getHeight()];
         for (int i = 0; i < bufferedImage.getWidth(); i++)

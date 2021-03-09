@@ -79,7 +79,7 @@ public class NettyServerConnector extends AbstractServerConnector
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#connect()
@@ -111,12 +111,12 @@ public class NettyServerConnector extends AbstractServerConnector
         }
         catch (Exception e)
         {
-            LOGGER.error("Connector Error", e);
-            return false;
+            LOGGER.error("Connector Error: {}, port: {}", getAddress(), getPort(), e);
         }
+        return false;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#disconnect()
@@ -126,7 +126,7 @@ public class NettyServerConnector extends AbstractServerConnector
     {
         if (channel != null)
         {
-            // channel.close();
+            channel.close();
             // group.shutdownGracefully();
         }
     }

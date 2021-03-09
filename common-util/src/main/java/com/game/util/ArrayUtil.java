@@ -30,33 +30,33 @@ public class ArrayUtil
 
     public static void FillTwoDimensionArray(int[][] arr, int value)
     {
-        for (int i = 0; i < arr.length; i++)
+        for (int[] ints : arr)
         {
-            Arrays.fill(arr[i], value);
+            Arrays.fill(ints, value);
         }
     }
 
     public static void FillTwoDimensionArray(boolean[][] arr, boolean value)
     {
-        for (int i = 0; i < arr.length; i++)
+        for (boolean[] booleans : arr)
         {
-            Arrays.fill(arr[i], value);
+            Arrays.fill(booleans, value);
         }
     }
 
     public static void FillTwoDimensionArray(float[][] arr, float value)
     {
-        for (int i = 0; i < arr.length; i++)
+        for (float[] floats : arr)
         {
-            Arrays.fill(arr[i], value);
+            Arrays.fill(floats, value);
         }
     }
 
-    public static void FillTwoDimensionArray(long[][] arr, long value)
+    public static void fillTwoDimensionArray(long[][] arr, long value)
     {
-        for (int i = 0; i < arr.length; i++)
+        for (long[] longs : arr)
         {
-            Arrays.fill(arr[i], value);
+            Arrays.fill(longs, value);
         }
     }
 }

@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-/**
- * Date: 2014-3-4
- * 
- * Copyright (C) 2013-2015 7Road. All rights reserved.
- */
-
 package com.game.log;
 
 import java.time.Instant;
@@ -49,7 +43,7 @@ public class WriterLog
         return logCache;
     }
 
-    public static Date LocalDateTimeToUdate(LocalDateTime localDateTime)
+    public static Date LocalDateTimeToUpdate(LocalDateTime localDateTime)
     {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();

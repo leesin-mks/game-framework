@@ -14,14 +14,7 @@
  * limitations under the License.
  */
 
-/**
- * Date: 2014-3-26
- *
- * Copyright (C) 2013-2015 7Road. All rights reserved.
- */
-
 package com.game.log.cache;
-
 
 import com.game.component.IComponent;
 import com.game.log.task.AbstractTask;
@@ -34,21 +27,21 @@ import com.game.log.task.AbstractTask;
 public interface ILogCache extends IComponent
 {
     /** 组件名称 */
-    public static final String NAME = "LogCache";
+    String NAME = "LogCache";
 
     /**
      * 向缓存中添加日志
      * 
-     * @param log
+     * @param log log object
      */
-    public <T> void addLog(T log);
+    <T> void addLog(T log);
 
     /**
      * 向DB中更新日志
      */
-    public void writeLog();
+    void writeLog();
 
-    public <T> void addLogTask(AbstractTask<T> task);
-    
-    public <T> void addLogDelayTask(AbstractTask<T> task);
+    <T> void addLogTask(AbstractTask<T> task);
+
+    <T> void addLogDelayTask(AbstractTask<T> task);
 }
