@@ -309,10 +309,10 @@ public class LogCache implements ILogCache
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.component.IComponent#reload()
+     * @see com.game.component.IComponent#reload()
      */
     @Override
     public boolean reload()
@@ -321,7 +321,7 @@ public class LogCache implements ILogCache
         return false;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.log.cache.ILogCache#addLogTask(com.game.log.task.AbstractTask)

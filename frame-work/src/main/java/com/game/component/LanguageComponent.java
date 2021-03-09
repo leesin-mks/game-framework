@@ -42,7 +42,7 @@ public class LanguageComponent implements IComponent
 
     private static Map<String, String> cache = new ConcurrentHashMap<String, String>();
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#getName()
@@ -53,7 +53,7 @@ public class LanguageComponent implements IComponent
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#initialize()
@@ -65,7 +65,7 @@ public class LanguageComponent implements IComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#start()
@@ -113,7 +113,7 @@ public class LanguageComponent implements IComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#stop()
@@ -125,7 +125,7 @@ public class LanguageComponent implements IComponent
         cache = null;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#reload()

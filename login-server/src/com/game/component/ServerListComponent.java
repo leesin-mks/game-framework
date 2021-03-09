@@ -18,13 +18,8 @@ package com.game.component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.game.bll.ServerBussiness;
 import com.game.component.inf.IServerListComponent;
@@ -33,7 +28,6 @@ import com.game.manager.LoginManager;
 import com.game.timer.ITimerComponent;
 import com.game.type.ServerType;
 import com.game.web.job.UpdateServerListJob;
-import com.google.gson.Gson;
 
 /**
  * @author leesin
@@ -41,13 +35,11 @@ import com.google.gson.Gson;
  */
 public class ServerListComponent implements IServerListComponent
 {
-    private static Logger LOGGER = LoggerFactory.getLogger(ServerListComponent.class);
-    private static final Gson gson = new Gson();
-    private Object locker = new Object();
+    private static final Object locker = new Object();
     private Map<Integer, List<ServerListBean>> servers;     // serverType:servers
     private Map<Integer, ServerListBean> serverIDs;   // serverID:server
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#getName()
@@ -58,7 +50,7 @@ public class ServerListComponent implements IServerListComponent
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#initialize()
@@ -71,7 +63,7 @@ public class ServerListComponent implements IServerListComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#start()
@@ -85,7 +77,7 @@ public class ServerListComponent implements IServerListComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#stop()
@@ -97,7 +89,7 @@ public class ServerListComponent implements IServerListComponent
         serverIDs.clear();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#reload()
@@ -111,10 +103,10 @@ public class ServerListComponent implements IServerListComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.component.inf.IServerListComponent#getServerListByType(com.niuniu.type.ServerType)
+     * @see com.game.component.inf.IServerListComponent#getServerListByType(com.game.type.ServerType)
      */
     @Override
     public List<ServerListBean> getServerListByType(ServerType type)
@@ -142,16 +134,9 @@ public class ServerListComponent implements IServerListComponent
     public void initServer()
     {
         List<ServerListBean> fsList = ServerBussiness.getServerList();
-        Iterator<ServerListBean> iterator = fsList.iterator();
-        while (iterator.hasNext())
+        for (ServerListBean bean : fsList)
         {
-            ServerListBean bean = iterator.next();
-            List<ServerListBean> list = servers.get(bean.getServerType());
-            if (list == null)
-            {
-                list = new ArrayList<ServerListBean>();
-                servers.put(bean.getServerType(), list);
-            }
+            List<ServerListBean> list = servers.computeIfAbsent(bean.getServerType(), k -> new ArrayList<>());
             list.add(bean);
             serverIDs.put(bean.getId(), bean);
         }

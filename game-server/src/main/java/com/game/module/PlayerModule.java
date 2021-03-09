@@ -16,8 +16,6 @@
 
 package com.game.module;
 
-import java.util.concurrent.locks.ReadWriteLock;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +23,6 @@ import com.game.module.inf.IMessageModule;
 import com.game.module.inf.IModule;
 import com.game.objec.GamePlayer;
 import com.game.type.ModuleType;
-import com.google.gson.Gson;
 
 /**
  * @author leesin
@@ -33,19 +30,13 @@ import com.google.gson.Gson;
  */
 public abstract class PlayerModule implements IModule
 {
-    protected GamePlayer player;
-
-    private ModuleType moduleType;
-
-    protected ReadWriteLock lock;
-
-    protected IMessageModule messageModule;
-
     protected final Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-    protected static final Gson gson = new Gson();
+    protected GamePlayer player;
 
-    // protected static IDataSaveComponent dataSaveComponent;
+    private final ModuleType moduleType;
+
+    protected IMessageModule messageModule;
 
     public PlayerModule(GamePlayer player, ModuleType moduleType)
     {

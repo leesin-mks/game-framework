@@ -39,10 +39,10 @@ public class FSCmdTask extends AbstractServerTask
         this.server = server;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.command.AbstractServerTask#execute()
+     * @see com.game.command.AbstractServerTask#execute()
      */
     @Override
     protected void execute()

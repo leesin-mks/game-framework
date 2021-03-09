@@ -40,7 +40,7 @@ public class CommonMessageHandler implements IMessageHandler
         this.cmdCMPTName = cmdCMPTName;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see IMessageHandler#process(IClientConnection, java.lang.Object)

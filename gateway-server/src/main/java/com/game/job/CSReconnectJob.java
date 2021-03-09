@@ -31,7 +31,7 @@ import com.game.type.ServerStateType;
 public class CSReconnectJob implements Job
 {
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)

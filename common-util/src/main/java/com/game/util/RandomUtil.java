@@ -32,7 +32,7 @@ public class RandomUtil
      *            数量
      * @return
      */
-    public static int[] getRandomUnrepeatArray(int minValue, int maxValue, int count)
+    public static int[] getRandomUnRepeatArray(int minValue, int maxValue, int count)
     {
         if (minValue >= maxValue)
         {
@@ -66,7 +66,8 @@ public class RandomUtil
      * 按给定的总概率随机一个index
      * 
      * @param totalRandomAry
-     * @param 最大下标
+     * @param maxIndex
+     *            max index
      * @return
      */
     public static int getRandomIndexOfArrayByTotalRate(int[] totalRandomAry, int maxIndex)
@@ -86,8 +87,8 @@ public class RandomUtil
     /**
      * 按给定的总概率随机一个index
      * 
-     * @param totalRandomAry
-     * @param 最大下标
+     * @param totalRandomList
+     * @param maxIndex
      * @return
      */
     public static int getRandomIndexOfArrayByTotalRate(List<Integer> totalRandomList, int maxIndex)

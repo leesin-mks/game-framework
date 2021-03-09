@@ -49,7 +49,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
 
     private int serverID;
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IConnectionHolder#onDisconnect()
@@ -63,7 +63,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
         LOGGER.info("Client disconnect: {}", serverID);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IConnectionHolder#getClientConnection()
@@ -74,10 +74,10 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
         return connection;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.net.IConnectionHolder#setClientConnection(com.bdsk.net.IClientConnection)
+     * @see com.game.net.IConnectionHolder#setClientConnection(com.game.net.IClientConnection)
      */
     @Override
     public void setClientConnection(IClientConnection conn)
@@ -85,7 +85,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
         this.connection = conn;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.ISequenceTask#getSequenceTaskName()
@@ -96,7 +96,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
         return "ServerClientTask";
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.ISequenceTask#addCommandTask(java.lang.Runnable)
@@ -107,7 +107,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
         cmdQueue.add((AbstractServerTask) task);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.ISequenceTask#finishOneCommandTask()

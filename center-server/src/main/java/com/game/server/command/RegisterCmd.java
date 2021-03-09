@@ -34,10 +34,10 @@ import com.google.protobuf.InvalidProtocolBufferException;
 public class RegisterCmd extends AbstractServerCmd
 {
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.command.AbstractServerCmd#exec(com.niuniu.server.ServerClient, byte[])
+     * @see com.game.command.AbstractServerCmd#exec(com.game.server.ServerClient, byte[])
      */
     @Override
     public void exec(ServerClient client, byte[] packet)
@@ -45,15 +45,15 @@ public class RegisterCmd extends AbstractServerCmd
         // TODO Auto-generated method stub
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.command.AbstractServerCmd#executeConnect(com.bdsk.net.IClientConnection, byte[])
+     * @see com.game.command.AbstractServerCmd#executeConnect(com.game.net.IClientConnection, byte[])
      */
     @Override
     public void executeConnect(IClientConnection conn, byte[] packet)
     {
-        RegisterMsg msg = null;
+        RegisterMsg msg;
         try
         {
             msg = RegisterMsg.parseFrom(packet);

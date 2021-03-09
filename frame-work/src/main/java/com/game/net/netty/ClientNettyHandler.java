@@ -74,7 +74,7 @@ public class ClientNettyHandler extends ChannelInboundHandlerAdapter
             conn.onDisconnect();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#exceptionCaught(io.netty.channel.ChannelHandlerContext,

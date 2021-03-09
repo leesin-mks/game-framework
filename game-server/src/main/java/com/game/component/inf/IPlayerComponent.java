@@ -31,7 +31,7 @@ public interface IPlayerComponent extends IComponent
     /**
      * 组件名
      */
-    public static final String NAME = "PlayerComponent";
+    String NAME = "PlayerComponent";
 
     /**
      * 根据玩家id来查找在线玩家

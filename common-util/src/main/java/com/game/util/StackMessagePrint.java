@@ -37,16 +37,16 @@ public class StackMessagePrint
     {
 
         StringBuilder result = new StringBuilder();
+        String line = "***************************************************************************";
         if (error != null)
         {
-            result.append("***************************************************************************\n");
-
+            result.append(line);
+            result.append(OutPutUtil.lineSeparator);
             StringWriter writer = new StringWriter();
             PrintWriter print = new PrintWriter(writer);
             error.printStackTrace(print);
             result.append(writer.toString());
-
-            result.append("***************************************************************************");
+            result.append(line);
         }
         else
         {
@@ -57,21 +57,16 @@ public class StackMessagePrint
 
     /**
      * 打印当前堆栈信息
-     * 
-     * @param cls
+     *
      */
     public static String printStackTrace()
     {
         StackTraceElement[] elements = (new Throwable()).getStackTrace();
-
-        StringBuffer buf = new StringBuffer();
-
-        for (int i = 0; i < elements.length; i++)
-        {
-
-            buf.append("    ").append(elements[i].getClassName()).append(".").append(
-                    elements[i].getMethodName()).append("(").append(elements[i].getFileName()).append(":").append(
-                            elements[i].getLineNumber()).append(")").append("\n");
+        StringBuilder buf = new StringBuilder();
+        for (StackTraceElement element : elements) {
+            buf.append("    ").append(element.getClassName()).append(".").append(
+                    element.getMethodName()).append("(").append(element.getFileName()).append(":").append(
+                    element.getLineNumber()).append(")").append("\n");
         }
 
         return buf.toString();
@@ -92,7 +87,7 @@ public class StackMessagePrint
      * 
      * @param message
      *            输出的头部提示信息
-     * @return
+     * @return stack message
      */
     public static String captureStackTrace(Thread thread, String message)
     {
@@ -101,7 +96,7 @@ public class StackMessagePrint
         StackTraceElement[] trace = thread.getStackTrace();
         for (int i = 0; i < trace.length; i++)
         {
-            stringBuilder.append(" " + trace[i] + "\r\n");
+            stringBuilder.append(" " + trace[i] + OutPutUtil.lineSeparator);
         }
 
         stringBuilder.append("");
@@ -121,11 +116,11 @@ public class StackMessagePrint
     {
         String line = System.getProperty("line.separator");
         String kong = "        at ";
-        StringBuffer sb = new StringBuffer();
-        sb.append(exception + line);
+        StringBuilder sb = new StringBuilder();
+        sb.append(exception).append(line);
         for (StackTraceElement stack : stacks)
         {
-            sb.append(kong + stack.toString() + line);
+            sb.append(kong).append(stack.toString()).append(line);
         }
         logger.error(sb.toString());
     }

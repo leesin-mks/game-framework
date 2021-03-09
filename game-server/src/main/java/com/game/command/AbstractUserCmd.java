@@ -41,10 +41,10 @@ public abstract class AbstractUserCmd implements ICommand
         new UnsupportedOperationException();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.command.ICommand#execute(com.bdsk.net.IClientConnection, byte[])
+     * @see com.game.command.ICommand#execute(com.game.net.IClientConnection, byte[])
      */
     @Override
     public void execute(IClientConnection client, byte[] packet) throws Exception

@@ -72,7 +72,7 @@ public class CSComponent implements ICSComponent
         return slc;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#getName()
@@ -83,7 +83,7 @@ public class CSComponent implements ICSComponent
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#initialize()
@@ -96,7 +96,7 @@ public class CSComponent implements ICSComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#start()
@@ -132,7 +132,7 @@ public class CSComponent implements ICSComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#stop()
@@ -147,7 +147,7 @@ public class CSComponent implements ICSComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#reload()
@@ -175,11 +175,10 @@ public class CSComponent implements ICSComponent
         return null;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.component.inf.IFSComponent#sendToAll(com.bdsk.net.
-     * CommonMessage)
+     * @see com.game.component.inf.ICSComponent#sendToAll(com.game.net.CommonMessage)
      */
     @Override
     public void sendToAll(CommonMessage message)

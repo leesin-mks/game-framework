@@ -26,19 +26,16 @@ import com.game.component.inf.IServerComponent;
 import com.game.net.CommonMessage;
 import com.game.pb.CenterMsgProto.CSForwardMsg;
 import com.game.server.ServerClient;
-import com.google.gson.Gson;
 
 /**
- * @date 2020年03月31日 15:38
  * @author leesin
+ *
  */
 public class ServerComponent implements IServerComponent
 {
-    private static Logger LOGGER = LoggerFactory.getLogger(ServerComponent.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServerComponent.class);
 
     private Map<Integer, ServerClient> servers;
-
-    private static final Gson gson = new Gson();
 
     @Override
     public String getName()
@@ -74,10 +71,10 @@ public class ServerComponent implements IServerComponent
         return false;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see com.niuniu.component.inf.IServerComponent#sendToAll(com.bdsk.net.CommonMessage)
+     * @see com.game.component.inf.IServerComponent#sendToAll(com.game.net.CommonMessage)
      */
     @Override
     public void sendToAll(CommonMessage message)
@@ -88,10 +85,10 @@ public class ServerComponent implements IServerComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see com.niuniu.component.inf.IServerComponent#addServerClient(com.niuniu.server.ServerClient)
+     * @see com.game.component.inf.IServerComponent#addServerClient(com.game.server.ServerClient)
      */
     @Override
     public synchronized void addServerClient(ServerClient client)
@@ -99,10 +96,10 @@ public class ServerComponent implements IServerComponent
         servers.put(client.getServerID(), client);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see com.niuniu.component.inf.IServerComponent#removeServerClient(com.niuniu.server.ServerClient)
+     * @see com.game.component.inf.IServerComponent#removeServerClient(com.game.server.ServerClient)
      */
     @Override
     public synchronized void removeServerClient(ServerClient client)

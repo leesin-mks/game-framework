@@ -29,17 +29,17 @@ import org.slf4j.LoggerFactory;
 public class NamedThreadFactory implements ThreadFactory,
         UncaughtExceptionHandler
 {
-    private static Logger logger = LoggerFactory.getLogger(NamedThreadFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(NamedThreadFactory.class);
 
     /**
      * 是否为后台线程
      */
-    private boolean daemon;
+    private final boolean daemon;
 
     /**
      * 线程名
      */
-    private String threadName;
+    private final String threadName;
 
     /**
      * 默认构造函数

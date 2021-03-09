@@ -47,7 +47,7 @@ public class UserCmdTask extends AbstractTask
         this.code = code;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.AbstractTask#execute()

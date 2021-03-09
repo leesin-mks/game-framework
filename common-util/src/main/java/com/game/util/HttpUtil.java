@@ -30,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,7 +51,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author leesin
- *
  */
 public class HttpUtil
 {
@@ -59,80 +59,18 @@ public class HttpUtil
     /**
      * 连接超时
      */
-    private static int connectTimeOut = 5000;
+    private static final int connectTimeOut = 5000;
 
     /**
      * 读取数据超时
      */
-    private static int readTimeOut = 10000;
-
-    /**
-     * 请求编码
-     */
-    private static String requestEncoding = "UTF-8";
-
-    /**
-     * @return 连接超时(毫秒)
-     * @see com.hengpeng.common.web.HttpRequestProxy#connectTimeOut
-     */
-    public static int getConnectTimeOut()
-    {
-        return HttpUtil.connectTimeOut;
-    }
-
-    /**
-     * @return 读取数据超时(毫秒)
-     * @see com.hengpeng.common.web.HttpRequestProxy#readTimeOut
-     */
-    public static int getReadTimeOut()
-    {
-        return HttpUtil.readTimeOut;
-    }
-
-    /**
-     * @return 请求编码
-     * @see com.hengpeng.common.web.HttpRequestProxy#requestEncoding
-     */
-    public static String getRequestEncoding()
-    {
-        return requestEncoding;
-    }
-
-    /**
-     * @param connectTimeOut
-     *            连接超时(毫秒)
-     * @see com.hengpeng.common.web.HttpRequestProxy#connectTimeOut
-     */
-    public static void setConnectTimeOut(int connectTimeOut)
-    {
-        HttpUtil.connectTimeOut = connectTimeOut;
-    }
-
-    /**
-     * @param readTimeOut
-     *            读取数据超时(毫秒)
-     * @see com.hengpeng.common.web.HttpRequestProxy#readTimeOut
-     */
-    public static void setReadTimeOut(int readTimeOut)
-    {
-        HttpUtil.readTimeOut = readTimeOut;
-    }
-
-    /**
-     * @param requestEncoding
-     *            请求编码
-     * @see com.hengpeng.common.web.HttpRequestProxy#requestEncoding
-     */
-    public static void setRequestEncoding(String requestEncoding)
-    {
-        HttpUtil.requestEncoding = requestEncoding;
-    }
+    private static final int readTimeOut = 10000;
 
     /**
      * <pre>
      * 发送带参数的GET的HTTP请求
      * </pre>
-     * 
+     *
      * @param reqUrl
      *            HTTP请求URL
      * @param parameters
@@ -152,8 +90,7 @@ public class HttpUtil
                 Entry<?, ?> element = (Entry<?, ?>) iter.next();
                 params.append(element.getKey().toString());
                 params.append("=");
-                params.append(URLEncoder.encode(element.getValue().toString(),
-                        HttpUtil.requestEncoding));
+                params.append(URLEncoder.encode(element.getValue().toString()));
                 params.append("&");
             }
 
@@ -212,7 +149,7 @@ public class HttpUtil
      * <pre>
      * 发送带参数的GET的HTTP请求
      * </pre>
-     * 
+     *
      * @param reqUrl
      *            HTTP请求URL
      * @param parameters
@@ -292,7 +229,7 @@ public class HttpUtil
      * <pre>
      * 发送不带参数的GET的HTTP请求
      * </pre>
-     * 
+     *
      * @param reqUrl
      *            HTTP请求URL
      * @return HTTP响应的字符串
@@ -320,16 +257,13 @@ public class HttpUtil
                     if (index > 0)
                     {
                         String parameter = string.substring(0, index);
-                        String value = string.substring(index + 1,
-                                string.length());
+                        String value = string.substring(index + 1);
                         params.append(parameter);
                         params.append("=");
-                        params.append(URLEncoder.encode(value,
-                                HttpUtil.requestEncoding));
+                        params.append(URLEncoder.encode(value, StandardCharsets.UTF_8.name()));
                         params.append("&");
                     }
                 }
-
                 params = params.deleteCharAt(params.length() - 1);
             }
 
@@ -434,7 +368,7 @@ public class HttpUtil
      * <pre>
      * 下载文件信息到指定路径
      * </pre>
-     * 
+     *
      * @param reqUrl
      *            HTTP请求URL
      * @return HTTP响应的字符串
@@ -462,12 +396,10 @@ public class HttpUtil
                     if (index > 0)
                     {
                         String parameter = string.substring(0, index);
-                        String value = string.substring(index + 1,
-                                string.length());
+                        String value = string.substring(index + 1);
                         params.append(parameter);
                         params.append("=");
-                        params.append(URLEncoder.encode(value,
-                                HttpUtil.requestEncoding));
+                        params.append(URLEncoder.encode(value, StandardCharsets.UTF_8.name()));
                         params.append("&");
                     }
                 }
@@ -524,7 +456,7 @@ public class HttpUtil
      * <pre>
      * 发送带参数的POST的HTTP请求
      * </pre>
-     * 
+     *
      * @param reqUrl
      *            HTTP请求URL
      * @param parameters
@@ -547,7 +479,7 @@ public class HttpUtil
                     params.append(element.getKey().toString());
                     params.append("=");
                     params.append(URLEncoder.encode(element.getValue().toString(),
-                            HttpUtil.requestEncoding));
+                            StandardCharsets.UTF_8.name()));
                     params.append("&");
                 }
             }
@@ -604,18 +536,18 @@ public class HttpUtil
 
     /**
      * 通过HTTP下载文档，保存
-     * 
+     *
      * @param xmlUrl
      * @param path
      */
     public static void getUrlXmlFile(String xmlUrl, String path)
     {
-        FileOutputStream fos = null;
-        BufferedInputStream bis = null;
-        HttpURLConnection httpUrl = null;
-        URL url = null;
+        FileOutputStream fos;
+        BufferedInputStream bis;
+        HttpURLConnection httpUrl;
+        URL url;
         byte[] buf = new byte[1024 * 10];
-        int size = 0;
+        int size;
         try
         {
             url = new URL(xmlUrl);
@@ -652,7 +584,7 @@ public class HttpUtil
      * <pre>
      * 发送带参数的GET的HTTPS请求
      * </pre>
-     * 
+     *
      * @param reqUrl
      *            HTTP请求URL
      * @param parameters
@@ -672,8 +604,7 @@ public class HttpUtil
                 Entry<?, ?> element = (Entry<?, ?>) iter.next();
                 params.append(element.getKey().toString());
                 params.append("=");
-                params.append(URLEncoder.encode(element.getValue().toString(),
-                        HttpUtil.requestEncoding));
+                params.append(URLEncoder.encode(element.getValue().toString(), StandardCharsets.UTF_8.name()));
                 params.append("&");
             }
 
@@ -751,12 +682,10 @@ public class HttpUtil
                     if (index > 0)
                     {
                         String parameter = string.substring(0, index);
-                        String value = string.substring(index + 1,
-                                string.length());
+                        String value = string.substring(index + 1);
                         params.append(parameter);
                         params.append("=");
-                        params.append(URLEncoder.encode(value,
-                                HttpUtil.requestEncoding));
+                        params.append(URLEncoder.encode(value, StandardCharsets.UTF_8.name()));
                         params.append("&");
                     }
                 }
@@ -814,7 +743,7 @@ public class HttpUtil
      * <pre>
      * 发送带参数的POST的HTTPS请求
      * </pre>
-     * 
+     *
      * @param reqUrl
      *            HTTP请求URL
      * @param parameters
@@ -836,8 +765,7 @@ public class HttpUtil
                     Entry<?, ?> element = (Entry<?, ?>) iter.next();
                     params.append(element.getKey().toString());
                     params.append("=");
-                    params.append(URLEncoder.encode(element.getValue().toString(),
-                            HttpUtil.requestEncoding));
+                    params.append(URLEncoder.encode(element.getValue().toString(), StandardCharsets.UTF_8.name()));
                     params.append("&");
                 }
             }
@@ -1020,7 +948,7 @@ public class HttpUtil
 
     /**
      * 转发表单内容
-     * 
+     *
      * @param reqUrl
      * @param file
      * @return
@@ -1133,7 +1061,7 @@ public class HttpUtil
 
     /**
      * 转发表单内容
-     * 
+     *
      * @param reqUrl
      * @param file
      * @return

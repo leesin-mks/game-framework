@@ -26,7 +26,7 @@ import com.google.protobuf.ByteString;
  */
 public interface ICSComponent extends IComponent
 {
-    public static final String NAME = "CSComponent";
+     String NAME = "CSComponent";
 
     void ping();
 

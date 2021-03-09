@@ -61,7 +61,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
         ipPort = bean.getIp() + ":" + bean.getPort();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.game.net.netty.NettyServerConnector#disconnect()
@@ -117,7 +117,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
         this.ipPort = ipPort;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.game.command.ISequenceTask#getSequenceTaskName()
@@ -128,7 +128,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
         return "CS server connection";
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.game.command.ISequenceTask#addCommandTask(java.lang.Runnable)
@@ -139,7 +139,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
         cmdQueue.add((CSCmdTask) task);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.game.command.ISequenceTask#finishOneCommandTask()

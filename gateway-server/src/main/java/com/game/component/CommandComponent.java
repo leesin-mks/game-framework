@@ -25,10 +25,10 @@ import com.game.command.ICode;
  */
 public class CommandComponent extends AbstractCommandComponent<ICode>
 {
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.command.AbstractCommandComponent#getCommandPacketName()
+     * @see com.game.command.AbstractCommandComponent#getCommandPacketName()
      */
     @Override
     public String getCommandPacketName()
@@ -36,10 +36,10 @@ public class CommandComponent extends AbstractCommandComponent<ICode>
         return "com.game.command";
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.command.AbstractCommandComponent#getAnnotationClass()
+     * @see com.game.command.AbstractCommandComponent#getAnnotationClass()
      */
     @Override
     public Class<ICode> getAnnotationClass()
@@ -47,10 +47,10 @@ public class CommandComponent extends AbstractCommandComponent<ICode>
         return ICode.class;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.command.AbstractCommandComponent#getNodeType(java.lang.annotation.Annotation)
+     * @see com.game.command.AbstractCommandComponent#getNodeType(java.lang.annotation.Annotation)
      */
     @Override
     public Short getNodeType(ICode annotation)

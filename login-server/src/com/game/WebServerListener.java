@@ -16,11 +16,7 @@
 
 package com.game;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.management.ManagementFactory;
 
 import javax.servlet.ServletContextEvent;
@@ -29,11 +25,7 @@ import javax.servlet.ServletContextListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.game.component.ComponentManager;
-import com.game.component.DataCenterComponent;
-import com.game.component.LanguageComponent;
-import com.game.component.RedisComponent;
-import com.game.component.ServerListComponent;
+import com.game.component.*;
 import com.game.config.GlobalConfigManager;
 import com.game.database.DBComponent;
 import com.game.manager.LoginManager;
@@ -45,9 +37,9 @@ import com.game.timer.TimerComponent;
  */
 public class WebServerListener implements ServletContextListener
 {
-    private static Logger LOGGER = LoggerFactory.getLogger(WebServerListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebServerListener.class);
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
@@ -55,12 +47,12 @@ public class WebServerListener implements ServletContextListener
     @Override
     public void contextDestroyed(ServletContextEvent arg0)
     {
-        LOGGER.error("------关闭成功-------");
+        LOGGER.info("------关闭成功-------");
         LoginManager.stop();
         ComponentManager.getInstance().stop();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)

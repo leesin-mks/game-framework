@@ -38,7 +38,7 @@ public class ServerCmdTask extends AbstractTask
         this.connect = connect;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.AbstractTask#execute()

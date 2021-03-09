@@ -35,10 +35,10 @@ public class CSMessageHandler implements IServerPacketHandler
 {
     private static Logger LOGGER = LoggerFactory.getLogger(CSMessageHandler.class);
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.net.IServerPacketHandler#process(com.bdsk.net.IServerConnector, java.lang.Object)
+     * @see com.game.net.IServerPacketHandler#process(com.game.net.IServerConnector, java.lang.Object)
      */
     @Override
     public void process(IServerConnector client, Object packet)

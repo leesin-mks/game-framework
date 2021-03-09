@@ -32,7 +32,6 @@ import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolInProto.ProtocolIn;
 
 /**
- * @date 2020年04月16日 19:26
  * @author leesin
  */
 @ICode(code = CSProtocol.MESSAGE_TO_USER, desc = "转发消息")

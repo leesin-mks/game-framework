@@ -80,7 +80,7 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#channelActive(io.netty.channel.ChannelHandlerContext)
@@ -93,7 +93,7 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
         ctx.channel().attr(CommonConst.CLIENT_CON).set(conn);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#channelInactive(io.netty.channel.ChannelHandlerContext)
@@ -108,7 +108,7 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
             conn.onDisconnect();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#userEventTriggered(io.netty.channel.ChannelHandlerContext,
@@ -129,7 +129,7 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
         super.userEventTriggered(ctx, evt);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#exceptionCaught(io.netty.channel.ChannelHandlerContext,

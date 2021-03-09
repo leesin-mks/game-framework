@@ -40,7 +40,7 @@ public abstract class AbstractTask<T> implements Runnable
         this.info = info;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Runnable#run()

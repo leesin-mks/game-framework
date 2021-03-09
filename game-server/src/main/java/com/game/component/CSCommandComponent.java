@@ -34,7 +34,7 @@ public class CSCommandComponent extends AbstractCommandComponent<ICode>
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.AbstractCommandComponent#getCommandPacketName()
@@ -45,7 +45,7 @@ public class CSCommandComponent extends AbstractCommandComponent<ICode>
         return "com.game.cs.command";
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.AbstractCommandComponent#getAnnotationClass()
@@ -56,7 +56,7 @@ public class CSCommandComponent extends AbstractCommandComponent<ICode>
         return ICode.class;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.command.AbstractCommandComponent#getNodeType(java.lang.annotation.Annotation)

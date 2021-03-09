@@ -31,18 +31,16 @@ public class ServletUtil
      * 获取客户端IP
      * 
      * @param request
-     * @return
+     *            request
+     * @return request ip
      */
     public static String getRequestIP(HttpServletRequest request)
     {
-        String ip = null;
-
         if (request == null)
         {
             return null;
         }
-
-        ip = request.getHeader("x-real-ip");
+        String ip = request.getHeader("x-real-ip");
         if (!StringUtil.isNullOrEmpty(ip) && !UNKNOWN.equalsIgnoreCase(ip))
         {
             return ip;
@@ -55,11 +53,11 @@ public class ServletUtil
             if (ips.length > 1)
             {
                 // 多级反向代理处理。取X-Forwarded-For中第一个非unknown的有效IP字符串。
-                for (int i = 0; i < ips.length; i++)
+                for (String s : ips)
                 {
-                    if (!UNKNOWN.equalsIgnoreCase(ips[i]))
+                    if (!UNKNOWN.equalsIgnoreCase(s))
                     {
-                        ip = ips[i];
+                        ip = s;
                         break;
                     }
                 }
@@ -69,26 +67,24 @@ public class ServletUtil
         }
 
         ip = request.getHeader("Proxy-Client-IP");
-        if (StringUtil.isNullOrEmpty(ip) == false
-                && UNKNOWN.equalsIgnoreCase(ip) == false)
+        if (!StringUtil.isNullOrEmpty(ip) && !UNKNOWN.equalsIgnoreCase(ip))
         {
             return ip;
         }
 
         ip = request.getHeader("WL-Proxy-Client-IP");
-        if (StringUtil.isNullOrEmpty(ip) == false
-                && UNKNOWN.equalsIgnoreCase(ip) == false)
+        if (!StringUtil.isNullOrEmpty(ip)
+                && !UNKNOWN.equalsIgnoreCase(ip))
         {
             return ip;
         }
 
         // 必须在最后啊，不然有代理的时候获取到的不是真实的客户端IP。
         ip = request.getRemoteAddr();
-        if (StringUtil.isNullOrEmpty(ip) == false && UNKNOWN.equalsIgnoreCase(ip) == false)
+        if (!StringUtil.isNullOrEmpty(ip) && !UNKNOWN.equalsIgnoreCase(ip))
         {
             return ip;
         }
-
         return null;
     }
 }

@@ -36,7 +36,9 @@ public class UserCmdTask extends AbstractTask
 
     /**
      * @param cmd
+     *            command
      * @param message
+     *            client message
      */
     public UserCmdTask(AbstractUserCmd cmd, ByteString message, GamePlayer player)
     {
@@ -44,10 +46,10 @@ public class UserCmdTask extends AbstractTask
         this.player = player;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.command.AbstractTask#execute()
+     * @see com.game.command.AbstractTask#execute()
      */
     @Override
     protected void execute()

@@ -124,7 +124,7 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
         return false;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#stop()

@@ -36,10 +36,10 @@ public class NettyWSComponent extends AbstractNettyComponent
 {
     private static final String WEBSOCKET_PATH = "/websocket";
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.net.netty.AbstractNettyComponent#acceptorInit(io.netty.bootstrap.ServerBootstrap)
+     * @see com.game.net.netty.AbstractNettyComponent#acceptorInit(io.netty.bootstrap.ServerBootstrap)
      */
     @Override
     protected void acceptorInit(ServerBootstrap bootstrap)
@@ -49,7 +49,6 @@ public class NettyWSComponent extends AbstractNettyComponent
 
             @Override
             protected void initChannel(SocketChannel ch)
-                    throws Exception
             {
                 ChannelPipeline pipeline = ch.pipeline();
                 pipeline.addLast("http-codec", new HttpServerCodec());
@@ -62,18 +61,18 @@ public class NettyWSComponent extends AbstractNettyComponent
 
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.net.netty.AbstractNettyComponent#getPort()
+     * @see com.game.net.netty.AbstractNettyComponent#getPort()
      */
     @Override
     protected int getPort()
     {
-        return Integer.valueOf(GlobalConfigManager.getInstance().getServerConfig().getPort());
+        return Integer.parseInt(GlobalConfigManager.getInstance().getServerConfig().getPort());
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.netty.AbstractNettyComponent#getCmdCMPTName()
@@ -81,7 +80,6 @@ public class NettyWSComponent extends AbstractNettyComponent
     @Override
     protected String getCmdCMPTName()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 

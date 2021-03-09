@@ -33,10 +33,10 @@ public class CommonWSMessageHandler implements IMessageHandler
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonWSMessageHandler.class);
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.net.IMessageHandler#process(little.seven.net.IClientConnection, java.lang.Object)
+     * @see com.game.net.IMessageHandler#process(com.game.net.IClientConnection, java.lang.Object)
      */
     @Override
     public void process(IClientConnection conn, Object packet)

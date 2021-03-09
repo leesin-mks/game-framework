@@ -24,7 +24,6 @@ import com.game.pb.CenterMsgProto.RegisterMsg;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
- * @date 2020年04月10日 11:14
  * @author leesin
  */
 @ICode(code = CSProtocol.REGISTER, desc = "服务器注册")
@@ -33,7 +32,7 @@ public class RegisterCmd extends AbstractServerCmd
 
     public void execute(CSServerConn client, byte[] packet)
     {
-        RegisterMsg msg = null;
+        RegisterMsg msg;
         try
         {
             msg = RegisterMsg.parseFrom(packet);

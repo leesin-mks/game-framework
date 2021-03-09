@@ -40,7 +40,7 @@ public abstract class AbstractNettyComponent implements IComponent
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#getName()
@@ -51,7 +51,7 @@ public abstract class AbstractNettyComponent implements IComponent
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#initialize()
@@ -62,7 +62,7 @@ public abstract class AbstractNettyComponent implements IComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#start()
@@ -96,7 +96,7 @@ public abstract class AbstractNettyComponent implements IComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#stop()
@@ -110,7 +110,7 @@ public abstract class AbstractNettyComponent implements IComponent
             workerGroup.shutdownGracefully();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IComponent#reload()

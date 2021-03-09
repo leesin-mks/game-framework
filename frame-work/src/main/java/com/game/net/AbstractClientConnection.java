@@ -54,7 +54,7 @@ public abstract class AbstractClientConnection implements IClientConnection
 
     public abstract void setChannelReadBytes();
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see IClientConnection#getPacketHandler()
@@ -65,7 +65,7 @@ public abstract class AbstractClientConnection implements IClientConnection
         return messageHandler;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see IClientConnection#getHolder()
@@ -76,7 +76,7 @@ public abstract class AbstractClientConnection implements IClientConnection
         return holder;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see IClientConnection#setHolder(IConnectionHolder)
@@ -91,7 +91,7 @@ public abstract class AbstractClientConnection implements IClientConnection
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see IClientConnection#onDisconnect()
@@ -105,7 +105,7 @@ public abstract class AbstractClientConnection implements IClientConnection
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see IClientConnection#setAttribute(java.lang.Object, java.lang.Object)
@@ -116,7 +116,7 @@ public abstract class AbstractClientConnection implements IClientConnection
         attributes.put(key, value);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see IClientConnection#getAttribute(java.lang.Object)

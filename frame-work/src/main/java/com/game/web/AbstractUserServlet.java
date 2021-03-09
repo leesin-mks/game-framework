@@ -27,7 +27,7 @@ public abstract class AbstractUserServlet extends BaseHandlerServlet
      */
     private static final long serialVersionUID = -3669019500620243561L;
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.web.IWebHandler#execute(java.lang.String, java.lang.String[])

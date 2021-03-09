@@ -68,7 +68,7 @@ public abstract class AbstractServerConnector implements IServerConnector
     {
         return readBytes;
     }
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#getAddress()
@@ -79,7 +79,7 @@ public abstract class AbstractServerConnector implements IServerConnector
         return address;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#getPort()
@@ -90,7 +90,7 @@ public abstract class AbstractServerConnector implements IServerConnector
         return port;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#getMaxReconnectTimes()
@@ -101,7 +101,7 @@ public abstract class AbstractServerConnector implements IServerConnector
         return maxReconnectTimes;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#setMaxReconnectTimes(int)
@@ -113,7 +113,7 @@ public abstract class AbstractServerConnector implements IServerConnector
 
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#getReconnectedTimes()
@@ -124,7 +124,7 @@ public abstract class AbstractServerConnector implements IServerConnector
         return reconnectedTimes;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#getPacketHandler()

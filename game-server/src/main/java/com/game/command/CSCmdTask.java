@@ -30,8 +30,8 @@ public class CSCmdTask extends AbstractServerTask
     protected IServerConnector server;
 
     /**
-     * @param cmd
-     * @param message
+     * @param cmd command
+     * @param message client message
      */
     public CSCmdTask(AbstractServerCmd cmd, byte[] message, IServerConnector server)
     {
@@ -39,10 +39,10 @@ public class CSCmdTask extends AbstractServerTask
         this.server = server;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.command.AbstractServerTask#execute()
+     * @see com.game.command.AbstractServerTask#execute()
      */
     @Override
     protected void execute()

@@ -44,7 +44,7 @@ public class UpdateListener extends JedisPubSub
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateListener.class);
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see redis.clients.jedis.JedisPubSub#onMessage(java.lang.String,

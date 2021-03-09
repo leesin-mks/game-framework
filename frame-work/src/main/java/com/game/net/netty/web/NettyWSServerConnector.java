@@ -27,12 +27,7 @@ import com.game.net.netty.NettyServerConnector;
 import com.game.type.CommonConst;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -81,7 +76,7 @@ public class NettyWSServerConnector extends AbstractServerConnector
         super(address, port, packetHandler);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#connect()
@@ -142,7 +137,7 @@ public class NettyWSServerConnector extends AbstractServerConnector
         return null;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#disconnect()
@@ -157,7 +152,7 @@ public class NettyWSServerConnector extends AbstractServerConnector
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IServerConnector#isConnected()
@@ -175,10 +170,10 @@ public class NettyWSServerConnector extends AbstractServerConnector
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.net.IServerConnector#send(com.bdsk.net.CommonMessage)
+     * @see com.game.net.IServerConnector#send(java.lang.Object)
      */
     public void send(Object msg)
     {

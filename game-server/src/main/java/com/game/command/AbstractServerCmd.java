@@ -31,32 +31,30 @@ public abstract class AbstractServerCmd implements ICommand
 {
     protected final Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.command.ICommand#execute(com.bdsk.net.IClientConnection, byte[])
+     * @see com.game.command.ICommand#execute(com.game.net.IClientConnection, byte[])
      */
     @Override
     public void execute(IClientConnection client, byte[] packet) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        throw new UnsupportedOperationException();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.command.ICommand#execute(com.bdsk.net.IClientConnection, com.google.protobuf.ByteString)
+     * @see com.game.command.ICommand#execute(com.game.net.IClientConnection, com.google.protobuf.ByteString,short)
      */
     @Override
     public void execute(IClientConnection client, ByteString packet, short code) throws Exception
     {
-        // TODO Auto-generated method stub
-
+        throw new UnsupportedOperationException();
     }
 
     public void execute(CSServerConn client, byte[] packet)
     {
-
+        throw new UnsupportedOperationException();
     }
 }

@@ -40,7 +40,7 @@ public abstract class AbstractTask implements Runnable
         this.message = message;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Runnable#run()

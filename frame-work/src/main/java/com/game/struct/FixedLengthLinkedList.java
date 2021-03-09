@@ -59,7 +59,7 @@ public class FixedLengthLinkedList<T>extends LinkedList<T>
         return ret;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.util.LinkedList#addFirst(java.lang.Object)

@@ -44,7 +44,7 @@ public class RedisComponent implements IRedisComponent
     /** redis 连接池 */
     private JedisPool jedisPool = null;
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.component.IComponent#getName()
@@ -55,7 +55,7 @@ public class RedisComponent implements IRedisComponent
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.component.IComponent#initialize()
@@ -66,7 +66,7 @@ public class RedisComponent implements IRedisComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.component.IComponent#start()
@@ -107,7 +107,7 @@ public class RedisComponent implements IRedisComponent
      * }
      */
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.component.IComponent#stop()
@@ -121,7 +121,7 @@ public class RedisComponent implements IRedisComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.component.IComponent#reload()
@@ -452,7 +452,7 @@ public class RedisComponent implements IRedisComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.chat.component.inf.IRedisComponent#lrang(java.lang.String, int, int)
@@ -621,7 +621,7 @@ public class RedisComponent implements IRedisComponent
         return value;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.chat.component.inf.IRedisComponent#ltrim(java.lang.String, int)
@@ -644,7 +644,7 @@ public class RedisComponent implements IRedisComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.chat.component.inf.IRedisComponent#delAll(java.lang.String)
@@ -667,7 +667,7 @@ public class RedisComponent implements IRedisComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.threemonths.chat.component.inf.IRedisComponent#delAll(java.lang.String)
@@ -690,7 +690,7 @@ public class RedisComponent implements IRedisComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IRedisComponent#setNX(java.lang.String, java.lang.String)
@@ -718,7 +718,7 @@ public class RedisComponent implements IRedisComponent
             return get(key);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IRedisComponent#setex(java.lang.String, int, java.lang.String)
@@ -759,7 +759,7 @@ public class RedisComponent implements IRedisComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IRedisComponent#incr(java.lang.String)
@@ -782,7 +782,7 @@ public class RedisComponent implements IRedisComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.IRedisComponent#incrby(java.lang.String, int)

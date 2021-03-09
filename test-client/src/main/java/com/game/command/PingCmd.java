@@ -33,7 +33,6 @@ public class PingCmd extends AbstractPressCmd
         builder.setCode(ProtocolIn.PING_VALUE);
         builder.setBody(ByteString.EMPTY);
         player.getClient().sendTCP(builder);
-        System.out.println("Player ping: " + player.getUserID());
     }
 
 }

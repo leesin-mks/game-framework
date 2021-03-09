@@ -94,7 +94,7 @@ public class NettyClientConnection extends AbstractClientConnection
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IClientConnection#isServerClosed()
@@ -105,7 +105,7 @@ public class NettyClientConnection extends AbstractClientConnection
         return isServerClosed;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IClientConnection#setIsServerClosed(boolean)
@@ -116,7 +116,7 @@ public class NettyClientConnection extends AbstractClientConnection
         this.isServerClosed = isServerClosed;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.IClientConnection#isConnected()
@@ -134,7 +134,7 @@ public class NettyClientConnection extends AbstractClientConnection
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.net.AbstractClientConnection#setReadBytes()

@@ -24,11 +24,13 @@ import com.game.net.IClientConnection;
  */
 public class ServerCmdTask extends AbstractServerTask
 {
-    private IClientConnection connect;
+    private final IClientConnection connect;
 
     /**
      * @param cmd
+     *            command
      * @param message
+     *            message
      */
     public ServerCmdTask(AbstractServerCmd cmd, byte[] message, IClientConnection connect)
     {
@@ -36,10 +38,10 @@ public class ServerCmdTask extends AbstractServerTask
         this.connect = connect;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.niuniu.command.AbstractTask#execute()
+     * @see com.game.command.ServerCmdTask#execute()
      */
     @Override
     protected void execute()

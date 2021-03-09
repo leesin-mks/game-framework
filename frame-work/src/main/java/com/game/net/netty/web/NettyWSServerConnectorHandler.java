@@ -88,7 +88,7 @@ public class NettyWSServerConnectorHandler extends SimpleChannelInboundHandler<O
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#channelInactive(io.netty.channel.ChannelHandlerContext)
@@ -112,7 +112,7 @@ public class NettyWSServerConnectorHandler extends SimpleChannelInboundHandler<O
         ctx.close();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see io.netty.channel.ChannelInboundHandlerAdapter#channelActive(io.netty.channel.ChannelHandlerContext)

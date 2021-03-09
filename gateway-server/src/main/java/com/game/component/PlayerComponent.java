@@ -17,7 +17,6 @@
 package com.game.component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,18 +37,16 @@ import com.game.type.ModuleType;
  */
 public class PlayerComponent implements IPlayerComponent
 {
-    private Logger LOGGER = LoggerFactory.getLogger(PlayerComponent.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerComponent.class);
 
     private Map<Integer, ProxyPlayer> players;
 
-    private Object locker = new Object();
+    private final Object locker = new Object();
 
-    private Map<Integer, Integer> online;
-
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.component.IComponent#getName()
+     * @see com.game.component.IComponent#getName()
      */
     @Override
     public String getName()
@@ -57,23 +54,22 @@ public class PlayerComponent implements IPlayerComponent
         return NAME;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.component.IComponent#initialize()
+     * @see com.game.component.IComponent#initialize()
      */
     @Override
     public boolean initialize()
     {
         players = new ConcurrentHashMap<>();
-        online = new HashMap<Integer, Integer>();
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.component.IComponent#start()
+     * @see com.game.component.IComponent#start()
      */
     @Override
     public boolean start()
@@ -81,10 +77,10 @@ public class PlayerComponent implements IPlayerComponent
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.component.IComponent#stop()
+     * @see com.game.component.IComponent#stop()
      */
     @Override
     public void stop()
@@ -95,10 +91,10 @@ public class PlayerComponent implements IPlayerComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see little.seven.component.IComponent#reload()
+     * @see com.game.component.IComponent#reload()
      */
     @Override
     public boolean reload()
@@ -115,7 +111,7 @@ public class PlayerComponent implements IPlayerComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.inf.IPlayerComponent#remove(int)
@@ -125,17 +121,14 @@ public class PlayerComponent implements IPlayerComponent
     {
         synchronized (locker)
         {
-            if (players.containsKey(userId))
-            {
-                players.remove(userId);
-            }
+            players.remove(userId);
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.component.inf.IPlayerComponent#add(int, com.game.object.inf.GamePlayer)
+     * @see com.game.component.inf.IPlayerComponent#add(int, com.game.object.ProxyPlayer)
      */
     @Override
     public boolean add(int userId, ProxyPlayer player)
@@ -166,7 +159,7 @@ public class PlayerComponent implements IPlayerComponent
         return new ArrayList<>(players.values());
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.inf.IPlayerComponent#sendToAll(com.game.pb.CommonMsgProto.CommonMsgPB.Builder)
@@ -180,7 +173,7 @@ public class PlayerComponent implements IPlayerComponent
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.component.inf.IPlayerComponent#sendToAll(byte[])

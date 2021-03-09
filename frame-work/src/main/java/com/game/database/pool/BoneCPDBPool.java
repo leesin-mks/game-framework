@@ -44,7 +44,7 @@ public class BoneCPDBPool implements IDBPool
         this.configuration = configuration;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.datebase.pool.IDBPool#getConnection()
@@ -66,7 +66,7 @@ public class BoneCPDBPool implements IDBPool
         return null;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.datebase.pool.IDBPool#startup()
@@ -125,7 +125,7 @@ public class BoneCPDBPool implements IDBPool
         config.setDisableConnectionTracking(configuration.getDisableConnectionTracking());
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.datebase.pool.IDBPool#shutdown()
@@ -139,7 +139,7 @@ public class BoneCPDBPool implements IDBPool
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.datebase.pool.IDBPool#getState()
@@ -151,7 +151,7 @@ public class BoneCPDBPool implements IDBPool
         return null;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.game.datebase.pool.IDBPool#getCurConns()

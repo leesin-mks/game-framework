@@ -19,9 +19,9 @@ package com.game.command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.game.server.ServerClient;
 import com.game.component.ComponentManager;
 import com.game.net.IClientConnection;
+import com.game.server.ServerClient;
 import com.google.protobuf.ByteString;
 
 /**
@@ -55,20 +55,19 @@ public abstract class AbstractServerCmd implements ICommand
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.game.command.ICommand#execute(com.bdsk.net.IClientConnection, com.google.protobuf.ByteString)
+     * @see com.game.command.ICommand#execute(com.game.net.IClientConnection, com.google.protobuf.ByteString,short)
      */
     @Override
-    public void execute(IClientConnection client, ByteString packet, short code) throws Exception
+    public void execute(IClientConnection client, ByteString packet, short code)
     {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * server excute全局调用使用
+     * server executeConnect全局调用使用
      * 
      * @param
      */
