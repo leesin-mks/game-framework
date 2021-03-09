@@ -36,7 +36,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class MessageModule extends PlayerModule implements IMessageModule

@@ -20,7 +20,7 @@ import com.game.component.IComponent;
 
 /**
  * @date 2020年03月31日 15:29
- * @auth zm
+ * @author leesin
  */
 
 public interface IServerListComponent extends IComponent

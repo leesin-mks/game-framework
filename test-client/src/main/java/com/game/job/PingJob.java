@@ -24,7 +24,7 @@ import com.game.component.inf.IPlayerComponent;
 
 /**
  * @date 2020年04月21日 14:27
- * @auth zm
+ * @author leesin
  */
 public class PingJob implements Job {
 	@Override

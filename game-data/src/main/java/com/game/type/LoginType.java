@@ -17,7 +17,7 @@
 package com.game.type;
 
 /**
- * @author dsfish
+ * @author leesin dsfish
  *
  */
 public enum LoginType

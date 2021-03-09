@@ -17,7 +17,7 @@
 package com.game.net;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractServerConnector implements IServerConnector
@@ -29,13 +29,13 @@ public abstract class AbstractServerConnector implements IServerConnector
     protected int reconnectedTimes;
 
     /** 连接地址（IP或域名） */
-    private String address;
+    private final String address;
     /** 连接端口 */
-    private int port;
+    private final int port;
     /** 最大重连次数 */
     private int maxReconnectTimes;
     /** 服务器包处理器 */
-    private IServerPacketHandler packetHandler = null;
+    private final IServerPacketHandler packetHandler;
 
     private boolean isServerClosed = false;
 
@@ -71,7 +71,7 @@ public abstract class AbstractServerConnector implements IServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#getAddress()
+     * @see com.game.net.IServerConnector#getAddress()
      */
     @Override
     public String getAddress()
@@ -82,7 +82,7 @@ public abstract class AbstractServerConnector implements IServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#getPort()
+     * @see com.game.net.IServerConnector#getPort()
      */
     @Override
     public int getPort()
@@ -93,7 +93,7 @@ public abstract class AbstractServerConnector implements IServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#getMaxReconnectTimes()
+     * @see com.game.net.IServerConnector#getMaxReconnectTimes()
      */
     @Override
     public int getMaxReconnectTimes()
@@ -104,7 +104,7 @@ public abstract class AbstractServerConnector implements IServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#setMaxReconnectTimes(int)
+     * @see com.game.net.IServerConnector#setMaxReconnectTimes(int)
      */
     @Override
     public void setMaxReconnectTimes(int maxReconnectTimes)
@@ -116,7 +116,7 @@ public abstract class AbstractServerConnector implements IServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#getReconnectedTimes()
+     * @see com.game.net.IServerConnector#getReconnectedTimes()
      */
     @Override
     public int getReconnectedTimes()
@@ -127,7 +127,7 @@ public abstract class AbstractServerConnector implements IServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#getPacketHandler()
+     * @see com.game.net.IServerConnector#getPacketHandler()
      */
     @Override
     public IServerPacketHandler getPacketHandler()

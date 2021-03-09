@@ -19,7 +19,7 @@ package com.game.command;
 import com.game.net.IClientConnection;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ServerCmdTask extends AbstractServerTask

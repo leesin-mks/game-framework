@@ -39,7 +39,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
  * @date 2020年04月09日 18:43
- * @auth zm
+ * @author leesin
  */
 @ICode(code = ProtocolIn.USER_LOGIN_VALUE, desc = "登陆")
 public class UserLoginCmd extends AbstractUserCmd

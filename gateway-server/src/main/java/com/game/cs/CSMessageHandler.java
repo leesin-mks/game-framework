@@ -28,7 +28,7 @@ import com.game.net.IServerConnector;
 import com.game.net.IServerPacketHandler;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CSMessageHandler implements IServerPacketHandler
@@ -38,7 +38,7 @@ public class CSMessageHandler implements IServerPacketHandler
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerPacketHandler#process(com.bdsk.net.IServerConnector, java.lang.Object)
+     * @see com.game.net.IServerPacketHandler#process(com.bdsk.net.IServerConnector, java.lang.Object)
      */
     @Override
     public void process(IServerConnector client, Object packet)

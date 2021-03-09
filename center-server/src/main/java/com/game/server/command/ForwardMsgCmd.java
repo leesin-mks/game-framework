@@ -27,7 +27,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
  * @date 2020年04月16日 19:26
- * @auth zm
+ * @author leesin
  */
 @ICode(code = CSProtocol.FORWARD_MESSAGE, desc = "转发消息")
 public class ForwardMsgCmd extends AbstractServerCmd

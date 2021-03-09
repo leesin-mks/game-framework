@@ -90,7 +90,7 @@
       <recent name="com.game.Job" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CopyrightUtil">
+  <component name="RunManager" selected="Application.GameServer">
     <configuration name="CommonMessage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.game.net.CommonMessage" />
       <module name="frame-work" />
@@ -261,8 +261,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CopyrightUtil" />
         <item itemvalue="Application.GameServer" />
+        <item itemvalue="Application.CopyrightUtil" />
         <item itemvalue="Application.RechargeServer" />
         <item itemvalue="Application.CommonMessage" />
         <item itemvalue="Application.Test" />
@@ -345,7 +345,7 @@
       <workItem from="1589530865677" duration="5534000" />
       <workItem from="1589878681065" duration="9441000" />
       <workItem from="1615021882525" duration="6658000" />
-      <workItem from="1615171399777" duration="25264000" />
+      <workItem from="1615171399777" duration="33511000" />
     </task>
     <servers />
   </component>
@@ -367,6 +367,10 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/frame-work/src/main/java/com/game/event/EventSource.java</url>
           <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/protobuf-protocol/src/main/java/com/game/pb/CenterMsgProto.java</url>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

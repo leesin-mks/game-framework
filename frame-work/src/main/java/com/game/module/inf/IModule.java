@@ -26,27 +26,29 @@ public interface IModule
 {
     /**
      * 初始化
+     * 
+     * @return init result
      */
     boolean init();
 
     /**
      * 读DB
      * 
-     * @return
+     * @return load from database result
      */
     boolean loadFromDB();
 
     /**
      * 写DB
      * 
-     * @return
+     * @return save into database result
      */
     boolean saveIntoDB();
 
     /**
      * 写缓存
      * 
-     * @return
+     * @return save into cache result
      */
     boolean saveIntoCache();
 
@@ -58,7 +60,7 @@ public interface IModule
     /**
      * 得到模块类型
      * 
-     * @return
+     * @return the module type
      */
     ModuleType getType();
 }

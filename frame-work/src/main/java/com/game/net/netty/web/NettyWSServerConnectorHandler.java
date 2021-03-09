@@ -32,7 +32,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketClientHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyWSServerConnectorHandler extends SimpleChannelInboundHandler<Object>

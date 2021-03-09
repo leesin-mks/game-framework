@@ -21,7 +21,7 @@ import com.game.net.IServerConnector;
 import com.game.util.StackMessagePrint;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class FSCmdTask extends AbstractServerTask

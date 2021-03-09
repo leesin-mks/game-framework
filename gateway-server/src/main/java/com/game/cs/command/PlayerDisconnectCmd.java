@@ -28,7 +28,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
  * @date 2020年04月27日 14:46
- * @auth zm
+ * @author leesin
  */
 @ICode(code = CSProtocol.PLAYER_DISCONNECT, desc = "玩家断线")
 public class PlayerDisconnectCmd extends AbstractServerCmd

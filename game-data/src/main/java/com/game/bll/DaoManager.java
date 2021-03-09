@@ -24,7 +24,7 @@ import com.game.database.DBComponent;
 import com.game.database.DBHelper;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class DaoManager

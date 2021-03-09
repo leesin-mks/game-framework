@@ -19,7 +19,7 @@ package com.game.database;
 import java.util.HashMap;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class DBParamWrapper

@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.game.util.StringUtil;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class GlobalConfigManager

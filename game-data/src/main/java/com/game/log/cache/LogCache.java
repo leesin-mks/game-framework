@@ -52,7 +52,7 @@ import com.game.util.NamedThreadFactory;
 
 /**
  * 
- * @author saly.bao
+ * @author leesin
  */
 public class LogCache implements ILogCache
 {

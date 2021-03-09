@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-/**
- * BaseShutdownHooker
- *
- *  @date 2021-03-06
- *
- * @author leesin
- */
 package com.game;
 
-
+/**
+ *
+ *
+ * @author leesin
+ *
+ * @since  1.0.0
+ *
+ */
 public class BaseShutdownHooker extends Thread
 {
     private final IServer server;

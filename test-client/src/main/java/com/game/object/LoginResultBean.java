@@ -19,7 +19,7 @@ package com.game.object;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class LoginResultBean

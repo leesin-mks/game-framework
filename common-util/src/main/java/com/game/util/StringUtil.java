@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class StringUtil

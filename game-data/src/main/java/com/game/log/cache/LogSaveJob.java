@@ -23,7 +23,7 @@ import org.quartz.JobExecutionException;
 import com.game.component.ComponentManager;
 
 /**
- * @author Jacken
+ * @author leesin
  *
  */
 public class LogSaveJob implements Job

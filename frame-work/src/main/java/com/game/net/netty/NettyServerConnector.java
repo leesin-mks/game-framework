@@ -24,17 +24,13 @@ import com.game.net.IServerPacketHandler;
 import com.game.type.CommonConst;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyServerConnector extends AbstractServerConnector
@@ -44,23 +40,26 @@ public class NettyServerConnector extends AbstractServerConnector
     private Channel channel;
 
     /** 处理器 */
-    private Class<NettyServerConnectorHandler> handler;
+    private final Class<NettyServerConnectorHandler> handler;
 
     /** 编码解码工厂 */
-    private Class<NettyCommonCodecFactory> codec;
+    private final Class<NettyCommonCodecFactory> codec;
 
-    private EventLoopGroup group = new NioEventLoopGroup();
+    private final EventLoopGroup group = new NioEventLoopGroup();
 
-    private Bootstrap bootstrap = new Bootstrap();
+    private final Bootstrap bootstrap = new Bootstrap();
 
     private boolean setGroup;
 
-    // NioSocketChannel
     /**
      * @param address
+     *            address
      * @param port
+     *            port
      * @param packetHandler
+     *            packet handler
      * @param nettyCodecFactory
+     *            code factory
      */
     public NettyServerConnector(String address, int port, IServerPacketHandler packetHandler,
             Class<NettyCommonCodecFactory> nettyCodecFactory)
@@ -83,7 +82,7 @@ public class NettyServerConnector extends AbstractServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#connect()
+     * @see com.game.net.IServerConnector#connect()
      */
     @Override
     public boolean connect()
@@ -120,7 +119,7 @@ public class NettyServerConnector extends AbstractServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#disconnect()
+     * @see com.game.net.IServerConnector#disconnect()
      */
     @Override
     public void disconnect()
@@ -132,28 +131,20 @@ public class NettyServerConnector extends AbstractServerConnector
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#isConnected()
+     * @see com.game.net.IServerConnector#isConnected()
      */
     @Override
     public boolean isConnected()
     {
-        if (channel != null && channel.isActive())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return channel != null && channel.isActive();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#send(com.bdsk.net.CommonMessage)
      */
     @Override
     public void send(Object msg)
@@ -162,13 +153,12 @@ public class NettyServerConnector extends AbstractServerConnector
         {
             channel.writeAndFlush(msg);
         }
-
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.AbstractServerConnector#setReadBytes()
+     * @see com.game.net.AbstractServerConnector#setChannelReadBytes()
      */
     @Override
     public void setChannelReadBytes()

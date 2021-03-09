@@ -20,7 +20,7 @@ import com.game.net.IClientConnection;
 import com.google.protobuf.ByteString;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ServerCmdTask extends AbstractTask

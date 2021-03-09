@@ -34,7 +34,7 @@ import com.game.pb.CenterMsgProto.RegisterMsg;
 import sun.rmi.runtime.Log;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ServerClient implements IConnectionHolder, ISequenceTask
@@ -52,7 +52,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IConnectionHolder#onDisconnect()
+     * @see com.game.net.IConnectionHolder#onDisconnect()
      */
     @Override
     public void onDisconnect()
@@ -66,7 +66,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IConnectionHolder#getClientConnection()
+     * @see com.game.net.IConnectionHolder#getClientConnection()
      */
     @Override
     public IClientConnection getClientConnection()
@@ -77,7 +77,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IConnectionHolder#setClientConnection(com.bdsk.net.IClientConnection)
+     * @see com.game.net.IConnectionHolder#setClientConnection(com.bdsk.net.IClientConnection)
      */
     @Override
     public void setClientConnection(IClientConnection conn)
@@ -88,7 +88,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.ISequenceTask#getSequenceTaskName()
+     * @see com.game.command.ISequenceTask#getSequenceTaskName()
      */
     @Override
     public String getSequenceTaskName()
@@ -99,7 +99,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.ISequenceTask#addCommandTask(java.lang.Runnable)
+     * @see com.game.command.ISequenceTask#addCommandTask(java.lang.Runnable)
      */
     @Override
     public <T extends Runnable> void addCommandTask(T task)
@@ -110,7 +110,7 @@ public class ServerClient implements IConnectionHolder, ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.ISequenceTask#finishOneCommandTask()
+     * @see com.game.command.ISequenceTask#finishOneCommandTask()
      */
     @Override
     public void finishOneCommandTask()

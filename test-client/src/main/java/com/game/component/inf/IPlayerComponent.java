@@ -21,7 +21,7 @@ import com.game.object.PressPlayer;
 
 /**
  * @date 2020年04月21日 14:29
- * @auth zm
+ * @author leesin
  */
 public interface IPlayerComponent extends IComponent {
 	public static final String NAME = "PlayerComponent";

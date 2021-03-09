@@ -30,7 +30,7 @@ public enum ServerStateType
 
     private final int type;
 
-    private ServerStateType(int type)
+    ServerStateType(int type)
     {
         this.type = type;
     }

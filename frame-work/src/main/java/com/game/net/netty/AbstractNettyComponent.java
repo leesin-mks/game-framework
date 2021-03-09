@@ -27,7 +27,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractNettyComponent implements IComponent
@@ -43,7 +43,7 @@ public abstract class AbstractNettyComponent implements IComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#getName()
+     * @see com.game.component.IComponent#getName()
      */
     @Override
     public String getName()
@@ -54,7 +54,7 @@ public abstract class AbstractNettyComponent implements IComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#initialize()
+     * @see com.game.component.IComponent#initialize()
      */
     @Override
     public boolean initialize()
@@ -65,7 +65,7 @@ public abstract class AbstractNettyComponent implements IComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#start()
+     * @see com.game.component.IComponent#start()
      */
     @Override
     public boolean start()
@@ -81,12 +81,11 @@ public abstract class AbstractNettyComponent implements IComponent
             LOGGER.error("port:" + getPort());
             bootStrap.bind(getPort()).sync();
             // ChannelFuture f = bootStrap.bind(getPort()).sync();
-
             // f.channel().closeFuture().sync();
         }
         catch (Exception e)
         {
-            LOGGER.error("netty Error:" + e.toString());
+            LOGGER.error("Netty error: ", e.toString());
             return false;
         }
         finally
@@ -100,7 +99,7 @@ public abstract class AbstractNettyComponent implements IComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#stop()
+     * @see com.game.component.IComponent#stop()
      */
     @Override
     public void stop()
@@ -114,12 +113,11 @@ public abstract class AbstractNettyComponent implements IComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#reload()
+     * @see com.game.component.IComponent#reload()
      */
     @Override
     public boolean reload()
     {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -127,13 +125,14 @@ public abstract class AbstractNettyComponent implements IComponent
      * netty初始化配置。
      * 
      * @param bootstrap
+     *            server bootstrap
      */
     protected abstract void acceptorInit(ServerBootstrap bootstrap);
 
     /**
      * 获取监听的端口。
      * 
-     * @return
+     * @return port
      */
     protected abstract int getPort();
 

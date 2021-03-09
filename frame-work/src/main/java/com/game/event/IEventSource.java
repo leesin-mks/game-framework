@@ -17,7 +17,7 @@
 package com.game.event;
 
 /**
- * @author jacken
+ * @author leesin
  *         事件源。同一事件类型，支持多个监听者，并且监听者对象可以相同。
  */
 public interface IEventSource

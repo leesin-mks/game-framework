@@ -17,7 +17,7 @@
 package com.game.bean;
 
 /**
- * @author dsfish
+ * @author leesin
  *
  */
 public final class StateCode

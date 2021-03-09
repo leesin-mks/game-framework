@@ -43,7 +43,7 @@ import com.game.util.StringUtil;
 
 /**
  * @date 2020年04月16日 20:05
- * @auth zm
+ * @author leesin
  */
 public class GamePlayer implements ISequenceTask
 {

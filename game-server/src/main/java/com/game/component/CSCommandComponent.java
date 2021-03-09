@@ -20,7 +20,7 @@ import com.game.command.AbstractCommandComponent;
 import com.game.command.ICode;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CSCommandComponent extends AbstractCommandComponent<ICode>
@@ -37,7 +37,7 @@ public class CSCommandComponent extends AbstractCommandComponent<ICode>
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.AbstractCommandComponent#getCommandPacketName()
+     * @see com.game.command.AbstractCommandComponent#getCommandPacketName()
      */
     @Override
     public String getCommandPacketName()
@@ -48,7 +48,7 @@ public class CSCommandComponent extends AbstractCommandComponent<ICode>
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.AbstractCommandComponent#getAnnotationClass()
+     * @see com.game.command.AbstractCommandComponent#getAnnotationClass()
      */
     @Override
     public Class<ICode> getAnnotationClass()
@@ -59,7 +59,7 @@ public class CSCommandComponent extends AbstractCommandComponent<ICode>
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.AbstractCommandComponent#getNodeType(java.lang.annotation.Annotation)
+     * @see com.game.command.AbstractCommandComponent#getNodeType(java.lang.annotation.Annotation)
      */
     @Override
     public Short getNodeType(ICode annotation)

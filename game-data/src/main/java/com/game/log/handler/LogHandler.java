@@ -27,7 +27,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * 
- * @author saly.bao
+ * @author leesin
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogHandler

@@ -26,7 +26,7 @@ import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class BoneCPDBPool implements IDBPool
@@ -47,7 +47,7 @@ public class BoneCPDBPool implements IDBPool
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.datebase.pool.IDBPool#getConnection()
+     * @see com.game.datebase.pool.IDBPool#getConnection()
      */
     @Override
     public Connection getConnection()
@@ -69,7 +69,7 @@ public class BoneCPDBPool implements IDBPool
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.datebase.pool.IDBPool#startup()
+     * @see com.game.datebase.pool.IDBPool#startup()
      */
     @Override
     public boolean startUp()
@@ -128,7 +128,7 @@ public class BoneCPDBPool implements IDBPool
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.datebase.pool.IDBPool#shutdown()
+     * @see com.game.datebase.pool.IDBPool#shutdown()
      */
     @Override
     public void shutDown()
@@ -142,7 +142,7 @@ public class BoneCPDBPool implements IDBPool
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.datebase.pool.IDBPool#getState()
+     * @see com.game.datebase.pool.IDBPool#getState()
      */
     @Override
     public String getState()
@@ -154,7 +154,7 @@ public class BoneCPDBPool implements IDBPool
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.datebase.pool.IDBPool#getCurConns()
+     * @see com.game.datebase.pool.IDBPool#getCurConns()
      */
     @Override
     public int getCurConns()

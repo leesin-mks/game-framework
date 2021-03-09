@@ -217,7 +217,7 @@ public class GameServer implements IServer
         }
         else
         {
-            LOGGER.error("找不到服务器配置");
+            LOGGER.error("Can not find server config");
         }
     }
 

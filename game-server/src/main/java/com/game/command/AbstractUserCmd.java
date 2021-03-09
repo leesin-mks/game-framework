@@ -25,7 +25,7 @@ import com.game.objec.GamePlayer;
 import com.google.protobuf.ByteString;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractUserCmd implements ICommand
@@ -44,7 +44,7 @@ public abstract class AbstractUserCmd implements ICommand
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.ICommand#execute(com.bdsk.net.IClientConnection, byte[])
+     * @see com.game.command.ICommand#execute(com.bdsk.net.IClientConnection, byte[])
      */
     @Override
     public void execute(IClientConnection client, byte[] packet) throws Exception

@@ -36,7 +36,7 @@ import com.game.web.job.UpdateServerListJob;
 import com.google.gson.Gson;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ServerListComponent implements IServerListComponent
@@ -50,7 +50,7 @@ public class ServerListComponent implements IServerListComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#getName()
+     * @see com.game.component.IComponent#getName()
      */
     @Override
     public String getName()
@@ -61,7 +61,7 @@ public class ServerListComponent implements IServerListComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#initialize()
+     * @see com.game.component.IComponent#initialize()
      */
     @Override
     public boolean initialize()
@@ -74,7 +74,7 @@ public class ServerListComponent implements IServerListComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#start()
+     * @see com.game.component.IComponent#start()
      */
     @Override
     public boolean start()
@@ -88,7 +88,7 @@ public class ServerListComponent implements IServerListComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#stop()
+     * @see com.game.component.IComponent#stop()
      */
     @Override
     public void stop()
@@ -100,7 +100,7 @@ public class ServerListComponent implements IServerListComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#reload()
+     * @see com.game.component.IComponent#reload()
      */
     @Override
     public boolean reload()

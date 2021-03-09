@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bdsk.struct;
+package com.game.struct;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * @author dsfish
+ * @author leesin
  *
  */
 public class Tree<E> implements Serializable

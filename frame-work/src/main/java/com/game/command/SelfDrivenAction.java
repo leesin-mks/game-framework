@@ -31,7 +31,7 @@ public abstract class SelfDrivenAction implements Runnable
 
     private SelfDrivenTaskQueue<SelfDrivenAction> actionQueue;
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Runnable#run()
@@ -47,8 +47,7 @@ public abstract class SelfDrivenAction implements Runnable
             }
             catch (Exception e)
             {
-                String errorMsg = String.format("action error:%n%s%n",
-                        StackMessagePrint.printErrorTrace(e));
+                String errorMsg = String.format("action error:%n%s%n", StackMessagePrint.printErrorTrace(e));
                 logger.error(errorMsg, e);
             }
             finally

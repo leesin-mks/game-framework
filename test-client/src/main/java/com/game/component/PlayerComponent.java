@@ -29,7 +29,7 @@ import com.google.protobuf.ByteString;
 
 /**
  * @date 2020年04月21日 14:29
- * @auth zm
+ * @author leesin
  */
 public class PlayerComponent implements IPlayerComponent
 {

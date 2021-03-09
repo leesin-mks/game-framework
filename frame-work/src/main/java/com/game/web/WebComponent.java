@@ -36,7 +36,7 @@ import com.game.config.GlobalConfigManager;
 import com.game.util.ClassUtil;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class WebComponent implements IComponent

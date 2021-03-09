@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.bdsk.struct;
+package com.game.struct;
 
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * @author Kissy
+ * @author leesin
  *
  */
 public class KeyDescTreeMap<K extends Comparable<K>, V>extends TreeMap<K, V>

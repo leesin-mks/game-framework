@@ -36,7 +36,7 @@ import com.sun.tools.attach.VirtualMachineDescriptor;
 import redis.clients.jedis.JedisPubSub;
 
 /**
- * @author chenzhichao
+ * @author leesin
  *
  */
 public class UpdateListener extends JedisPubSub

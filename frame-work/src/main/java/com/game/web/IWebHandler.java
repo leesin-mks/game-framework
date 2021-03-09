@@ -17,7 +17,7 @@
 package com.game.web;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IWebHandler

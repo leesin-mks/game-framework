@@ -16,6 +16,8 @@
 
 package com.game.net.netty;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.game.net.CommonMessageHandler;
 import com.game.net.IClientConnection;
@@ -25,12 +27,14 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ClientNettyHandler extends ChannelInboundHandlerAdapter
 {
-    private String cmdCMPTName;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientNettyHandler.class);
+
+    private final String cmdCMPTName;
 
     /**
      * 
@@ -43,19 +47,18 @@ public class ClientNettyHandler extends ChannelInboundHandlerAdapter
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception
     {
-        // TODO Auto-generated method stub
         super.channelRegistered(ctx);
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception
+    public void channelActive(ChannelHandlerContext ctx)
     {
-        IClientConnection conn =new NettyClientConnection(new CommonMessageHandler(cmdCMPTName), ctx.channel(), 65534);
+        IClientConnection conn = new NettyClientConnection(new CommonMessageHandler(cmdCMPTName), ctx.channel(), 65534);
         ctx.channel().attr(CommonConst.CLIENT_CON).set(conn);
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
+    public void channelRead(ChannelHandlerContext ctx, Object msg)
     {
         // super.channelRead(ctx, msg);
         IClientConnection conn = ctx.channel().attr(CommonConst.CLIENT_CON).get();
@@ -65,7 +68,6 @@ public class ClientNettyHandler extends ChannelInboundHandlerAdapter
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception
     {
-        // TODO Auto-generated method stub
         super.channelInactive(ctx);
         IClientConnection conn = ctx.channel().attr(CommonConst.CLIENT_CON).get();
         if (!conn.isServerClosed())
@@ -81,7 +83,9 @@ public class ClientNettyHandler extends ChannelInboundHandlerAdapter
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
     {
-        // TODO Auto-generated method stub
-        // super.exceptionCaught(ctx, cause);
+        super.exceptionCaught(ctx, cause);
+        IClientConnection conn = ctx.channel().attr(CommonConst.CLIENT_CON).get();
+        String ip = conn == null ? "" : conn.getClientIP();
+        LOGGER.warn("Connection error: {}", ip, cause);
     }
 }

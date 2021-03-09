@@ -33,7 +33,7 @@ import com.game.timer.ITimerComponent;
 import com.game.type.ServerStateType;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CSServerConn extends NettyServerConnector implements ISequenceTask
@@ -63,7 +63,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.netty.NettyServerConnector#disconnect()
+     * @see com.game.net.netty.NettyServerConnector#disconnect()
      */
     @Override
     public void disconnect()
@@ -119,7 +119,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.ISequenceTask#getSequenceTaskName()
+     * @see com.game.command.ISequenceTask#getSequenceTaskName()
      */
     @Override
     public String getSequenceTaskName()
@@ -131,7 +131,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.ISequenceTask#addCommandTask(java.lang.Runnable)
+     * @see com.game.command.ISequenceTask#addCommandTask(java.lang.Runnable)
      */
     @Override
     public <T extends Runnable> void addCommandTask(T task)
@@ -142,7 +142,7 @@ public class CSServerConn extends NettyServerConnector implements ISequenceTask
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.command.ISequenceTask#finishOneCommandTask()
+     * @see com.game.command.ISequenceTask#finishOneCommandTask()
      */
     @Override
     public void finishOneCommandTask()

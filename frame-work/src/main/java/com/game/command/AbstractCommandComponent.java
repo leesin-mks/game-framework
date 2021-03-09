@@ -28,31 +28,31 @@ import com.game.component.IComponent;
 import com.game.util.ClassUtil;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractCommandComponent<T extends Annotation> implements IComponent
 {
-    private static Logger LOGGER = LoggerFactory.getLogger(AbstractCommandComponent.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCommandComponent.class);
 
     public static String NAME = "Command";
 
     /**
      * 缓存命令对象
      **/
-    private final Map<Short, ICommand> cmdCache = new HashMap<Short, ICommand>();
+    private final Map<Short, ICommand> cmdCache = new HashMap<>();
 
     /**
      * 取得所在包名称
      * 
-     * @return
+     * @return package name
      */
     public abstract String getCommandPacketName();
 
     /**
      * 取得注释的类型
      * 
-     * @return
+     * @return annotation class
      */
     public abstract Class<T> getAnnotationClass();
 
@@ -60,7 +60,8 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
      * 取得类型
      * 
      * @param annotation
-     * @return
+     *            annotation
+     * @return annotation code
      */
     public abstract Short getNodeType(T annotation);
 
@@ -86,6 +87,7 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
         try
         {
             List<Class<?>> allClasses = ClassUtil.getClasses(getCommandPacketName());
+            assert allClasses != null;
             for (Class<?> clazz : allClasses)
             {
                 try
@@ -104,7 +106,6 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
                             return false;
                         }
                         cmdCache.put(getNodeType(cmd), (ICommand) clazz.newInstance());
-                        continue;
                     }
                 }
                 catch (Exception e)
@@ -118,15 +119,15 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
         }
         catch (Exception e)
         {
-            LOGGER.error("命令管理器解析错误", e);
-            return false;
+            LOGGER.error("Command parse error: ", e);
         }
+        return false;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#stop()
+     * @see com.game.component.IComponent#stop()
      */
     @Override
     public void stop()
@@ -138,22 +139,22 @@ public abstract class AbstractCommandComponent<T extends Annotation> implements 
      * 缓存中获取命令
      * 
      * @param code
-     * @return
+     *            protocol code
+     * @return command
      */
     public ICommand getCommand(short code)
     {
         return cmdCache.get(code);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#reload()
+     * @see com.game.component.IComponent#reload()
      */
     @Override
     public boolean reload()
     {
-        // TODO Auto-generated method stub
         return false;
     }
 }

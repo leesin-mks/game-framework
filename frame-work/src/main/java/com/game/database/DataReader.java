@@ -19,7 +19,7 @@ package com.game.database;
 import java.sql.ResultSet;
 
 /**
- * @author jacken
+ * @author leesin
  *         db查询结果集数据读取接口
  */
 public interface DataReader<T>

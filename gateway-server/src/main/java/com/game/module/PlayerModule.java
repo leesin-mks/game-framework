@@ -29,7 +29,7 @@ import com.google.gson.Gson;
 
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class PlayerModule implements IModule

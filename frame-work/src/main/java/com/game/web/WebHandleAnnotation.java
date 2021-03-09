@@ -22,7 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

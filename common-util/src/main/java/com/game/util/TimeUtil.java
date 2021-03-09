@@ -29,7 +29,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class TimeUtil

@@ -25,7 +25,7 @@ package com.game.log.cache;
 /**
  * 日志缓存对象
  * 
- * @author saly.bao
+ * @author leesin
  * @param <T>
  */
 public class LogData<T>

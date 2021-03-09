@@ -19,7 +19,7 @@ package com.game.bean;
 import java.util.Map;
 
 /**
- * @author dsfish
+ * @author leesin
  *
  */
 public class RequestURL

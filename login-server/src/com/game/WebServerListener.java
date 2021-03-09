@@ -40,7 +40,7 @@ import com.game.manager.LoginManager;
 import com.game.timer.TimerComponent;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class WebServerListener implements ServletContextListener

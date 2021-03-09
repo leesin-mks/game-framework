@@ -38,7 +38,7 @@ public interface IServer
 
     static void printServerPID()
     {
-        Class mainClass = ClassUtil.deduceMainApplicationClass();
+        Class<?> mainClass = ClassUtil.deduceMainApplicationClass();
         String serverPid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
         System.out.println("Server pid: " + serverPid);
         if (mainClass != null)
@@ -50,7 +50,7 @@ public interface IServer
 
     static void printServerVersion()
     {
-        Class mainClass = ClassUtil.deduceMainApplicationClass();
+        Class<?> mainClass = ClassUtil.deduceMainApplicationClass();
         Log log = LogFactory.getLog(mainClass);
         String versionPath = GlobalConfigManager.getInstance().getServerConfig().getVersionPath();
         versionPath = versionPath == null ? "./version.txt" : versionPath;

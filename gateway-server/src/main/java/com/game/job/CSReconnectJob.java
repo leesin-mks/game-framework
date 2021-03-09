@@ -25,7 +25,7 @@ import com.game.cs.CSServerConn;
 import com.game.type.ServerStateType;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CSReconnectJob implements Job

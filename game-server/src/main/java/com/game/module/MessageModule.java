@@ -32,7 +32,7 @@ import com.game.type.ModuleType;
 import com.google.protobuf.ByteString;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class MessageModule extends PlayerModule implements IMessageModule

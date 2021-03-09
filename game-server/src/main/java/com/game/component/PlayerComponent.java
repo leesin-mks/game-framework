@@ -35,7 +35,7 @@ import com.game.timer.ITimerComponent;
 import com.google.protobuf.ByteString;
 
 /**
- * @author Jacken
+ * @author leesin
  *
  */
 public class PlayerComponent implements IPlayerComponent

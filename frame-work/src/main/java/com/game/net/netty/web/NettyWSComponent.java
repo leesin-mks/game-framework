@@ -29,7 +29,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
 
 /**
- * @author Jacken
+ * @author leesin
  *
  */
 public class NettyWSComponent extends AbstractNettyComponent
@@ -76,7 +76,7 @@ public class NettyWSComponent extends AbstractNettyComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.netty.AbstractNettyComponent#getCmdCMPTName()
+     * @see com.game.net.netty.AbstractNettyComponent#getCmdCMPTName()
      */
     @Override
     protected String getCmdCMPTName()

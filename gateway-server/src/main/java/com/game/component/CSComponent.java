@@ -38,7 +38,7 @@ import com.game.type.ServerType;
 import com.google.protobuf.ByteString;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CSComponent implements ICSComponent
@@ -75,7 +75,7 @@ public class CSComponent implements ICSComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#getName()
+     * @see com.game.component.IComponent#getName()
      */
     @Override
     public String getName()
@@ -86,7 +86,7 @@ public class CSComponent implements ICSComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#initialize()
+     * @see com.game.component.IComponent#initialize()
      */
     @Override
     public boolean initialize()
@@ -99,7 +99,7 @@ public class CSComponent implements ICSComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#start()
+     * @see com.game.component.IComponent#start()
      */
     @Override
     public boolean start()
@@ -135,7 +135,7 @@ public class CSComponent implements ICSComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#stop()
+     * @see com.game.component.IComponent#stop()
      */
     @Override
     public void stop()
@@ -150,7 +150,7 @@ public class CSComponent implements ICSComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IComponent#reload()
+     * @see com.game.component.IComponent#reload()
      */
     @Override
     public boolean reload()

@@ -23,7 +23,7 @@ import com.google.common.reflect.TypeToken;
 
 /**
  * @date 2020年04月16日 15:33
- * @auth zm
+ * @author leesin
  */
 public class JsonTypeToken
 {

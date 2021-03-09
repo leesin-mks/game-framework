@@ -25,16 +25,16 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.socket.SocketChannel;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyComponent extends AbstractNettyComponent
 {
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.AbstractNettyComponent#acceptorInit(io.netty.bootstrap.ServerBootstrap)
+     * @see com.game.net.netty.AbstractNettyComponent#acceptorInit(io.netty.bootstrap.ServerBootstrap)
      */
     @Override
     protected void acceptorInit(ServerBootstrap bootstrap)
@@ -42,7 +42,7 @@ public class NettyComponent extends AbstractNettyComponent
         bootstrap.childHandler(new ChannelInitializer<SocketChannel>()
         {
             @Override
-            protected void initChannel(SocketChannel ch) throws Exception
+            protected void initChannel(SocketChannel ch)
             {
                 ch.pipeline().addLast("codec", new NettyCommonCodecFactory());
                 ch.pipeline().addLast(new ClientNettyHandler(getCmdCMPTName()));
@@ -51,21 +51,21 @@ public class NettyComponent extends AbstractNettyComponent
         }).option(ChannelOption.SO_BACKLOG, 128).childOption(ChannelOption.SO_KEEPALIVE, true);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.AbstractNettyComponent#getPort()
+     * @see com.game.net.netty.AbstractNettyComponent#getPort()
      */
     @Override
     protected int getPort()
     {
-        return Integer.valueOf(GlobalConfigManager.getInstance().getServerConfig().getPort());
+        return Integer.parseInt(GlobalConfigManager.getInstance().getServerConfig().getPort());
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.netty.AbstractNettyComponent#getCmdCMPTName()
+     * @see com.game.net.netty.AbstractNettyComponent#getCmdCMPTName()
      */
     @Override
     protected String getCmdCMPTName()

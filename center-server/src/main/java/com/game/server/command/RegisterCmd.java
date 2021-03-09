@@ -27,7 +27,7 @@ import com.game.server.ServerClient;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 @ICode(code = CSProtocol.REGISTER, desc = "服务器注册")

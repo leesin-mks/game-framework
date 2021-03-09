@@ -24,7 +24,7 @@ import com.game.util.StackMessagePrint;
 import com.google.protobuf.ByteString;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class UserCmdTask extends AbstractTask

@@ -20,7 +20,7 @@ import com.game.command.AbstractUserCmd;
 import com.google.protobuf.ByteString;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractTask implements Runnable

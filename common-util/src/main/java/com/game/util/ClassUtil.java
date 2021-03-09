@@ -17,7 +17,6 @@
 package com.game.util;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -34,7 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ClassUtil
@@ -180,13 +179,13 @@ public class ClassUtil
     /**
      * 以文件的形式来获取包下的所有Class
      * 
-     * @param packageName
-     * @param packagePath
+     * @param packageName package name
+     * @param packagePath package path
      * @param recursive
      * @param classes
      */
-    public static void findAndAddClassesInPackageByFile(String packageName,
-            String packagePath, final boolean recursive, Set<Class<?>> classes)
+    public static void findAndAddClassesInPackageByFile(String packageName, String packagePath, final boolean recursive,
+            Set<Class<?>> classes)
     {
         // 获取此包的目录 建立一个File
         File dir = new File(packagePath);
@@ -196,15 +195,9 @@ public class ClassUtil
             return;
         }
         // 如果存在 就获取包下的所有文件 包括目录
-        File[] dirFiles = dir.listFiles(new FileFilter()
-        {
-            // 自定义过滤规则 如果可以循环(包含子目录) 或则是以.class结尾的文件(编译好的java类文件)
-            public boolean accept(File file)
-            {
-                return (recursive && file.isDirectory())
-                        || (file.getName().endsWith(".class"));
-            }
-        });
+        // 自定义过滤规则 如果可以循环(包含子目录) 或则是以.class结尾的文件(编译好的java类文件)
+        File[] dirFiles = dir.listFiles(
+                file -> (recursive && file.isDirectory()) || (file.getName().endsWith(".class")));
 
         // 循环所有文件
 
@@ -258,7 +251,7 @@ public class ClassUtil
             assert classLoader != null;
             String path = packageName.replace('.', '/');
             Enumeration<URL> resources = classLoader.getResources(path);
-            List<String> dirs = new ArrayList<String>();
+            List<String> dirs = new ArrayList<>();
             while (resources.hasMoreElements())
             {
                 URL resource = resources.nextElement();
@@ -274,14 +267,13 @@ public class ClassUtil
             {
                 classList.add(Class.forName(clazz));
             }
-
             return classList;
         }
         catch (Exception e)
         {
             LOGGER.error("get classes error.", e);
-            return null;
         }
+        return null;
     }
 
     /**
@@ -305,7 +297,7 @@ public class ClassUtil
             String[] split = directory.split("!");
             URL jar = new URL(split[0]);
             ZipInputStream zip = new ZipInputStream(jar.openStream());
-            ZipEntry entry = null;
+            ZipEntry entry;
             while ((entry = zip.getNextEntry()) != null)
             {
                 if (entry.getName().endsWith(".class"))
@@ -351,13 +343,6 @@ public class ClassUtil
      * @param newOneClass
      * @param args
      * @return
-     * @throws ClassNotFoundException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws IllegalArgumentException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
      */
     public static Object newInstance(Class<?> newOneClass, String args)
             throws SecurityException, NoSuchMethodException,

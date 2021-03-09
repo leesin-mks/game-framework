@@ -28,7 +28,7 @@ import com.google.protobuf.ByteString;
 
 /**
  * @date 2020年04月09日 18:43
- * @auth zm
+ * @author leesin
  */
 @ICode(code = ProtocolIn.FORWARD_MESSAGE_VALUE, desc = "转发消息")
 public class ForwardMsgCmd extends AbstractUserCmd

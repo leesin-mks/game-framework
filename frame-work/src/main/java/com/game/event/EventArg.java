@@ -19,7 +19,7 @@ package com.game.event;
 import java.util.EventObject;
 
 /**
- * @author jacken
+ * @author leesin
  *         事件参数
  */
 public class EventArg extends EventObject

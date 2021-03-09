@@ -23,51 +23,58 @@ import org.quartz.Trigger.TriggerState;
 import com.game.component.IComponent;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface ITimerComponent extends IComponent
 {
-    public static final String NAME = "TimerComponent";
+    String NAME = "TimerComponent";
 
     /**
      * 增加定时任务，间隔毫秒单位执行
      * 
      * @param jobName
+     *            name
      * @param job
+     *            class extends com.quartz.Job
      * @param millis
+     *            interval time
      *            重复间隔时间 毫秒
      */
-    public void addJob(String jobName, Class<? extends Job> job, long millis);
+    void addJob(String jobName, Class<? extends Job> job, long millis);
 
     /**
      * 增加延迟delay任务，延迟毫秒单位执行，只执行一次
      * 
      * @param jobName
+     *            name
      * @param job
+     *            class extends com.quartz.Job
      * @param delay
      *            延迟执行时间 毫秒
      */
-    public void addDelayJob(String jobName, Class<? extends Job> job, long delay);
+    void addDelayJob(String jobName, Class<? extends Job> job, long delay);
 
     /**
      * 增加延迟delay任务，延迟毫秒单位执行，只执行一次
      * 
      * @param dataMap
      *            上下文参数
-     * @param jobName
-     * @param job
+     * @param jobName name
+     * @param job class extends com.quartz.Job
      * @param delay
      *            延迟执行时间 毫秒
      */
-    public void addDelayJob(JobDataMap dataMap, String jobName, Class<? extends Job> job,
+    void addDelayJob(JobDataMap dataMap, String jobName, Class<? extends Job> job,
             long delay);
 
     /**
      * 增加延迟delay任务，延迟毫秒单位执行，可指定重复执行次数和间隔时间
      * 
      * @param jobName
+     *            name
      * @param job
+     *            class extends com.quartz.Job
      * @param delay
      *            延迟执行时间 毫秒
      * @param repeat
@@ -75,14 +82,16 @@ public interface ITimerComponent extends IComponent
      * @param millis
      *            重复间隔时间 毫秒
      */
-    public void addDelayJob(String jobName, Class<? extends Job> job, long delay, int repeat,
+    void addDelayJob(String jobName, Class<? extends Job> job, long delay, int repeat,
             long millis);
 
     /**
      * 增加延迟delay任务，延迟毫秒单位执行，可指定重复执行次数和间隔时间
      * 
      * @param jobName
+     *            name
      * @param job
+     *            class extends com.quartz.Job
      * @param delay
      *            延迟执行时间 毫秒
      * @param repeat
@@ -90,30 +99,33 @@ public interface ITimerComponent extends IComponent
      * @param millis
      *            重复间隔时间 毫秒
      */
-    public void addDelayJob(JobDataMap dataMap, String jobName, Class<? extends Job> job,
+    void addDelayJob(JobDataMap dataMap, String jobName, Class<? extends Job> job,
             long delay, int repeat, long millis);
 
     /**
      * 增加定时任务，间隔方式用 quartz表达式 定义
      * 
      * @param jobName
-     * @param job
+     *            name
+     * @param job class extends com.quartz.Job
      * @param time
      *            quartz表达式
      */
-    public void addJob(String jobName, Class<? extends Job> job, String time);
+    void addJob(String jobName, Class<? extends Job> job, String time);
 
     /**
      * 删除任务
      * 
      * @param jobName
+     *            name
      */
-    public void deleteJob(String jobName);
+    void deleteJob(String jobName);
 
     /**
      * 增加延迟delay任务，延迟毫秒单位执行，可指定重复执行次数和间隔时间
      * 
      * @param jobName
+     *            name
      * @param job
      * @param delay
      *            延迟执行时间 毫秒
@@ -123,40 +135,41 @@ public interface ITimerComponent extends IComponent
      *            重复间隔时间 毫秒
      *            object设置参数
      */
-    public void addDelayJob(String jobName, Class<? extends Job> job, long delay, int repeat,
+    void addDelayJob(String jobName, Class<? extends Job> job, long delay, int repeat,
             long millis, Object object);
 
     /**
      * 任务是否存在
      * 
      * @param jobName
-     *            任务名
-     * @return
+     *            name
+     * 
+     * @return job exist
      */
-    public boolean isJobExist(String jobName);
+    boolean isJobExist(String jobName);
 
     /**
      * 暂停任务
      * 
      * @param jobName
-     *            任务名
+     *            name
      */
-    public void pauseJob(String jobName);
+    void pauseJob(String jobName);
 
     /**
      * 恢复任务
      * 
      * @param jobName
-     *            任务名
+     *            name
      */
-    public void resumeJob(String jobName);
+    void resumeJob(String jobName);
 
     /**
      * 获取任务状态
      * 
      * @param jobName
-     *            任务名
-     * @return
+     *            name
+     * @return job status
      */
-    public TriggerState getJobState(String jobName);
+    TriggerState getJobState(String jobName);
 }

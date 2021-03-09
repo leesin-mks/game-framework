@@ -31,7 +31,7 @@ import com.sun.tools.attach.VirtualMachine;
 import com.sun.tools.attach.VirtualMachineDescriptor;
 
 /**
- * @author dsfish
+ * @author leesin
  *
  */
 public class ExecuteUpdate

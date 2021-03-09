@@ -18,6 +18,7 @@ package com.game.net.netty;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
@@ -48,7 +49,7 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
     {
         try
         {
-            POLICY_BYTES = POLICY.getBytes("utf8");
+            POLICY_BYTES = POLICY.getBytes(StandardCharsets.UTF_8);
         }
         catch (Exception e)
         {
@@ -67,10 +68,10 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
             return;
         }
 
-        int header = 0;
-        int packetLength = 0;
+        int header;
+        int packetLength;
         int[] decryptKey = getDecodeContext(ctx);
-        int cipherByte1 = 0, cipherByte2 = 0, cipherByte3, cipherByte4;
+        int cipherByte1, cipherByte2, cipherByte3, cipherByte4;
 
         // 此处4字节头部的解码使用直接解码形式，规避频繁的对象创建
         int plainByte1, plainByte2, plainByte3, plainByte4;
@@ -112,7 +113,7 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
 
                 else
                 {
-                    ctx.write(ByteBuffer.wrap(POLICY.getBytes("utf8")));
+                    ctx.write(ByteBuffer.wrap(POLICY.getBytes(StandardCharsets.UTF_8)));
                 }
 
                 return;
@@ -163,7 +164,7 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
     // 获取密钥上下文
     private int[] getDecodeContext(ChannelHandlerContext ctx)
     {
-        int[] keys = (int[]) ctx.channel().attr(CommonConst.NETTY_DECRYPTION_KEY).get();
+        int[] keys = ctx.channel().attr(CommonConst.NETTY_DECRYPTION_KEY).get();
         if (keys == null)
         {
             keys = new int[] { 0xae, 0xbf, 0x56, 0x78, 0xab, 0xcd, 0xef, 0xf1 };
@@ -201,12 +202,11 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
             data[index] = (byte) plainText;
             decryptKey[index & 0x7] = (byte) (key & 0xff);
         }
-
         return data;
     }
 
     @Override
-    protected void encode(ChannelHandlerContext ctx, CommonMessage in, ByteBuf out) throws Exception
+    protected void encode(ChannelHandlerContext ctx, CommonMessage in, ByteBuf out)
     {
         synchronized (ctx)
         {
@@ -215,7 +215,7 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
                 // 若存在不同线程给同一玩家发送数据的情况，因此加密过程需要同步处理
                 // CommonMessage msg = (CommonMessage) message;
 
-                int lastCipherByte = 0;
+                int lastCipherByte;
                 int[] encryptKey = getEncodeContext(ctx);
 
                 byte[] plainText = in.toByteBuffer().array();
@@ -228,7 +228,7 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
                 cipherBuffer.put((byte) lastCipherByte);
 
                 // 循环加密
-                int keyIndex = 0;
+                int keyIndex;
                 for (int i = 1; i < length; i++)
                 {
                     keyIndex = i & 0x7;
@@ -243,7 +243,10 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
 
                 // 调试打印IP和包头
                 String ip = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().toString();
-                LOGGER.debug("send: {}, {}", ip, in.headerToStr());
+                if (LOGGER.isDebugEnabled())
+                {
+                    LOGGER.debug("send: {}, {}", ip, in.headerToStr());
+                }
             }
             catch (Exception ex)
             {
@@ -256,7 +259,7 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
     // 获取当前加密密钥
     private int[] getEncodeContext(ChannelHandlerContext ctx)
     {
-        int[] keys = (int[]) ctx.channel().attr(CommonConst.NETTY_ENCRYPTION_KEY).get();
+        int[] keys = ctx.channel().attr(CommonConst.NETTY_ENCRYPTION_KEY).get();
         if (keys == null)
         {
             keys = new int[] { 0xae, 0xbf, 0x56, 0x78, 0xab, 0xcd, 0xef, 0xf1 };
@@ -264,11 +267,6 @@ public class NettyCodecFactory extends ByteToMessageCodec<CommonMessage>
         }
         return keys;
     }
-
-    // public static void setKey(IoSession session, int[] key)
-    // {
-    // session.setAttribute(StrictMessageEncoder.class, key);
-    // }
 
     public static String toHexDump(String description, int[] dump, int start,
             int count)

@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractServerTask implements Runnable

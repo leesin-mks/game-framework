@@ -24,13 +24,13 @@ import com.game.command.ICommand;
 import com.game.component.ComponentManager;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CommonMessageHandler implements IMessageHandler
 {
-    private String cmdCMPTName;
-    private static Logger LOGGER = LoggerFactory.getLogger(CommonMessageHandler.class);
+    private final String cmdCMPTName;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommonMessageHandler.class);
 
     /**
      * 

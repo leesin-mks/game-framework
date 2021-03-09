@@ -26,12 +26,12 @@ import com.game.component.ComponentManager;
 import com.game.pb.command.ProtocolInProto.ProtocolIn;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CommonWSMessageHandler implements IMessageHandler
 {
-    private static Logger LOGGER = LoggerFactory.getLogger(CommonWSMessageHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommonWSMessageHandler.class);
 
     /*
      * (non-Javadoc)

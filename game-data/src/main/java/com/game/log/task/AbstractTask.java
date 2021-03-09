@@ -23,7 +23,7 @@ import com.game.command.SelfDrivenTaskQueue;
 import com.game.util.StackMessagePrint;
 
 /**
- * @author jacken
+ * @author leesin
  * @param <T>
  *
  */

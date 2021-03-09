@@ -17,7 +17,7 @@
 package com.game.net;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IMessageHandler

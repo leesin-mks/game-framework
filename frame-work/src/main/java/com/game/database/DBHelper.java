@@ -16,12 +16,7 @@
 
 package com.game.database;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +26,7 @@ import org.slf4j.LoggerFactory;
 import com.game.database.pool.IDBPool;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class DBHelper
@@ -421,21 +416,21 @@ public class DBHelper
     /**
      * 给Statement赋值
      * 
-     * @param pstmt
-     * @param parms
+     * @param preparedStatement db preparedStatement
+     * @param params sql params
      * @throws SQLException
      */
-    public PreparedStatement prepareCommand(PreparedStatement pstmt,
-            Map<Integer, DBParameter> parms) throws SQLException
+    public PreparedStatement prepareCommand(PreparedStatement preparedStatement,
+            Map<Integer, DBParameter> params) throws SQLException
     {
-        if (pstmt == null || parms == null)
+        if (preparedStatement == null || params == null)
             return null;
-        for (Map.Entry<Integer, DBParameter> entry : parms.entrySet())
+        for (Map.Entry<Integer, DBParameter> entry : params.entrySet())
         {
-            pstmt.setObject(entry.getKey(), entry.getValue().getResult());
+            preparedStatement.setObject(entry.getKey(), entry.getValue().getResult());
         }
 
-        return pstmt;
+        return preparedStatement;
     }
 
     /**
@@ -489,15 +484,14 @@ public class DBHelper
     {
         try
         {
-            if (rs != null && rs.isClosed() == false)
+            if (rs != null && !rs.isClosed())
             {
                 rs.close();
-                rs = null;
             }
         }
         catch (SQLException e)
         {
-            LOGGER.error("关闭Resultset出错", e);
+            LOGGER.error("Result set close error: ", e);
         }
         finally
         {
@@ -516,7 +510,7 @@ public class DBHelper
     {
         try
         {
-            if (stmt != null && stmt.isClosed() == false)
+            if (stmt != null && !stmt.isClosed())
             {
                 if (stmt instanceof PreparedStatement)
                 {
@@ -524,12 +518,11 @@ public class DBHelper
                     ((PreparedStatement) stmt).clearParameters();
                 }
                 stmt.close();
-                stmt = null;
             }
         }
         catch (SQLException e)
         {
-            LOGGER.error("关闭statement出错", e);
+            LOGGER.error("Statement close error: ", e);
         }
         finally
         {
@@ -541,22 +534,22 @@ public class DBHelper
      * 关闭Connection
      * 
      * @param conn
+     *            database connection
      */
     public void closeConn(Connection conn)
     {
 
         try
         {
-            if (conn != null && conn.isClosed() == false)
+            if (conn != null && !conn.isClosed())
             {
                 conn.setAutoCommit(true);
                 conn.close();
-                conn = null;
             }
         }
         catch (SQLException e)
         {
-            LOGGER.error("关闭数据库连接出错", e);
+            LOGGER.error("Close data base error: ", e);
         }
     }
 }

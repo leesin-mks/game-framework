@@ -26,7 +26,7 @@ import com.game.component.ComponentManager;
 import com.game.component.IRedisComponent;
 
 /**
- * @author chenzhichao
+ * @author leesin
  *
  */
 public class UpdateListenThread implements Runnable

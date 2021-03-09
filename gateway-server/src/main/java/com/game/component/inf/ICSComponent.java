@@ -22,7 +22,7 @@ import com.google.protobuf.ByteString;
 
 /**
  * @date 2020年03月31日 17:44
- * @auth zm
+ * @author leesin
  */
 public interface ICSComponent extends IComponent
 {

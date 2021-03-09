@@ -25,7 +25,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
  * @date 2020年04月10日 11:14
- * @auth zm
+ * @author leesin
  */
 @ICode(code = CSProtocol.REGISTER, desc = "服务器注册")
 public class RegisterCmd extends AbstractServerCmd

@@ -24,9 +24,9 @@ import org.slf4j.LoggerFactory;
 import com.game.net.CommonWSMessageHandler;
 import com.game.net.IClientConnection;
 import com.game.net.netty.NettyClientConnection;
+import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.type.CommonConst;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.game.pb.CommonMsgProto.CommonMsgPB;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -45,13 +45,10 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
     private static final Logger logger = LoggerFactory.getLogger(WebSocketFrameHandler.class);
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception
+    protected void channelRead0(ChannelHandlerContext ctx, WebSocketFrame frame)
     {
-        // ping and pong frames already handled
-
         if (frame instanceof TextWebSocketFrame)
         {
-            // Send the uppercase string back.
             String request = ((TextWebSocketFrame) frame).text();
             request += ctx.channel().attr(CommonConst.CLIENT_IP).get();
             logger.info("{} received {}", ctx.channel(), request);
@@ -73,12 +70,12 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
                 }
                 catch (InvalidProtocolBufferException e)
                 {
-                    e.printStackTrace();
+                    logger.error("Process packet error: ", e);
                 }
             }
             else
             {
-                logger.error("can't process the frame！" + frame.toString());
+                logger.warn("can't process the frame！" + frame.toString());
             }
         }
     }
@@ -141,7 +138,9 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
     {
-        // TODO Auto-generated method stub
-        // super.exceptionCaught(ctx, cause);
+        super.exceptionCaught(ctx, cause);
+        IClientConnection conn = ctx.channel().attr(CommonConst.CLIENT_CON).get();
+        String ip = conn == null ? "" : conn.getClientIP();
+        logger.warn("Connection error: {}", ip, cause);
     }
 }

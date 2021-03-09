@@ -19,7 +19,7 @@ package com.game.database.pool;
 import java.sql.Connection;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IDBPool

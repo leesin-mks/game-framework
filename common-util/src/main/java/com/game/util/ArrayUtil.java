@@ -22,7 +22,7 @@ package com.game.util;
 import java.util.Arrays;
 
 /**
- * @author HoJanHoi
+ * @author leesin
  *
  */
 public class ArrayUtil

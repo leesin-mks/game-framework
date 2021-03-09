@@ -23,7 +23,7 @@ import java.util.Set;
 import redis.clients.jedis.JedisPubSub;
 
 /**
- * @author Jacken
+ * @author leesin
  *
  */
 public interface IRedisComponent extends IComponent

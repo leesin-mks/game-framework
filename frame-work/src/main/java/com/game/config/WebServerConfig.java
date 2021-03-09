@@ -17,7 +17,7 @@
 package com.game.config;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class WebServerConfig

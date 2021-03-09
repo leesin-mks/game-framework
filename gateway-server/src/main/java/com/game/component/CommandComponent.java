@@ -20,7 +20,7 @@ import com.game.command.AbstractCommandComponent;
 import com.game.command.ICode;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class CommandComponent extends AbstractCommandComponent<ICode>

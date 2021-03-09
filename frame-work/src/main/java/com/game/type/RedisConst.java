@@ -17,7 +17,7 @@
 package com.game.type;
 
 /**
- * @author dsfish
+ * @author leesin
  *
  */
 public final class RedisConst

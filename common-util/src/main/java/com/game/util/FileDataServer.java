@@ -35,7 +35,7 @@ import org.dom4j.Element;
 /**
  * 文件存储数据
  * 
- * @author saly.bao
+ * @author leesin
  */
 public class FileDataServer
 {

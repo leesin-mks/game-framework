@@ -17,7 +17,7 @@
 package com.game.net;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IClientConnection
@@ -25,21 +25,21 @@ public interface IClientConnection
     /**
      * 获取客户端IP
      * 
-     * @return
+     * @return ip
      */
     String getClientIP();
 
     /**
      * 获取数据包处理器。
      * 
-     * @return
+     * @return message handler
      */
     IMessageHandler getPacketHandler();
 
     /**
      * 获取连接持有者。
      * 
-     * @return
+     * @return connection holder
      */
     IConnectionHolder getHolder();
 
@@ -47,6 +47,7 @@ public interface IClientConnection
      * 设置连接持有者。
      * 
      * @param holder
+     *            connection holder
      */
     void setHolder(IConnectionHolder holder);
 
@@ -54,6 +55,7 @@ public interface IClientConnection
      * 发送数据包。
      * 
      * @param packet
+     *            message packet
      */
     void send(Object packet);
 
@@ -83,6 +85,7 @@ public interface IClientConnection
     /**
      * 
      * @param immediately
+     *            close now
      */
     void closeConnection(boolean immediately);
 
@@ -108,7 +111,7 @@ public interface IClientConnection
     /**
      * 是否是服务器断开连接
      * 
-     * @return
+     * @return server status
      */
     boolean isServerClosed();
 
@@ -122,7 +125,7 @@ public interface IClientConnection
     /**
      * 是否连接
      * 
-     * @return
+     * @return is connected
      */
     public boolean isConnected();
 

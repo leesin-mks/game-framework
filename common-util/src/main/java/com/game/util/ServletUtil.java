@@ -19,7 +19,7 @@ package com.game.util;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ServletUtil

@@ -18,7 +18,7 @@ package com.game.type;
 
 /**
  * @date 2020年04月16日 17:05
- * @auth zm
+ * @author leesin
  */
 public class GlobalVariable
 {

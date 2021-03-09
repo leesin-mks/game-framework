@@ -30,7 +30,7 @@ import com.google.gson.Gson;
 
 /**
  * @date 2020年03月31日 15:38
- * @auth zm
+ * @author leesin
  */
 public class ServerComponent implements IServerComponent
 {

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.bdsk.struct;
+package com.game.struct;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * @author Kissy
+ * @author leesin
  *
  */
 public class FixedLengthLinkedList<T>extends LinkedList<T>

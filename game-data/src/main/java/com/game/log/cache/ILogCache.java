@@ -29,7 +29,7 @@ import com.game.log.task.AbstractTask;
 /**
  * 日志缓存接口
  * 
- * @author saly.bao
+ * @author leesin
  */
 public interface ILogCache extends IComponent
 {

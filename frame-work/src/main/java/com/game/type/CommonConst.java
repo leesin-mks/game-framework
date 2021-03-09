@@ -22,7 +22,7 @@ import com.game.net.IServerConnector;
 import io.netty.util.AttributeKey;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public final class CommonConst

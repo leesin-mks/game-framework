@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractClientConnection implements IClientConnection
@@ -28,9 +28,9 @@ public abstract class AbstractClientConnection implements IClientConnection
     /** 连接持有者 */
     private IConnectionHolder holder = null;
     /** 客户端封包处理器 */
-    private IMessageHandler messageHandler = null;
+    private final IMessageHandler messageHandler;
     /** 扩展属性表 */
-    private Map<Object, Object> attributes = null;
+    private final Map<Object, Object> attributes;
 
     protected byte[] readBytes;
 
@@ -43,7 +43,7 @@ public abstract class AbstractClientConnection implements IClientConnection
     public AbstractClientConnection(IMessageHandler messageHandler, int readBytesLen)
     {
         this.messageHandler = messageHandler;
-        this.attributes = new ConcurrentHashMap<Object, Object>();
+        this.attributes = new ConcurrentHashMap<>();
         readBytes = new byte[readBytesLen];
     }
 

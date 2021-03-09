@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Jacken
+ * @author leesin
  *
  */
 public class NameRandomUtil

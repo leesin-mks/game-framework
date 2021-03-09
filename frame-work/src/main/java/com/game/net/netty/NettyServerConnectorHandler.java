@@ -27,7 +27,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyServerConnectorHandler extends ChannelInboundHandlerAdapter
@@ -35,7 +35,7 @@ public class NettyServerConnectorHandler extends ChannelInboundHandlerAdapter
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyServerConnectorHandler.class);
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
+    public void channelRead(ChannelHandlerContext ctx, Object msg)
     {
         IServerConnector conn = ctx.channel().attr(CommonConst.SERVER_CON).get();
         conn.getPacketHandler().process(conn, msg);
@@ -57,7 +57,7 @@ public class NettyServerConnectorHandler extends ChannelInboundHandlerAdapter
      * java.lang.Throwable)
      */
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
     {
         LOGGER.error(StackMessagePrint.printErrorTrace(cause));
     }

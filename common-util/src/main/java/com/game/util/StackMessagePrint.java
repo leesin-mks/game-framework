@@ -22,7 +22,7 @@ import java.io.StringWriter;
 import org.slf4j.Logger;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class StackMessagePrint

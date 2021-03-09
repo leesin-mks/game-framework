@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IBaseDao<T>

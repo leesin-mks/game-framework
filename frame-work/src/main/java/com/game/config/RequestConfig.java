@@ -24,7 +24,7 @@ import java.util.Set;
 import com.game.util.StringUtil;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class RequestConfig

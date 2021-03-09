@@ -23,7 +23,7 @@ import com.game.server.ServerClient;
 
 /**
  * @date 2020年03月31日 15:29
- * @auth zm
+ * @author leesin
  */
 public interface IServerComponent extends IComponent
 {

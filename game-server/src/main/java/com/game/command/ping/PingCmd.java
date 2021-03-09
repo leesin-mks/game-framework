@@ -24,7 +24,7 @@ import com.google.protobuf.ByteString;
 
 /**
  * @date 2020年04月09日 18:43
- * @auth zm
+ * @author leesin
  */
 @ICode(code = ProtocolIn.PING_VALUE, desc = "ping")
 public class PingCmd extends AbstractUserCmd

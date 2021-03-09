@@ -26,7 +26,7 @@ import com.game.component.ComponentManager;
 import com.game.component.inf.IServerListComponent;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class UpdateServerListJob implements Job

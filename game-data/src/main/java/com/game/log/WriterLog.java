@@ -34,7 +34,7 @@ import com.game.log.task.AbstractTask;
 /**
  * 写日志到数据库
  * 
- * @author jacken
+ * @author leesin
  */
 public class WriterLog
 {

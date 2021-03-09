@@ -33,7 +33,7 @@ import com.game.pb.CommonMsgProto.CommonMsgPB.Builder;
 import com.game.type.ModuleType;
 
 /**
- * @author Jacken
+ * @author leesin
  *
  */
 public class PlayerComponent implements IPlayerComponent

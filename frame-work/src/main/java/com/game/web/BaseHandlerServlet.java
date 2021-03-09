@@ -36,7 +36,7 @@ import com.game.util.StackMessagePrint;
 import com.game.util.StringUtil;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class BaseHandlerServlet extends HttpServlet implements IWebHandler

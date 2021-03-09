@@ -17,7 +17,7 @@
 package com.game.type;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public enum ModuleType

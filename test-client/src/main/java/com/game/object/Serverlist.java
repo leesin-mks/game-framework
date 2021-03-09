@@ -22,10 +22,10 @@ package com.game.object;
 /**
  * Auto-generated: 2019-12-17 11:15:8
  *
- * @author bejson.com (i@bejson.com)
+ * @author leesin
  * @website http://www.bejson.com/java2pojo/
  */
-public class Serverlist {
+public class ServerList {
 
 	private int id;
 	private String name;

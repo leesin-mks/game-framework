@@ -34,7 +34,7 @@ import redis.clients.jedis.Transaction;
 import redis.clients.jedis.util.SafeEncoder;
 
 /**
- * @author Jacken
+ * @author leesin
  *
  */
 public class RedisComponent implements IRedisComponent
@@ -693,7 +693,7 @@ public class RedisComponent implements IRedisComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IRedisComponent#setNX(java.lang.String, java.lang.String)
+     * @see com.game.component.IRedisComponent#setNX(java.lang.String, java.lang.String)
      */
     @Override
     public String setNX(String key, String value)
@@ -721,7 +721,7 @@ public class RedisComponent implements IRedisComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IRedisComponent#setex(java.lang.String, int, java.lang.String)
+     * @see com.game.component.IRedisComponent#setex(java.lang.String, int, java.lang.String)
      */
     @Override
     public void setex(String key, int second, String value)
@@ -762,7 +762,7 @@ public class RedisComponent implements IRedisComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IRedisComponent#incr(java.lang.String)
+     * @see com.game.component.IRedisComponent#incr(java.lang.String)
      */
     @Override
     public long incr(String key)
@@ -785,7 +785,7 @@ public class RedisComponent implements IRedisComponent
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.component.IRedisComponent#incrby(java.lang.String, int)
+     * @see com.game.component.IRedisComponent#incrby(java.lang.String, int)
      */
     @Override
     public long incrby(String key, long value)

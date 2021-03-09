@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 import com.game.util.TimeUtil;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class DBWatcher

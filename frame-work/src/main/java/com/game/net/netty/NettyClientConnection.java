@@ -28,7 +28,7 @@ import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyClientConnection extends AbstractClientConnection
@@ -51,9 +51,9 @@ public class NettyClientConnection extends AbstractClientConnection
         String ip = channel.attr(CommonConst.CLIENT_IP).get();
         if (ip != null)
             return ip;
-        InetSocketAddress insocket = (InetSocketAddress) channel.remoteAddress();
-        if (insocket != null)
-            return insocket.getAddress().getHostAddress();
+        InetSocketAddress inSocket = (InetSocketAddress) channel.remoteAddress();
+        if (inSocket != null)
+            return inSocket.getAddress().getHostAddress();
         return "";
     }
 
@@ -97,7 +97,7 @@ public class NettyClientConnection extends AbstractClientConnection
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IClientConnection#isServerClosed()
+     * @see com.game.net.IClientConnection#isServerClosed()
      */
     @Override
     public boolean isServerClosed()
@@ -108,7 +108,7 @@ public class NettyClientConnection extends AbstractClientConnection
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IClientConnection#setIsServerClosed(boolean)
+     * @see com.game.net.IClientConnection#setIsServerClosed(boolean)
      */
     @Override
     public void setIsServerClosed(boolean isServerClosed)
@@ -119,7 +119,7 @@ public class NettyClientConnection extends AbstractClientConnection
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IClientConnection#isConnected()
+     * @see com.game.net.IClientConnection#isConnected()
      */
     @Override
     public boolean isConnected()
@@ -137,7 +137,7 @@ public class NettyClientConnection extends AbstractClientConnection
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.AbstractClientConnection#setReadBytes()
+     * @see com.game.net.AbstractClientConnection#setReadBytes()
      */
     @Override
     public void setChannelReadBytes()

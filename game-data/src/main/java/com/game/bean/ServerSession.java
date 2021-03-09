@@ -18,7 +18,7 @@ package com.game.bean;
 
 /**
  * @date 2020年04月10日 18:18
- * @auth zm
+ * @author leesin
  */
 public class ServerSession
 {

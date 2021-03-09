@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class BoneCPConfiguration

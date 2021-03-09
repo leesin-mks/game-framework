@@ -33,7 +33,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 缓存管理
  * 
- * @author saly.bao
+ * @author leesin
  */
 public class CacheManager
 {

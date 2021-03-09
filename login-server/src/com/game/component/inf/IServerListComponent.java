@@ -25,7 +25,7 @@ import com.game.type.ServerType;
 import com.game.web.ResultMessage;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IServerListComponent extends IComponent

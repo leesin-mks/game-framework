@@ -44,7 +44,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketVersion;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketClientCompressionHandler;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyWSServerConnector extends AbstractServerConnector
@@ -84,7 +84,7 @@ public class NettyWSServerConnector extends AbstractServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#connect()
+     * @see com.game.net.IServerConnector#connect()
      */
     @Override
     public boolean connect()
@@ -145,7 +145,7 @@ public class NettyWSServerConnector extends AbstractServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#disconnect()
+     * @see com.game.net.IServerConnector#disconnect()
      */
     @Override
     public void disconnect()
@@ -160,7 +160,7 @@ public class NettyWSServerConnector extends AbstractServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#isConnected()
+     * @see com.game.net.IServerConnector#isConnected()
      */
     @Override
     public boolean isConnected()
@@ -178,7 +178,7 @@ public class NettyWSServerConnector extends AbstractServerConnector
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.net.IServerConnector#send(com.bdsk.net.CommonMessage)
+     * @see com.game.net.IServerConnector#send(com.bdsk.net.CommonMessage)
      */
     public void send(Object msg)
     {

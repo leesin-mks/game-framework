@@ -17,7 +17,7 @@
 package com.game.net;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public interface IConnectionHolder
@@ -30,7 +30,7 @@ public interface IConnectionHolder
     /**
      * 获取持有的连接。
      * 
-     * @return
+     * @return connection
      */
     IClientConnection getClientConnection();
 
@@ -38,6 +38,7 @@ public interface IConnectionHolder
      * 设置持有的连接。
      * 
      * @param conn
+     *            the connection to set
      */
     void setClientConnection(IClientConnection conn);
 }

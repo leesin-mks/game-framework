@@ -17,7 +17,7 @@
 package com.game.web;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public abstract class AbstractUserServlet extends BaseHandlerServlet
@@ -30,7 +30,7 @@ public abstract class AbstractUserServlet extends BaseHandlerServlet
     /*
      * (non-Javadoc)
      * 
-     * @see com.bdsk.web.IWebHandler#execute(java.lang.String, java.lang.String[])
+     * @see com.game.web.IWebHandler#execute(java.lang.String, java.lang.String[])
      */
     @Override
     public boolean checkRequestIP(String ip)

@@ -31,7 +31,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class NettyCommonCodecFactory extends ByteToMessageCodec<CommonMessage>

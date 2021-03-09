@@ -23,7 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.codec.binary.Hex;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class HashUtil

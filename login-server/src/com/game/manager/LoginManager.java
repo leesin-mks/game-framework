@@ -37,7 +37,7 @@ import com.game.web.bean.LoginResultBean;
 import com.google.gson.Gson;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class LoginManager

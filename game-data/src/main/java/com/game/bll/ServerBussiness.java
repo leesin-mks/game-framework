@@ -21,7 +21,7 @@ import java.util.List;
 import com.game.entity.bean.ServerListBean;
 
 /**
- * @author jacken
+ * @author leesin
  *
  */
 public class ServerBussiness
