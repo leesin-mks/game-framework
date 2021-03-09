@@ -29,7 +29,6 @@ import com.game.pb.CommonMsgProto.CommonMsgPB;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.timer.TimerComponent;
 import com.game.type.ServerStateType;
-import com.game.util.OutPutUtil;
 import com.game.util.Uptime;
 import com.game.web.WebComponent;
 
@@ -70,7 +69,6 @@ public class GameServer implements IServer
     public static void main(String[] args)
     {
         LOGGER.info("GameServer is starting...");
-        System.out.println("-->" + OutPutUtil.lineSeparator);
         if (args.length <= 0)
         {
             LOGGER.warn("Please input the global config path.");

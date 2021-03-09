@@ -16,11 +16,8 @@
 
 package com.game.component;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -40,7 +37,7 @@ public class LanguageComponent implements IComponent
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LanguageComponent.class);
 
-    private static Map<String, String> cache = new ConcurrentHashMap<String, String>();
+    private static Map<String, String> cache;
 
     /**
      * (non-Javadoc)
@@ -61,7 +58,7 @@ public class LanguageComponent implements IComponent
     @Override
     public boolean initialize()
     {
-        // do nothing.
+        cache = new ConcurrentHashMap<>();
         return true;
     }
 
@@ -75,15 +72,11 @@ public class LanguageComponent implements IComponent
     {
         try
         {
-            // String path = this.getClass().getResource("/").getPath();
-            // LOGGER.error("------Path:" + path);
-
             FileInputStream fis = new FileInputStream(
                     GlobalConfigManager.getInstance().getServerConfig().getLanguagePath());
-            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(isr);
             String lineContent;
-            cache = new ConcurrentHashMap<String, String>();
             while ((lineContent = bufferedReader.readLine()) != null)
             {
                 int index = lineContent.indexOf(":");
@@ -103,12 +96,12 @@ public class LanguageComponent implements IComponent
         }
         catch (FileNotFoundException e)
         {
-            LOGGER.error("start language Fileerror!", e);
+            LOGGER.error("start language file error!", e);
             return false;
         }
         catch (IOException e)
         {
-            LOGGER.error("start language IOerror!", e);
+            LOGGER.error("start language io error!", e);
             return false;
         }
     }
@@ -122,7 +115,6 @@ public class LanguageComponent implements IComponent
     public void stop()
     {
         cache.clear();
-        cache = null;
     }
 
     /**
@@ -141,26 +133,26 @@ public class LanguageComponent implements IComponent
      * 从语言包中获取对应的值。
      * 
      * @param key
+     *            key
      * @param paras
-     * @return
+     *            参数
+     * @return this language value
      */
     public static String getResource(String key, Object... paras)
     {
         try
         {
             String msg = cache.get(key);
-            if (msg == null)
+            if (msg != null)
             {
-                LOGGER.error("Language package does not contain key: {}", key);
-                return "";
+                return String.format(msg, paras);
             }
-            return String.format(msg, paras);
         }
         catch (Exception e)
         {
-            LOGGER.error(String.format("error key : %s", key), e);
-            return "";
+            LOGGER.error("error key: {}", key, e);
         }
+        return key;
     }
 
     public static String getContent(String content, Object... params)
@@ -184,26 +176,23 @@ public class LanguageComponent implements IComponent
      * 从语言包中获取对应的值
      * 
      * @param key
-     * @return
+     *            key
+     * @return the language value
      */
     public static String getResource(String key)
     {
         try
         {
             String msg = cache.get(key);
-            if (msg == null)
+            if (msg != null)
             {
-                LOGGER.error("Language package does not contain key: " + key,
-                        new NullPointerException());
-                return key;
+                return msg;
             }
-
-            return msg;
         }
         catch (Exception e)
         {
             LOGGER.error(e.toString());
-            return key;
         }
+        return key;
     }
 }
