@@ -16,7 +16,6 @@
 
 package com.game.manager;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.UUID;
@@ -26,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.game.bll.ServerBussiness;
 import com.game.component.ComponentManager;
-import com.game.component.IRedisComponent;
+import com.game.component.inf.IRedisComponent;
 import com.game.component.inf.IServerListComponent;
 import com.game.entity.bean.PlayerInfo;
 import com.game.entity.bean.ServerListBean;

@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.component.ComponentManager;
-import com.game.component.IRedisComponent;
+import com.game.component.inf.IRedisComponent;
 import com.game.component.inf.IDataCenterComponent;
 import com.game.type.RedisConst;
 import com.google.gson.Gson;

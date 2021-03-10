@@ -27,7 +27,7 @@ import com.game.command.ISequenceTask;
 import com.game.command.SelfDrivenTaskQueue;
 import com.game.command.UserCmdTask;
 import com.game.component.ComponentManager;
-import com.game.component.IRedisComponent;
+import com.game.component.inf.IRedisComponent;
 import com.game.component.inf.IPlayerComponent;
 import com.game.cs.CSServerConn;
 import com.game.database.DataOption;

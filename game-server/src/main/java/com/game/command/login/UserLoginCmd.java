@@ -21,7 +21,7 @@ import com.game.bean.StateCode;
 import com.game.command.AbstractUserCmd;
 import com.game.command.ICode;
 import com.game.component.ComponentManager;
-import com.game.component.IRedisComponent;
+import com.game.component.inf.IRedisComponent;
 import com.game.component.LanguageComponent;
 import com.game.component.inf.IPlayerComponent;
 import com.game.cs.CSServerConn;

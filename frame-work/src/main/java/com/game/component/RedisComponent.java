@@ -21,16 +21,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import com.game.component.inf.IRedisComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.config.GlobalConfigManager;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.JedisPubSub;
-import redis.clients.jedis.Transaction;
+import redis.clients.jedis.*;
 import redis.clients.jedis.util.SafeEncoder;
 
 /**
@@ -47,7 +44,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.component.IComponent#getName()
+     * @see com.game.component.IComponent#getName()
      */
     @Override
     public String getName()
@@ -58,7 +55,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.component.IComponent#initialize()
+     * @see com.game.component.IComponent#initialize()
      */
     @Override
     public boolean initialize()
@@ -69,7 +66,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.component.IComponent#start()
+     * @see com.game.component.IComponent#start()
      */
     @Override
     public boolean start()
@@ -110,7 +107,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.component.IComponent#stop()
+     * @see com.game.component.IComponent#stop()
      */
     @Override
     public void stop()
@@ -124,7 +121,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.component.IComponent#reload()
+     * @see com.game.component.IComponent#reload()
      */
     @Override
     public boolean reload()
@@ -162,7 +159,7 @@ public class RedisComponent implements IRedisComponent
      * 删除hash的某些域
      */
     @Override
-    public void hdel(String key, String... fields)
+    public void hDel(String key, String... fields)
     {
         Jedis jedis = null;
         try
@@ -455,7 +452,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.chat.component.inf.IRedisComponent#lrang(java.lang.String, int, int)
+     * @see com.game.component.inf.IRedisComponent#lrang(java.lang.String, int, int)
      */
     @Override
     public List<String> lrang(String key, int begin, int end)
@@ -624,7 +621,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.chat.component.inf.IRedisComponent#ltrim(java.lang.String, int)
+     * @see com.game.component.inf.IRedisComponent#ltrim(java.lang.String, int)
      */
     @Override
     public void ltrim(String key, int count)
@@ -647,7 +644,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.chat.component.inf.IRedisComponent#delAll(java.lang.String)
+     * @see com.game.component.inf.IRedisComponent#del(java.lang.String)
      */
     @Override
     public void del(String key)
@@ -670,7 +667,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.threemonths.chat.component.inf.IRedisComponent#delAll(java.lang.String)
+     * @see com.game.component.inf.IRedisComponent#del(java.lang.String)
      */
     @Override
     public void del(byte[] key)
@@ -693,7 +690,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.game.component.IRedisComponent#setNX(java.lang.String, java.lang.String)
+     * @see IRedisComponent#setNX(java.lang.String, java.lang.String)
      */
     @Override
     public String setNX(String key, String value)
@@ -721,7 +718,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.game.component.IRedisComponent#setex(java.lang.String, int, java.lang.String)
+     * @see IRedisComponent#setex(java.lang.String, int, java.lang.String)
      */
     @Override
     public void setex(String key, int second, String value)
@@ -762,7 +759,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.game.component.IRedisComponent#incr(java.lang.String)
+     * @see IRedisComponent#incr(java.lang.String)
      */
     @Override
     public long incr(String key)
@@ -785,7 +782,7 @@ public class RedisComponent implements IRedisComponent
     /**
      * (non-Javadoc)
      * 
-     * @see com.game.component.IRedisComponent#incrby(java.lang.String, int)
+     * @see IRedisComponent#incrby(java.lang.String, long)
      */
     @Override
     public long incrby(String key, long value)

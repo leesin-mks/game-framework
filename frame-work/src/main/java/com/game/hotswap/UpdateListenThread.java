@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.game.component.ComponentManager;
-import com.game.component.IRedisComponent;
+import com.game.component.inf.IRedisComponent;
 
 /**
  * @author leesin

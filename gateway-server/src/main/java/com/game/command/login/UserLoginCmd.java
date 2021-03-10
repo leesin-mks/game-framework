@@ -21,7 +21,7 @@ import com.game.bean.StateCode;
 import com.game.command.AbstractUserCmd;
 import com.game.command.ICode;
 import com.game.component.ComponentManager;
-import com.game.component.IRedisComponent;
+import com.game.component.inf.IRedisComponent;
 import com.game.component.LanguageComponent;
 import com.game.component.inf.IPlayerComponent;
 import com.game.entity.bean.PlayerInfo;
@@ -34,7 +34,6 @@ import com.game.pb.command.ProtocolInProto.ProtocolIn;
 import com.game.pb.command.ProtocolOutProto.ProtocolOut;
 import com.game.type.RedisConst;
 import com.game.util.StackMessagePrint;
-import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 
