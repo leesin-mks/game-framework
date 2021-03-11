@@ -11,6 +11,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.safety.Whitelist;
 
+/**
+ * 
+ * 替换后写入文件是覆盖,执行前一定记的手动备份
+ * 
+ * 每次执行VERSION+1000
+ * 
+ * 
+ */
 public class FindChineseUtil
 {
 
@@ -19,77 +27,105 @@ public class FindChineseUtil
     public static final char CHAR_3 = '=';
     public static final char CHAR_4 = ' ';
     public static final char CHAR_5 = '>';
+    public static final int VERSION = 0;
     public static int index = 1;
+
+    public static final String MESSAGE_FILE = "D:\\Work\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\messages_zh_CN.properties";
+    public static final String ROOT = "templates";
 
     private static final List<String> OUT_PUT = new ArrayList<>();
 
     public static void main(String[] args)
     {
-        String fileName = "D:\\Work\\\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates\\febs\\views\\login.html";
-        String messageFile = "D:\\Work\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\messages_zh_CN.properties";
-        String attName = getFilePrefix(fileName) + "_";
-        String a = "<div src=\"中国sdI记得\" class=\"layui-logo\"><span><b>奥术</b> BI系统</span></div>";
-        a = a.trim();
-        Whitelist whitelist = new Whitelist();
-        whitelist.addTags("span", "b");
-        String b = Jsoup.clean(a, whitelist);
-        // System.out.println(b);
-        // findChinese(a);
-        jsoupParse(fileName, attName);
-        saveMessageFile(messageFile);
+        String path = "D:\\Work\\\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates";
+        parse(path);
+        saveMessageFile(MESSAGE_FILE);
         System.out.println(OUT_PUT);
     }
 
-    public static void jsoupParse(String fileName, String attName)
+    public static void parse(String path, String... exceptPath)
     {
+        File file = new File(path);
+        File[] children = file.listFiles();
+        for (File child : children)
+        {
+            if (child.isDirectory())
+            {
+                boolean isExcept = false;
+                for (String except : exceptPath)
+                {
+                    if (child.getPath().indexOf(except) == -1)
+                    {
+                        isExcept = true;
+                        break;
+                    }
+                    if (isExcept)
+                    {
+                        continue;
+                    }
+                }
+                parse(child.getPath(), exceptPath);
+            }
+            else
+            {
+                String fileName = child.getName();
+                if (fileName.endsWith(".html"))
+                {
+                    String attName = getFilePrefix(child.getPath()) + "_";
+                    System.out.println("Parse file: " + attName);
+                    jsoupParse(child, attName);
+                }
+            }
+        }
+    }
+
+    public static void jsoupParse(File file, String attName)
+    {
+        index = 1;
         Document doc = null;
         try
         {
-            doc = Jsoup.parse(new File(fileName), StandardCharsets.UTF_8.name());
+            doc = Jsoup.parse(file, StandardCharsets.UTF_8.name());
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        System.out.println(doc.text());
         for (Element element : doc.getAllElements())
         {
             List<TextNode> textNodeList = element.textNodes();
-            /*
-             * if (containsCN(text))
-             * {
-             * String filed = attName + (index++);
-             * element.text("#{" + filed + "}");
-             * }
-             */
             for (TextNode textNode : textNodeList)
             {
                 String text = textNode.text();
                 if (containsCN(textNode.text()))
                 {
-                    textNode.text("");
-                    String filed = attName + (index++);
-                    System.out.println("Node name: " + element.nodeName());
-                    if (element.nodeName().equals("title"))
-                    {
-                        element.attr("th:text", "#{" + filed + "}");
-                    }
-                    else
-                    {
-                        Node node = new Element("span");
-                        node.attr("th:text", "#{" + filed + "}");
-                        element.appendChild(node);
-                    }
+                    String filed = attName + (VERSION + index++);
+                    // 方法1
+                    textNode.text("[[#{" + filed + "}]]");
+                    /*
+                     * 方法2
+                     * textNode.text("");
+                     * if (element.nodeName().equals("title"))
+                     * {
+                     * element.attr("th:text", "#{" + filed + "}");
+                     * }
+                     * else
+                     * {
+                     * Node node = new Element("span");
+                     * node.attr("th:text", "#{" + filed + "}");
+                     * element.appendChild(node);
+                     * }
+                     */
+                    // element.attr("th:text", "#{" + filed + "}");
                     OUT_PUT.add(filed + "=" + text);
                 }
             }
-            System.out.println("-->" + textNodeList);
             for (Attribute attributes : element.attributes())
             {
                 String attValue = attributes.getValue();
                 if (containsCN(attValue))
                 {
-                    String filed = attName + (index++);
+                    String filed = attName + (VERSION + index++);
                     element.removeAttr(attributes.getKey());
                     element.attr("th:" + attributes.getKey(), "#{" + filed + "}");
                     OUT_PUT.add(filed + "=" + attValue);
@@ -98,16 +134,31 @@ public class FindChineseUtil
             }
         }
 
-        saveHtmlFile(fileName + ".html", doc.html());
+        saveHtmlFile(file, doc.html());
         // System.out.println(doc.html());
     }
 
     public static String getFilePrefix(String str)
     {
+        StringBuilder attrPrefix = new StringBuilder();
         str = str.replace("\\\\", "\\").replace("//", "//");
         String[] path = str.split("\\\\|/");
-        String[] fileName = path[path.length - 1].split("\\.");
-        return fileName[0];
+        boolean start = false;
+        for (int i = 0; i < path.length - 1; i++)
+        {
+            if (start)
+            {
+                attrPrefix.append(path[i]);
+                attrPrefix.append('.');
+            }
+            if (!start && path[i].equals(ROOT))
+            {
+                start = true;
+            }
+        }
+        String[] fileSplit = path[path.length - 1].split("\\.");
+        attrPrefix.append(fileSplit[0]);
+        return attrPrefix.toString();
     }
 
     public static void saveMessageFile(String fileName)
@@ -133,12 +184,12 @@ public class FindChineseUtil
         }
     }
 
-    public static void saveHtmlFile(String fileName, String content)
+    public static void saveHtmlFile(File file, String content)
     {
         FileOutputStream fos = null;
         try
         {
-            fos = new FileOutputStream(fileName);
+            fos = new FileOutputStream(file);
             fos.write(content.getBytes());
         }
         catch (Exception e)
@@ -165,8 +216,21 @@ public class FindChineseUtil
         return false;
     }
 
+    public static void parseJavaScript(File file)
+    {
+
+    }
+
     public static void findChinese(String str)
     {
+        String a = "<div src=\"中国sdI记得\" class=\"layui-logo\"><span><b>奥术</b> BI系统</span></div>";
+        a = a.trim();
+        Whitelist whitelist = new Whitelist();
+        whitelist.addTags("span", "b");
+        String b = Jsoup.clean(a, whitelist);
+        // System.out.println(b);
+        // findChinese(a);
+
         String filedName = "login";
         int startIndex = 0;
         int endIndex = 0;
@@ -192,7 +256,7 @@ public class FindChineseUtil
                 if (StringUtil.isNotNullAndNotEmpty(attName))
                 {
                     newLine = newLine.replace(attName, "th:" + attName);
-                    newLine = newLine.replace(sb.toString(), "#{login_" + (index++) + "}");
+                    newLine = newLine.replace(sb.toString(), "#{login_" + (VERSION + index++) + "}");
                 }
 
                 sb.setLength(0);
