@@ -26,7 +26,7 @@ import com.game.command.ICode;
 public class CSCommandComponent extends AbstractCommandComponent<ICode>
 {
 
-    public String NAME = "CSCommand";
+    public static  String NAME = "CSCommand";
 
     @Override
     public String getName()

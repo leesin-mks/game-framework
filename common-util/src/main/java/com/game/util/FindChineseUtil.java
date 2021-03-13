@@ -1,15 +1,18 @@
 package com.game.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.*;
+import org.jsoup.nodes.Attribute;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.safety.Whitelist;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -21,12 +24,17 @@ import org.jsoup.safety.Whitelist;
  */
 public class FindChineseUtil
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CopyrightUtil.class);
 
     public static final char CHAR_1 = '"';
     public static final char CHAR_2 = '\'';
     public static final char CHAR_3 = '=';
     public static final char CHAR_4 = ' ';
     public static final char CHAR_5 = '>';
+    public static final char CHAR_6 = '[';
+    public static final char CHAR_7 = ']';
+    public static final char CHAR_8 = '\\';
+    public static final char CHAR_9 = '\0';
     public static final int VERSION = 0;
     public static int index = 1;
 
@@ -36,6 +44,28 @@ public class FindChineseUtil
     private static final List<String> OUT_PUT = new ArrayList<>();
 
     public static void main(String[] args)
+    {
+        parseHTML();
+        // parseJavaScript();
+    }
+
+    public static void testParseJavaScript()
+    {
+        String jsString = " febs.modal.view('密码修改', 'password/update', '用户98' {";
+        String result = replaceJSCN(jsString, 0,
+                "D:\\Work\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates\\febs\\views\\layout.html");
+        System.out.println(result);
+    }
+
+    public static void parseJavaScript()
+    {
+        File file = new File(
+                "D:\\Work\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates\\febs\\views\\layout.html");
+        parseJavaScript(file);
+        System.out.println(OUT_PUT);
+    }
+
+    public static void parseHTML()
     {
         String path = "D:\\Work\\\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates";
         parse(path);
@@ -74,6 +104,7 @@ public class FindChineseUtil
                     String attName = getFilePrefix(child.getPath()) + "_";
                     System.out.println("Parse file: " + attName);
                     jsoupParse(child, attName);
+                    parseJavaScript(child);
                 }
             }
         }
@@ -218,7 +249,122 @@ public class FindChineseUtil
 
     public static void parseJavaScript(File file)
     {
+        StringBuilder sb = new StringBuilder();
+        FileInputStream fis = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        FileWriter fileWriter = null;
+        try
+        {
+            fis = new FileInputStream(file);
+            isr = new InputStreamReader(fis);
+            br = new BufferedReader(isr);
+            String line;
+            boolean parseJs = false;
+            while ((line = br.readLine()) != null)
+            {
+                if (line.indexOf("script") != -1 && line.indexOf("text/javascript") != -1)
+                {
+                    parseJs = true;
+                }
+                if (parseJs && line.indexOf("/script") != -1)
+                {
+                    parseJs = false;
+                }
 
+                if (parseJs)
+                {
+                    line = replaceJSCN(line, 0, file.getPath());
+                    // line = replaceJSCNAfter(line);
+                }
+
+                sb.append(line);
+                OutPutUtil.newLine(sb);
+            }
+        }
+        catch (IOException e)
+        {
+            LOGGER.error("Update copyright error: {}, message: {}", file.getName(), e);
+        }
+        finally
+        {
+            IOUtil.closeIO(br, isr, fis, fileWriter);
+        }
+
+        saveHtmlFile(file, sb.toString());
+    }
+
+    public static String replaceJSCNAfter(String str)
+    {
+        if (str.indexOf("btn") != -1)
+        {
+            str = str.replaceAll("\\[\\[\\[", "\\[\\[");
+            str = str.replaceAll("\\]\\]\\]", "\\]\\]");
+        }
+        return str;
+    }
+
+    public static String replaceJSCN(String str, int startIndex, String filePath)
+    {
+        int endIndex = -1;
+        char[] strChar = str.toCharArray();
+        boolean flag = false;
+        for (int i = startIndex; i < str.length(); i++)
+        {
+            String temp = String.valueOf(str.charAt(i));
+            if (temp.matches("[\\u4e00-\\u9fa5]") || temp.matches(
+                    "\\*[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\uff01]"))
+            {
+                startIndex = i;
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag)
+        {
+            return str;
+        }
+        // 往前往前找 去到 ' " [
+        boolean cond1 = false;
+        boolean cond2 = false;
+        flag = false;
+        char condChar = CHAR_1;
+        for (int k = startIndex - 1; k > 0; k--)
+        {
+            if ((strChar[k] == CHAR_1 || strChar[k] == CHAR_2) && (k - 1 > 0 && strChar[k - 1] != CHAR_8))
+            {
+                condChar = strChar[k];
+                strChar[k] = CHAR_4;
+                cond1 = true;
+                break;
+            }
+        }
+        // 往前往后找 去到 ' " [
+        for (int k = startIndex; k < strChar.length; k++)
+        {
+            if ((strChar[k] == condChar) && (k - 1 > 0 && strChar[k - 1] != CHAR_8))
+            {
+                endIndex = k;
+                strChar[k] = CHAR_4;
+                cond2 = true;
+                break;
+            }
+        }
+        if (cond1 && cond2)
+        {
+            flag = true;
+            String attName = getFilePrefix(filePath) + ".js_";
+            String filed = attName + (VERSION + index++);
+            String replaceStr = str.substring(startIndex, endIndex);
+            str = String.valueOf(strChar).replace(replaceStr, "[[#{" + filed + "}]]");
+            OUT_PUT.add(filed + "=" + replaceStr);
+        }
+        if (flag)
+        {
+            str = replaceJSCN(str, startIndex, filePath);
+        }
+        return str;
     }
 
     public static void findChinese(String str)
