@@ -3,13 +3,11 @@ package com.game.util;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Attribute;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
+import org.jsoup.nodes.*;
 import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,26 +36,27 @@ public class FindChineseUtil
     public static final int VERSION = 0;
     public static int index = 1;
 
+    public static final String HTML_PATH = "D:\\Work\\\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates";
     public static final String MESSAGE_FILE = "D:\\Work\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\messages_zh_CN.properties";
-    public static final String ROOT = "templates";
+    public static String ROOT;
+    static
+    {
+        String path = HTML_PATH.replace("\\\\", "\\").replace("////", "//");
+        String[] paths = path.split("\\\\|/");
+        ROOT = paths[paths.length - 1];
+    }
+
+    public static final List FILE_TYPE = Arrays.asList("html", "htm", "shtml");
 
     private static final List<String> OUT_PUT = new ArrayList<>();
 
     public static void main(String[] args)
     {
         parseHTML();
-        // parseJavaScript();
+        // testParseJavaScript();
     }
 
     public static void testParseJavaScript()
-    {
-        String jsString = " febs.modal.view('密码修改', 'password/update', '用户98' {";
-        String result = replaceJSCN(jsString, 0,
-                "D:\\Work\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates\\febs\\views\\layout.html");
-        System.out.println(result);
-    }
-
-    public static void parseJavaScript()
     {
         File file = new File(
                 "D:\\Work\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates\\febs\\views\\layout.html");
@@ -67,8 +66,7 @@ public class FindChineseUtil
 
     public static void parseHTML()
     {
-        String path = "D:\\Work\\\\changan-os\\server\\aoshu_bi\\src\\main\\resources\\templates";
-        parse(path);
+        parse(HTML_PATH);
         saveMessageFile(MESSAGE_FILE);
         System.out.println(OUT_PUT);
     }
@@ -77,6 +75,7 @@ public class FindChineseUtil
     {
         File file = new File(path);
         File[] children = file.listFiles();
+        assert children != null;
         for (File child : children)
         {
             if (child.isDirectory())
@@ -84,25 +83,26 @@ public class FindChineseUtil
                 boolean isExcept = false;
                 for (String except : exceptPath)
                 {
-                    if (child.getPath().indexOf(except) == -1)
+                    if (!child.getPath().contains(except))
                     {
                         isExcept = true;
                         break;
                     }
-                    if (isExcept)
-                    {
-                        continue;
-                    }
+                }
+                if (isExcept)
+                {
+                    continue;
                 }
                 parse(child.getPath(), exceptPath);
             }
             else
             {
                 String fileName = child.getName();
-                if (fileName.endsWith(".html"))
+                String[] fileArr = fileName.split("\\.");
+                String suffix = fileArr[fileArr.length - 1].toLowerCase();
+                if (FILE_TYPE.contains(suffix))
                 {
                     String attName = getFilePrefix(child.getPath()) + "_";
-                    System.out.println("Parse file: " + attName);
                     jsoupParse(child, attName);
                     parseJavaScript(child);
                 }
@@ -120,8 +120,9 @@ public class FindChineseUtil
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            LOGGER.error("Doc parse error: ", e);
         }
+        assert doc != null;
         for (Element element : doc.getAllElements())
         {
             List<TextNode> textNodeList = element.textNodes();
@@ -133,20 +134,20 @@ public class FindChineseUtil
                     String filed = attName + (VERSION + index++);
                     // 方法1
                     textNode.text("[[#{" + filed + "}]]");
-                    /*
-                     * 方法2
-                     * textNode.text("");
-                     * if (element.nodeName().equals("title"))
-                     * {
-                     * element.attr("th:text", "#{" + filed + "}");
-                     * }
-                     * else
-                     * {
-                     * Node node = new Element("span");
-                     * node.attr("th:text", "#{" + filed + "}");
-                     * element.appendChild(node);
-                     * }
-                     */
+
+                    // 方法2 会去掉原本文本样式
+                   /* textNode.text("");
+                    if (element.nodeName().equals("title"))
+                    {
+                        element.attr("th:text", "#{" + filed + "}");
+                    }
+                    else
+                    {
+                        Node node = new Element("span");
+                        node.attr("th:text", "#{" + filed + "}");
+                        element.appendChild(node);
+                    }*/
+
                     // element.attr("th:text", "#{" + filed + "}");
                     OUT_PUT.add(filed + "=" + text);
                 }
@@ -166,14 +167,13 @@ public class FindChineseUtil
         }
 
         saveHtmlFile(file, doc.html());
-        // System.out.println(doc.html());
     }
 
     public static String getFilePrefix(String str)
     {
         StringBuilder attrPrefix = new StringBuilder();
-        str = str.replace("\\\\", "\\").replace("//", "//");
-        String[] path = str.split("\\\\|/");
+        str = str.replace("\\\\", "\\").replace("////", "//");
+        String[] path = str.split("[\\\\/]");
         boolean start = false;
         for (int i = 0; i < path.length - 1; i++)
         {
@@ -207,7 +207,7 @@ public class FindChineseUtil
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            LOGGER.error("Save message file error: ", e);
         }
         finally
         {
@@ -261,25 +261,43 @@ public class FindChineseUtil
             br = new BufferedReader(isr);
             String line;
             boolean parseJs = false;
+            List<String> jsVar = new ArrayList<>();
             while ((line = br.readLine()) != null)
             {
-                if (line.indexOf("script") != -1 && line.indexOf("text/javascript") != -1)
+                if (line.contains("script") && line.contains("text/javascript"))
                 {
                     parseJs = true;
                 }
-                if (parseJs && line.indexOf("/script") != -1)
+                if (parseJs && line.contains("/script"))
                 {
                     parseJs = false;
                 }
 
                 if (parseJs)
                 {
-                    line = replaceJSCN(line, 0, file.getPath());
+                    line = replaceJSCN(line, 0, file.getPath(), jsVar);
                     // line = replaceJSCNAfter(line);
                 }
 
                 sb.append(line);
                 OutPutUtil.newLine(sb);
+            }
+
+            // 提取出来的中文以变量存放
+            if (!jsVar.isEmpty())
+            {
+                StringBuilder newScript = new StringBuilder();
+                newScript.append("  <script th-inline=\"javascript\" type=\"text/javascript\">");
+                OutPutUtil.newLine(newScript);
+                jsVar.forEach(k -> {
+                    String varName = k.replaceAll("\\.", "_");
+                    newScript.append("var " + varName + "='[[#{" + k + "}]]'");
+                    OutPutUtil.newLine(newScript);
+                });
+                newScript.append("</script>");
+                OutPutUtil.newLine(newScript);
+                newScript.append(sb);
+                sb = newScript;
             }
         }
         catch (IOException e)
@@ -294,17 +312,7 @@ public class FindChineseUtil
         saveHtmlFile(file, sb.toString());
     }
 
-    public static String replaceJSCNAfter(String str)
-    {
-        if (str.indexOf("btn") != -1)
-        {
-            str = str.replaceAll("\\[\\[\\[", "\\[\\[");
-            str = str.replaceAll("\\]\\]\\]", "\\]\\]");
-        }
-        return str;
-    }
-
-    public static String replaceJSCN(String str, int startIndex, String filePath)
+    public static String replaceJSCN(String str, int startIndex, String filePath, List<String> jsVar)
     {
         int endIndex = -1;
         char[] strChar = str.toCharArray();
@@ -334,6 +342,7 @@ public class FindChineseUtil
         {
             if ((strChar[k] == CHAR_1 || strChar[k] == CHAR_2) && (k - 1 > 0 && strChar[k - 1] != CHAR_8))
             {
+                startIndex = k + 1;
                 condChar = strChar[k];
                 strChar[k] = CHAR_4;
                 cond1 = true;
@@ -357,12 +366,14 @@ public class FindChineseUtil
             String attName = getFilePrefix(filePath) + ".js_";
             String filed = attName + (VERSION + index++);
             String replaceStr = str.substring(startIndex, endIndex);
-            str = String.valueOf(strChar).replace(replaceStr, "[[#{" + filed + "}]]");
+            String varName = filed.replaceAll("\\.", "_");
+            str = String.valueOf(strChar).replace(replaceStr, varName);
+            jsVar.add(filed);
             OUT_PUT.add(filed + "=" + replaceStr);
         }
         if (flag)
         {
-            str = replaceJSCN(str, startIndex, filePath);
+            str = replaceJSCN(str, startIndex, filePath, jsVar);
         }
         return str;
     }
@@ -379,7 +390,6 @@ public class FindChineseUtil
 
         String filedName = "login";
         int startIndex = 0;
-        int endIndex = 0;
         String newLine = str;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++)
@@ -397,8 +407,7 @@ public class FindChineseUtil
             }
             else if (hasZH)
             {
-                endIndex = i;
-                String attName = getAttrName(str, startIndex, endIndex);
+                String attName = getAttrName(str, startIndex);
                 if (StringUtil.isNotNullAndNotEmpty(attName))
                 {
                     newLine = newLine.replace(attName, "th:" + attName);
@@ -412,7 +421,7 @@ public class FindChineseUtil
         System.out.println(newLine);
     }
 
-    public static String getAttrName(String str, int startIndex, int endIndex)
+    public static String getAttrName(String str, int startIndex)
     {
         StringBuilder attrName = new StringBuilder();
         boolean condition1 = false;

@@ -61,28 +61,19 @@ public class StringUtil
      */
     public static boolean isNullOrEmpty(String src)
     {
-        if (src == null || src.isEmpty() || src.trim().length() <= 0)
-        {
-            return true;
-        }
-
-        return false;
+        return src == null || src.isEmpty() || src.trim().length() <= 0;
     }
 
     /**
      * 判断字符串是否为空。
      * 
-     * @param src source string
+     * @param src
+     *            source string
      * @return
      */
     public static boolean isNotNullAndNotEmpty(String src)
     {
-        if (src != null && !src.isEmpty() && src.trim().length() > 0)
-        {
-            return true;
-        }
-
-        return false;
+        return src != null && !src.isEmpty() && src.trim().length() > 0;
     }
 
     /**
