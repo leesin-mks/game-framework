@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class FindChineseUtil
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CopyrightUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FindChineseUtil.class);
 
     public static final char CHAR_1 = '"';
     public static final char CHAR_2 = '\'';
@@ -136,17 +136,19 @@ public class FindChineseUtil
                     textNode.text("[[#{" + filed + "}]]");
 
                     // 方法2 会去掉原本文本样式
-                   /* textNode.text("");
-                    if (element.nodeName().equals("title"))
-                    {
-                        element.attr("th:text", "#{" + filed + "}");
-                    }
-                    else
-                    {
-                        Node node = new Element("span");
-                        node.attr("th:text", "#{" + filed + "}");
-                        element.appendChild(node);
-                    }*/
+                    /*
+                     * textNode.text("");
+                     * if (element.nodeName().equals("title"))
+                     * {
+                     * element.attr("th:text", "#{" + filed + "}");
+                     * }
+                     * else
+                     * {
+                     * Node node = new Element("span");
+                     * node.attr("th:text", "#{" + filed + "}");
+                     * element.appendChild(node);
+                     * }
+                     */
 
                     // element.attr("th:text", "#{" + filed + "}");
                     OUT_PUT.add(filed + "=" + text);

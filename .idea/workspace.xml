@@ -73,11 +73,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\game-lite\common-util\src\main\java\com\game\util" />
       <recent name="D:\Work\game-lite\common-lib" />
       <recent name="E:\Work\game\game-server" />
       <recent name="E:\Work\game\test-client\src\main\resources" />
       <recent name="E:\Work\game\gateway-server\src\main\resources" />
-      <recent name="E:\Work\game\game-server\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\game-lite\common-lib\config" />
@@ -90,13 +90,13 @@
       <recent name="com.game.Job" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Student">
-    <configuration name="CommonMessage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.net.CommonMessage" />
-      <module name="frame-work" />
+  <component name="RunManager" selected="Application.FindChineseUtil">
+    <configuration name="CopyrightUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.util.CopyrightUtil" />
+      <module name="common-util" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.game.net.*" />
+          <option name="PATTERN" value="com.game.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -104,8 +104,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CopyrightUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.util.CopyrightUtil" />
+    <configuration name="FindChineseUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.util.FindChineseUtil" />
       <module name="common-util" />
       <extension name="coverage">
         <pattern>
@@ -251,19 +251,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.GameServer" />
-      <item itemvalue="Application.CommonMessage" />
       <item itemvalue="Application.RechargeServer" />
       <item itemvalue="Application.CopyrightUtil" />
-      <item itemvalue="Tomcat Server.Tomcat 9.0.27" />
       <item itemvalue="Application.Student" />
+      <item itemvalue="Application.FindChineseUtil" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.27" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Student" />
+        <item itemvalue="Application.FindChineseUtil" />
         <item itemvalue="Application.GameServer" />
+        <item itemvalue="Application.Student" />
         <item itemvalue="Application.CopyrightUtil" />
         <item itemvalue="Application.RechargeServer" />
-        <item itemvalue="Application.CommonMessage" />
       </list>
     </recent_temporary>
   </component>
@@ -344,7 +344,15 @@
       <workItem from="1589878681065" duration="9441000" />
       <workItem from="1615021882525" duration="6658000" />
       <workItem from="1615171399777" duration="50612000" />
-      <workItem from="1615289599546" duration="3775000" />
+      <workItem from="1615289599546" duration="4461000" />
+      <workItem from="1615428740786" duration="5910000" />
+      <workItem from="1615442704044" duration="1092000" />
+      <workItem from="1615445392403" duration="15338000" />
+      <workItem from="1615465993884" duration="15385000" />
+      <workItem from="1615540857632" duration="1421000" />
+      <workItem from="1615542796318" duration="6792000" />
+      <workItem from="1615620700168" duration="788000" />
+      <workItem from="1615776272871" duration="21930000" />
     </task>
     <servers />
   </component>
@@ -352,34 +360,10 @@
     <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/common-util/src/main/java/com/game/util/ClassUtil.java</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/game-server/src/main/java/com/game/object/GamePlayer.java</url>
-          <line>221</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/frame-work/src/main/java/com/game/event/EventSource.java</url>
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/protobuf-protocol/src/main/java/com/game/pb/CenterMsgProto.java</url>
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/game-data/src/main/java/com/game/log/cache/CacheManager.java</url>
-          <option name="timeStamp" value="91" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/game-server/src/main/java/com/game/GameServer.java</url>
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.lang.String" memberName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
