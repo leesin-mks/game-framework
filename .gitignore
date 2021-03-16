@@ -5,4 +5,8 @@ recharge-server/log
 game-server/target
 center-server/target
 gateway-server/target
+frame-work/target
+test-client/target
 recharge-server/target
+login-server/build
+common-util/target
