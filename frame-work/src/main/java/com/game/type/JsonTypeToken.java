@@ -17,8 +17,10 @@
 package com.game.type;
 
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 
+import com.game.config.ServerConfig;
 import com.google.common.reflect.TypeToken;
 
 /**
@@ -28,6 +30,16 @@ import com.google.common.reflect.TypeToken;
 public class JsonTypeToken
 {
     public static final Type MAP_STRING_STRING = new TypeToken<Map<String, String>>()
+    {
+        private static final long serialVersionUID = 1L;
+    }.getType();
+
+    public static final Type LIST_INTEGER = new TypeToken<List<Integer>>()
+    {
+        private static final long serialVersionUID = 1L;
+    }.getType();
+
+    public static final Type SERVER = new TypeToken<ServerConfig>()
     {
         private static final long serialVersionUID = 1L;
     }.getType();

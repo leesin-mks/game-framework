@@ -33,18 +33,23 @@ public class IOUtil
         {
             for (Closeable source : sources)
             {
-                try
-                {
-                    if (source != null)
-                    {
-                        source.close();
-                    }
-                }
-                catch (IOException e)
-                {
-                    LOGGER.error("Close io error: ", e);
-                }
+                closeIO(source);
             }
+        }
+    }
+
+    public static void closeIO(Closeable source)
+    {
+        try
+        {
+            if (source != null)
+            {
+                source.close();
+            }
+        }
+        catch (IOException e)
+        {
+            LOGGER.error("Close io error: ", e);
         }
     }
 

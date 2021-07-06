@@ -142,13 +142,30 @@ public class StringUtil
         {
             return false;
         }
-        Pattern pattern = Pattern.compile("[0-9]*");
+        Pattern pattern = Pattern.compile("(\\-|\\+)?\\d*");
         Matcher isNum = pattern.matcher(str);
-        if (!isNum.matches())
+        return isNum.matches();
+    }
+
+    /**
+     * String is Number
+     *
+     * @param str
+     * @return is double
+     */
+    public static boolean isDouble(String str)
+    {
+        if (isNullOrEmpty(str))
         {
             return false;
         }
-        return true;
+        if (isNumeric(str))
+        {
+            return true;
+        }
+        Pattern pattern = Pattern.compile("(\\-|\\+)?\\d*\\.\\d+");
+        Matcher isDou = pattern.matcher(str);
+        return isDou.matches();
     }
 
     public static String hidePhone(String str)
@@ -314,8 +331,8 @@ public class StringUtil
 
     public static void main(String[] args)
     {
-        String s = "lee1";
-        System.out.println(onlyContainsZNW(s));
+        String s = "-100.1";
+        System.out.println(isDouble(s));
     }
 
 }

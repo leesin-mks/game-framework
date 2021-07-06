@@ -26,6 +26,8 @@
       <module name="game-data" target="1.8" />
       <module name="game-server" target="1.8" />
       <module name="gateway-server" target="1.8" />
+      <module name="GC" target="8" />
+      <module name="GCloudVoice" target="1.8" />
       <module name="login-server" target="8" />
       <module name="protobuf-protocol" target="1.8" />
       <module name="recharge-server" target="1.8" />
@@ -35,6 +37,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding UTF8" />
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="GC" options="" />
+      <module name="GCloudVoice" options="" />
       <module name="center-server" options="" />
       <module name="common-util" options="" />
       <module name="frame-work" options="-parameters" />

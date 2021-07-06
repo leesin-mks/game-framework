@@ -90,48 +90,7 @@
       <recent name="com.game.Job" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FindChineseUtil">
-    <configuration name="CopyrightUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.util.CopyrightUtil" />
-      <module name="common-util" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.game.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FindChineseUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.util.FindChineseUtil" />
-      <module name="common-util" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.game.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.GameServer" />
-      <module name="game-server" />
-      <option name="PROGRAM_PARAMETERS" value="../common-lib/config/game/global.xml" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/game-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.game.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.TestSum">
     <configuration name="RechargeServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.game.RechargeServer" />
       <module name="recharge-server" />
@@ -147,8 +106,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Student" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.game.Student" />
+    <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.Test" />
       <module name="game-server" />
       <extension name="coverage">
         <pattern>
@@ -160,13 +119,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
+    <configuration name="TestLock" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.TestLock" />
+      <module name="game-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestMap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.TestMap" />
+      <module name="game-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSum" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.TestSum" />
+      <module name="game-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -250,20 +237,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.GameServer" />
+      <item itemvalue="Application.TestMap" />
       <item itemvalue="Application.RechargeServer" />
-      <item itemvalue="Application.CopyrightUtil" />
-      <item itemvalue="Application.Student" />
-      <item itemvalue="Application.FindChineseUtil" />
+      <item itemvalue="Application.TestLock" />
+      <item itemvalue="Application.Test (1)" />
+      <item itemvalue="Application.TestSum" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.27" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FindChineseUtil" />
-        <item itemvalue="Application.GameServer" />
-        <item itemvalue="Application.Student" />
-        <item itemvalue="Application.CopyrightUtil" />
+        <item itemvalue="Application.TestSum" />
+        <item itemvalue="Application.Test (1)" />
+        <item itemvalue="Application.TestLock" />
         <item itemvalue="Application.RechargeServer" />
+        <item itemvalue="Application.TestMap" />
       </list>
     </recent_temporary>
   </component>
@@ -352,7 +339,31 @@
       <workItem from="1615540857632" duration="1421000" />
       <workItem from="1615542796318" duration="6792000" />
       <workItem from="1615620700168" duration="788000" />
-      <workItem from="1615776272871" duration="22469000" />
+      <workItem from="1615776272871" duration="23554000" />
+      <workItem from="1615950752343" duration="70000" />
+      <workItem from="1615950970336" duration="626000" />
+      <workItem from="1616047546191" duration="2695000" />
+      <workItem from="1616142472121" duration="3837000" />
+      <workItem from="1616208702184" duration="18449000" />
+      <workItem from="1617680991788" duration="835000" />
+      <workItem from="1617682452276" duration="7000" />
+      <workItem from="1617777043611" duration="575000" />
+      <workItem from="1617794277839" duration="1208000" />
+      <workItem from="1618893043818" duration="756000" />
+      <workItem from="1618903555875" duration="730000" />
+      <workItem from="1619408022008" duration="595000" />
+      <workItem from="1619420394809" duration="18353000" />
+      <workItem from="1619511560866" duration="609000" />
+      <workItem from="1620300448774" duration="404000" />
+      <workItem from="1620808451336" duration="1558000" />
+      <workItem from="1622206141583" duration="10000" />
+      <workItem from="1622534425995" duration="70000" />
+      <workItem from="1623067236978" duration="1146000" />
+      <workItem from="1623306914106" duration="679000" />
+      <workItem from="1624959780623" duration="1911000" />
+      <workItem from="1625033317794" duration="1735000" />
+      <workItem from="1625057762936" duration="3134000" />
+      <workItem from="1625538939429" duration="1200000" />
     </task>
     <servers />
   </component>
@@ -360,9 +371,32 @@
     <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar!/com/google/gson/internal/ConstructorConstructor.class</url>
+          <line>43</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.6/gson-2.8.6-sources.jar!/com/google/gson/internal/bind/MapTypeAdapterFactory.java</url>
+          <line>166</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/frame-work/src/main/java/com/game/database/DBComponent.java</url>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="java.lang.reflect.Constructor" memberName="clazz" />
+        <PinnedItemInfo parentTag="com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter" memberName="constructor" />
         <PinnedItemInfo parentTag="java.lang.String" memberName="value" />
+        <PinnedItemInfo parentTag="sun.reflect.generics.tree.SimpleClassTypeSignature" memberName="typeArgs" />
+        <PinnedItemInfo parentTag="com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter" memberName="this$0" />
+        <PinnedItemInfo parentTag="sun.reflect.generics.tree.ClassSignature" memberName="superInterfaces" />
       </pinned-members>
     </pin-to-top-manager>
   </component>
